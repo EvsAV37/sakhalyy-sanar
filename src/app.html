@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сахалыы саҥар — разговорный якутский</title>
+<!--PWA-HEAD-->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F5F3EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#081128" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Сахалыы саҥар">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1320x2868.png">
+<link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1290x2796.png">
+<link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1206x2622.png">
+<link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1179x2556.png">
+<link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1284x2778.png">
+<link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1170x2532.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2688.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-828x1792.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-750x1334.png">
+<!--/PWA-HEAD-->
+<style>
+/* Шрифты лежат вместе с приложением (лицензия SIL OFL 1.1): Onest — интерфейс, PT Serif — якутский текст */
+@font-face{font-family:'Onest';font-weight:100 900;font-display:swap;src:url(fonts/onest-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20BD,U+2116,U+2190-2193,U+2212}
+@font-face{font-family:'Onest';font-weight:100 900;font-display:swap;src:url(fonts/onest-cyrillic.woff2) format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1}
+@font-face{font-family:'Onest';font-weight:100 900;font-display:swap;src:url(fonts/onest-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-048F,U+0492-04AF,U+04B2-052F}
+@font-face{font-family:'PT Serif';font-weight:400;font-display:swap;src:url(fonts/pt-serif-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20BD,U+2116,U+2190-2193,U+2212}
+@font-face{font-family:'PT Serif';font-weight:400;font-display:swap;src:url(fonts/pt-serif-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1}
+@font-face{font-family:'PT Serif';font-weight:400;font-display:swap;src:url(fonts/pt-serif-cyrillic-ext-400-normal.woff2) format('woff2');unicode-range:U+0460-048F,U+0492-04AF,U+04B2-052F}
+:root{
+  --bg:#F5F3EE; --surface:#FFFFFF; --ink:#13213F; --muted:#5B6782; --line:#DDE1EA;
+  --accent:#16306B; --accent-ink:#FFFFFF; --sun:#B07F22; --sun-soft:#F6EAD0;
+  --ok:#25805A; --ok-soft:#DCF1E6; --bad:#B23A3A; --bad-soft:#F7E1E1;
+  --sky:#2E7FD6; --link:#16306B; --hero-a:#E2AD45; --hero-b:#A8721C;
+  --body-bg:var(--bg); --btn-bg:var(--accent); --btn-shadow:none; --panel-bg:var(--surface);
+  --nav-bg:var(--surface); --seg-on-bg:var(--accent); --seg-on-ink:var(--accent-ink);
+  --logo-d:none; --logo-l:block;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#081128; --surface:#0F1C3D; --ink:#EAF0FA; --muted:#97A8C8; --line:#1F3160;
+    --accent:#E9C06E; --accent-ink:#1B1406; --sun:#E9C06E; --sun-soft:#2E2715;
+    --ok:#6FD3A2; --ok-soft:#10301F; --bad:#F08C8C; --bad-soft:#3A1A22;
+    --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A;
+    --body-bg:radial-gradient(130% 420px at 50% -60px,#14295A 0%,rgba(8,17,40,0) 100%) no-repeat,#081128;
+    --btn-bg:linear-gradient(180deg,#F4D58F,#DDAE57); --btn-shadow:0 6px 18px rgba(233,192,110,.18);
+    --panel-bg:linear-gradient(180deg,#13234A,#0F1C3D); --nav-bg:rgba(10,20,46,.94);
+    --seg-on-bg:var(--sun-soft); --seg-on-ink:var(--sun);
+    --logo-d:block; --logo-l:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#081128; --surface:#0F1C3D; --ink:#EAF0FA; --muted:#97A8C8; --line:#1F3160;
+  --accent:#E9C06E; --accent-ink:#1B1406; --sun:#E9C06E; --sun-soft:#2E2715;
+  --ok:#6FD3A2; --ok-soft:#10301F; --bad:#F08C8C; --bad-soft:#3A1A22;
+  --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A;
+  --body-bg:radial-gradient(130% 420px at 50% -60px,#14295A 0%,rgba(8,17,40,0) 100%) no-repeat,#081128;
+  --btn-bg:linear-gradient(180deg,#F4D58F,#DDAE57); --btn-shadow:0 6px 18px rgba(233,192,110,.18);
+  --panel-bg:linear-gradient(180deg,#13234A,#0F1C3D); --nav-bg:rgba(10,20,46,.94);
+  --seg-on-bg:var(--sun-soft); --seg-on-ink:var(--sun);
+  --logo-d:block; --logo-l:none;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--body-bg);color:var(--ink);font:16.5px/1.5 "Onest","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+main{max-width:560px;margin:0 auto;padding:20px 18px 110px}
+body.in-session main{padding-bottom:220px}
+.sa{font-family:"PT Serif","Noto Serif",Georgia,serif}
+.sp{text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:2px;text-underline-offset:4px}
+h1{font-size:1.85rem;line-height:1.15;margin:.2em 0 .3em;letter-spacing:-.015em}
+h2{font-size:1.2rem;margin:28px 0 10px}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.band{height:12px;margin-top:16px;background:var(--sun);opacity:.9;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='12'%3E%3Cpath d='M16 1 21 6 16 11 11 6Z M4 5.2 5 6 4 6.8 3 6Z M28 5.2 29 6 28 6.8 27 6Z M0 5.6H32V6.4H0Z'/%3E%3C/svg%3E") repeat-x;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='12'%3E%3Cpath d='M16 1 21 6 16 11 11 6Z M4 5.2 5 6 4 6.8 3 6Z M28 5.2 29 6 28 6.8 27 6Z M0 5.6H32V6.4H0Z'/%3E%3C/svg%3E") repeat-x}
+.hero .brand{display:flex;align-items:center;gap:14px;margin-top:6px}
+.hero .logo{width:64px;height:auto;flex:none}
+.hero .logo-d{display:var(--logo-d)} .hero .logo-l{display:var(--logo-l)}
+.hero h1{font-size:2.05rem;line-height:1.05;margin:0;font-weight:650;letter-spacing:-.015em;
+  background:linear-gradient(180deg,var(--hero-a),var(--hero-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{margin-top:12px}
+.lead{color:var(--muted);max-width:34em}
+
+.panel{background:var(--panel-bg);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:20px}
+.pt{font-weight:700;font-size:1.1rem}
+.ps{color:var(--muted);margin-top:2px}
+.btn{display:inline-block;margin-top:12px;background:var(--btn-bg);color:var(--accent-ink);border:0;border-radius:14px;padding:12px 20px;font-weight:700;box-shadow:var(--btn-shadow)}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent);box-shadow:none}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:default}
+.mini{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:6px 12px;font-size:.93rem;color:var(--link);font-weight:700}
+.mini.danger{color:var(--bad)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.row .btn{margin-top:0}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+.lessons{list-style:none;margin:0;padding:0}
+.lesson{display:flex;gap:14px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sun);color:var(--sun);display:grid;place-items:center;font-weight:700}
+.lesson.mine .num{border-style:dashed}
+.lt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.lname{font-weight:700;font-size:1.08rem}
+.lsub{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meter{display:block;height:5px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}
+.meter span{display:block;height:100%;background:var(--sky);border-radius:3px}
+.lcount{font-size:.9rem;color:var(--muted)}
+.note{font-size:.92rem;color:var(--muted);margin-top:22px}
+.tag{font-size:.85rem;color:var(--sun);font-weight:700;margin-top:4px}
+
+.back{background:none;border:0;color:var(--link);padding:6px 0;font-weight:700}
+.legend{font-size:.92rem;color:var(--muted);margin-top:10px;padding-left:10px;border-left:3px solid var(--sun)}
+.phrases{list-style:none;padding:0;margin:18px 0 0}
+.phrases li{padding:14px 0;border-bottom:1px solid var(--line)}
+.psa{font-size:1.45rem;line-height:1.3}
+.pru{margin-top:2px}
+.pnote{font-size:.92rem;color:var(--muted);margin-top:4px}
+.stick{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom,0px));padding-top:14px}
+
+label{display:block;font-weight:700;margin-top:18px}
+label small{font-weight:400;color:var(--muted);font-size:.9rem}
+.inp{width:100%;margin-top:6px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit}
+.inp.sa{font-family:"PT Serif",Georgia,serif;font-size:1.25rem}
+.inp:focus{border-color:var(--accent);outline:none}
+.keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.key{min-width:44px;height:44px;font-family:"PT Serif",Georgia,serif;font-size:1.3rem;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+.hint{font-size:.88rem;color:var(--muted);margin-top:6px}
+.err{color:var(--bad);margin-top:14px;font-weight:700}
+
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--nav-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.nav div{max-width:560px;margin:0 auto;display:flex}
+.nav button{flex:1;background:none;border:0;padding:16px 4px;color:var(--muted);font-weight:700}
+.nav button[aria-current="page"]{color:var(--sun);box-shadow:inset 0 3px 0 var(--sun)}
+body.in-session .nav{display:none}
+
+.shead{display:flex;align-items:center;gap:12px}
+.x{background:none;border:0;font-size:1.8rem;line-height:1;padding:4px 8px;color:var(--muted)}
+.bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--sky);border-radius:4px;transition:width .3s}
+.ask{color:var(--muted);margin-top:28px;font-weight:700}
+.prompt{font-size:1.9rem;line-height:1.25;margin:6px 0 22px}
+.prompt.ru{font-family:inherit;font-size:1.5rem}
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.opt.sa{font-size:1.2rem}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.answer{min-height:60px;border-bottom:2px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;padding:6px 0 10px;margin-bottom:18px}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:"PT Serif",Georgia,serif;font-size:1.2rem;padding:8px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface)}
+.chip.used{visibility:hidden}
+.w{border-bottom:1px dotted var(--muted);cursor:pointer}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:20;display:none}
+.sheet-bg.show{display:block}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);border-radius:16px 16px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom,0px));z-index:21;display:none;max-height:70vh;overflow:auto}
+.sheet.show{display:block}
+.sheet>div{max-width:560px;margin:0 auto}
+.sheet .x{float:right;margin:-6px -8px 0 0}
+.sw{font-family:"PT Serif",Georgia,serif;font-size:1.8rem;line-height:1.2;margin:0 0 6px}
+.dpos{font-size:.82rem;color:var(--sun);font-weight:700;margin-left:6px}
+.en{font-size:.88rem;color:var(--muted);margin-top:6px}
+.dlist{list-style:none;padding:0;margin:14px 0 0}
+.dlist li{border-bottom:1px solid var(--line)}
+.dlist summary{padding:12px 0;cursor:pointer;list-style:none}
+.dlist summary::-webkit-details-marker{display:none}
+.dlist .sa{font-size:1.2rem}
+.dlist .dtop{font-size:1.2rem}
+.dlist .dru.sa{font-size:1rem}
+.dru{display:block;margin-top:2px}
+.dlist details[open]{padding-bottom:12px}
+mark.miss{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:0 1px;text-decoration:underline}
+#f-type{margin-top:4px}
+.fb{position:fixed;left:0;right:0;bottom:0;border-top:2px solid;padding:16px 18px calc(16px + env(safe-area-inset-bottom,0px));z-index:6}
+.fb.ok{background:var(--ok-soft);border-color:var(--ok)}
+.fb.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fb div{max-width:560px;margin:0 auto}
+.fbt{font-weight:700;font-size:1.15rem}
+.fb.ok .fbt{color:var(--ok)} .fb.bad .fbt{color:var(--bad)}
+.fbp{margin-top:4px}
+.fbp .sa{font-size:1.2rem}
+
+.sounds{list-style:none;padding:0;margin:18px 0 0}
+.sounds li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.glyph{flex:none;width:64px;font-family:"PT Serif",Georgia,serif;font-size:2.2rem;line-height:1;color:var(--accent)}
+.sname{font-weight:700}
+.sex{margin-top:4px;color:var(--muted)}
+.sex .sa{color:var(--ink);font-size:1.1rem}
+.big{font-family:"PT Serif",Georgia,serif;font-size:2.4rem;margin:30px 0 6px}
+.nav button{font-size:.84rem;padding:16px 1px}
+.seg{display:flex;gap:4px;margin:24px 0 12px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.seg button{flex:1;border:0;background:transparent;color:var(--muted);border-radius:10px;padding:9px;font-weight:700}
+.seg button.on{background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.play{display:inline-flex;align-items:center;gap:6px;margin-top:8px}
+.mini.rec{color:var(--bad);border-color:var(--bad)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:12px;z-index:9;display:none}
+.toast.show{display:block}
+.backup{margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.chat{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
+.line{max-width:86%;padding:10px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.line.b{align-self:flex-end;background:var(--sun-soft);border-color:transparent}
+.who{font-size:.8rem;font-weight:700;color:var(--muted)}
+.line .sa{font-size:1.2rem;display:block}
+.line .ru{font-size:.9rem;color:var(--muted);display:block}
+.turn{margin-top:22px}
+a.btn,a.mini{text-decoration:none;display:inline-block}
+.steps{padding-left:1.3em;margin:18px 0 0}
+.steps li{margin-bottom:16px}
+.steps .btn{margin-top:8px}
+.linkbtn{background:none;border:0;padding:0;color:var(--link);text-decoration:underline;font:inherit}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;margin:0}
+.chk input{width:22px;height:22px;margin-top:5px;flex:none;accent-color:var(--accent)}
+.chk .sa{font-size:1.2rem}
+select.inp{appearance:auto}
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(120% 75% at 50% 42%,#10244E 0%,#081430 45%,#050B1C 100%);transition:opacity .5s ease}
+#splash img{width:min(56vw,280px);height:auto;margin-top:-5vh}
+#splash .sp-name{margin-top:18px;font-size:clamp(34px,10.5vw,52px);line-height:1.05;font-weight:600;text-align:center;letter-spacing:-.01em;
+  background:linear-gradient(180deg,#FBEBC4 0%,#F0CC84 55%,#D9A85A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#splash .sp-sub{margin-top:16px;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#A9BCDD;font-weight:500;text-align:center}
+#splash.out{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="splash" aria-hidden="true"><img src="emblem-dark.webp" alt=""><div class="sp-name">Сахалыы<br>саҥар</div><div class="sp-sub">самоучитель якутского языка</div></div>
+<script>window.SPLASH_AT=Date.now();setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},4000);</script>
+<main id="app"></main>
+<nav class="nav" aria-label="Разделы"><div>
+  <button data-act="home" data-tab="home">Уроки</button>
+  <button data-act="marathon" data-tab="marathon">Марафон</button>
+  <button data-act="dict" data-tab="dict">Словарь</button>
+  <button data-act="sounds" data-tab="sounds">Звуки</button>
+  <button data-act="settings" data-tab="settings">Настройки</button>
+</div></nav>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="sheet-bg" class="sheet-bg" data-act="sclose"></div><div id="sheet" class="sheet" role="dialog" aria-label="Слово"></div>
+<input type="file" id="audio-file" accept="audio/*" hidden>
+<input type="file" id="backup-file" accept=".json,application/json" hidden>
+<input type="file" id="pack-file" accept=".json,application/json" hidden>
+<input type="file" id="voice-file" accept="video/*,audio/*" hidden>
+<script>
+const DEFAULT_LESSONS=[
+ {id:'l1',title:'Приветствие',intro:'Встреча начинается с «Дорообо», а разговор — с «Кэпсээ!»: так просят рассказать новости.',phrases:[
+  {id:'l1p1',sa:'Дорообо!',ru:'Привет! Здравствуй!'},
+  {id:'l1p2',sa:'Дорооболоруҥ!',ru:'Здравствуйте!',note:'Когда здороваетесь с несколькими людьми или на «вы».'},
+  {id:'l1p3',sa:'Кэпсээ!',ru:'Рассказывай! (Как дела?)',note:'Традиционное начало разговора: «рассказывай новости».'},
+  {id:'l1p4',sa:'Сонун суох.',ru:'Новостей нет.',note:'Обычный ответ на «Кэпсээ!».'},
+  {id:'l1p5',sa:'Хайдах олороҕун?',ru:'Как поживаешь?'},
+  {id:'l1p6',sa:'Үчүгэйдик.',ru:'Хорошо.'},
+  {id:'l1p7',sa:'Көрсүөххэ диэри!',ru:'До встречи!'},
+  {id:'l1p8',sa:'Этэҥҥэ сылдьыҥ!',ru:'Всего доброго!',note:'Дословно «ходите благополучно».'}]},
+ {id:'l2',title:'Знакомство',intro:'Как спросить имя, рассказать о себе и признаться, что вы только учите язык.',phrases:[
+  {id:'l2p1',sa:'Эн аатыҥ кимий?',ru:'Как тебя зовут?'},
+  {id:'l2p2',sa:'Мин аатым Айаал.',ru:'Меня зовут Айаал.',note:'Подставьте своё имя.'},
+  {id:'l2p3',sa:'Эн ханна олороҕун?',ru:'Где ты живёшь?'},
+  {id:'l2p4',sa:'Мин Дьокуускайга олоробун.',ru:'Я живу в Якутске.',note:'Дьокуускай — Якутск; окончание -га здесь значит «в».'},
+  {id:'l2p5',sa:'Мин үлэлиибин.',ru:'Я работаю.'},
+  {id:'l2p6',sa:'Мин үөрэнэбин.',ru:'Я учусь.'},
+  {id:'l2p7',sa:'Сахалыы саҥараҕын дуо?',ru:'Ты говоришь по-якутски?',note:'«Дуо» делает фразу вопросом.'},
+  {id:'l2p8',sa:'Кыратык саҥарабын.',ru:'Немного говорю.'}]},
+ {id:'l3',title:'Вежливость',intro:'Спасибо, пожалуйста, извините — и что сказать, если не поняли собеседника.',phrases:[
+  {id:'l3p1',sa:'Баһыыба!',ru:'Спасибо!'},
+  {id:'l3p2',sa:'Махтал!',ru:'Благодарю!',note:'Более торжественное «спасибо».'},
+  {id:'l3p3',sa:'Бука диэн.',ru:'Пожалуйста.',note:'Когда о чём-то просите. Ещё говорят «баһаалыста».'},
+  {id:'l3p4',sa:'Бырастыы гын.',ru:'Извини.'},
+  {id:'l3p5',sa:'Сөп.',ru:'Ладно. Хорошо.',note:'Ещё значит «верно», «согласен».'},
+  {id:'l3p6',sa:'Суох.',ru:'Нет.'},
+  {id:'l3p7',sa:'Өйдөөбөтүм.',ru:'Я не понял(а).',note:'«Не понимаю» — өйдөөбөппүн.'},
+  {id:'l3p8',sa:'Бытааннык саҥар, бука диэн.',ru:'Говори медленнее, пожалуйста.'}]},
+ {id:'l4',title:'В гостях',intro:'Приглашение войти, чай и угощение — фразы, которые вы точно услышите в якутском доме.',phrases:[
+  {id:'l4p1',sa:'Киириҥ!',ru:'Входите!'},
+  {id:'l4p2',sa:'Олоруҥ.',ru:'Садитесь.'},
+  {id:'l4p3',sa:'Чэй иһиэҥ дуо?',ru:'Будешь чай?'},
+  {id:'l4p4',sa:'Сөп, баһыыба.',ru:'Да, спасибо.'},
+  {id:'l4p5',sa:'Аһаа!',ru:'Угощайся!',note:'Дословно «ешь».'},
+  {id:'l4p6',sa:'Минньигэс!',ru:'Вкусно!'},
+  {id:'l4p7',sa:'Бу туох?',ru:'Что это?'},
+  {id:'l4p8',sa:'Бу кымыс.',ru:'Это кумыс.',note:'Кымыс — традиционный напиток из кобыльего молока.'}]},
+ {id:'l5',title:'Магазин',intro:'Найти магазин, спросить цену и есть ли нужный товар.',phrases:[
+  {id:'l5p1',sa:'Маҕаһыын ханна баарый?',ru:'Где магазин?',note:'«… ханна баарый?» — где находится …? Подставьте любое место.'},
+  {id:'l5p2',sa:'Бу төһөнүй?',ru:'Сколько это стоит?',note:'Ответ строят так: «Кинигэ үс солкуобайга турар» — книга стоит три рубля.'},
+  {id:'l5p3',sa:'Килиэп баар дуо?',ru:'Хлеб есть?',note:'Баар — есть, имеется; суох — нет.'},
+  {id:'l5p4',sa:'Баар.',ru:'Есть.'},
+  {id:'l5p5',sa:'Миэхэ үүт наада.',ru:'Мне нужно молоко.'},
+  {id:'l5p6',sa:'Маны биэр, бука диэн.',ru:'Дайте это, пожалуйста.',note:'Маны — форма слова «бу» (это), как в «дай это».'},
+  {id:'l5p7',sa:'Олус сыаналаах.',ru:'Очень дорого.'},
+  {id:'l5p8',sa:'Харчы ыл.',ru:'Возьми деньги.'}]},
+ {id:'l6',title:'Транспорт',intro:'Спросить дорогу и объяснить водителю, куда ехать.',phrases:[
+  {id:'l6p1',sa:'Автобус ханна тохтуур?',ru:'Где останавливается автобус?',note:'В словаре автобус пишется «оптуобус», а остановка — «тохтобул».'},
+  {id:'l6p2',sa:'Ыраах дуо?',ru:'Далеко?'},
+  {id:'l6p3',sa:'Чугас.',ru:'Близко.'},
+  {id:'l6p4',sa:'Уҥа бар.',ru:'Езжай (иди) направо.'},
+  {id:'l6p5',sa:'Хаҥас бар.',ru:'Езжай (иди) налево.'},
+  {id:'l6p6',sa:'Көнөтүк бар.',ru:'Езжай прямо.'},
+  {id:'l6p7',sa:'Манна тохтоо.',ru:'Остановись здесь.'},
+  {id:'l6p8',sa:'Такси ыҥыр, бука диэн.',ru:'Вызови такси, пожалуйста.'}]},
+ {id:'l7',title:'Числа и время',intro:'Числа по одному, десятки, сотня и тысяча — и как спросить, который час.',phrases:[
+  {id:'l7n1',sa:'Биир',ru:'Один (1)'},
+  {id:'l7n2',sa:'Икки',ru:'Два (2)'},
+  {id:'l7n3',sa:'Үс',ru:'Три (3)'},
+  {id:'l7n4',sa:'Түөрт',ru:'Четыре (4)'},
+  {id:'l7n5',sa:'Биэс',ru:'Пять (5)'},
+  {id:'l7n6',sa:'Алта',ru:'Шесть (6)'},
+  {id:'l7n7',sa:'Сэттэ',ru:'Семь (7)'},
+  {id:'l7n8',sa:'Аҕыс',ru:'Восемь (8)'},
+  {id:'l7n9',sa:'Тоҕус',ru:'Девять (9)'},
+  {id:'l7n10',sa:'Уон',ru:'Десять (10)',note:'Уон биир — одиннадцать, уон икки — двенадцать и так далее.'},
+  {id:'l7n11',sa:'Сүүрбэ',ru:'Двадцать (20)'},
+  {id:'l7n12',sa:'Отут',ru:'Тридцать (30)'},
+  {id:'l7n13',sa:'Сүүс',ru:'Сто (100)'},
+  {id:'l7n14',sa:'Тыһыынча',ru:'Тысяча (1000)'},
+  {id:'l7p6',sa:'Хас чаас буолла?',ru:'Который час?'},
+  {id:'l7p7',sa:'Икки чаас.',ru:'Два часа.'},
+  {id:'l7p8',sa:'Биир мүнүүтэ!',ru:'Одна минута!',note:'Если просите подождать («Минутку!»), говорят «Тохтуу түс!».'}]},
+ {id:'l8',title:'Погода',intro:'О погоде в Якутии говорят часто — особенно о морозе.',phrases:[
+  {id:'l8p1',sa:'Бүгүн тымныы.',ru:'Сегодня холодно.'},
+  {id:'l8p2',sa:'Сүрдээх тымныы!',ru:'Сильный мороз!',note:'Так в словаре: «здоровый мороз — сүрдээх тымныы». Ещё говорят «модун тымныы».'},
+  {id:'l8p3',sa:'Бүгүн итии.',ru:'Сегодня жарко.'},
+  {id:'l8p4',sa:'Сылаас.',ru:'Тепло.'},
+  {id:'l8p5',sa:'Хаар түһэр.',ru:'Идёт снег.'},
+  {id:'l8p6',sa:'Самыыр түһэр.',ru:'Идёт дождь.'},
+  {id:'l8p7',sa:'Күн тахсыбыт.',ru:'Выглянуло солнце.'},
+  {id:'l8p8',sa:'Сарсын сылаас буолуо.',ru:'Завтра будет тепло.'}]},
+ {id:'l9',title:'Семья и о себе',intro:'Рассказать о семье, возрасте и откуда вы. Слова и образцы фраз сверены по словарю sakhatyla.ru.',phrases:[
+  {id:'l9p1',sa:'Бу мин ийэм.',ru:'Это моя мама.'},
+  {id:'l9p2',sa:'Бу мин аҕам.',ru:'Это мой папа.'},
+  {id:'l9p3',sa:'Бу мин доҕорум.',ru:'Это мой друг.'},
+  {id:'l9p4',sa:'Эн кэргэннээххин дуо?',ru:'Ты женат? / Ты замужем?',note:'Кэргэн — семья, супруг(а); кэргэннээх — семейный.'},
+  {id:'l9p5',sa:'Мин кэргэннээхпин.',ru:'Я женат. / Я замужем.'},
+  {id:'l9p6',sa:'Оҕолооххун дуо?',ru:'У тебя есть дети?'},
+  {id:'l9p7',sa:'Икки оҕолоохпун.',ru:'У меня двое детей.'},
+  {id:'l9p8',sa:'Сааһыҥ хаһый?',ru:'Сколько тебе лет?',note:'Саас — возраст (и ещё «весна»).'},
+  {id:'l9p9',sa:'Сааһым отутум.',ru:'Мне тридцать лет.',note:'Подставьте свой возраст.'},
+  {id:'l9p10',sa:'Эн хантан кэллиҥ?',ru:'Откуда ты приехал(а)?'},
+  {id:'l9p11',sa:'Мин Москваттан кэллим.',ru:'Я приехал(а) из Москвы.',note:'-ттан / -тан — «из, от».'},
+  {id:'l9p12',sa:'Мин учууталбын.',ru:'Я учитель.',note:'Подставьте свою профессию.'}]},
+ {id:'l10',title:'Время и дни недели',intro:'Дни недели, «сегодня — вчера — завтра» и как спросить «во сколько». Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l10d1',sa:'Бэнидиэнньик',ru:'Понедельник'},
+  {id:'l10d2',sa:'Оптуорунньук',ru:'Вторник'},
+  {id:'l10d3',sa:'Сэрэдэ',ru:'Среда'},
+  {id:'l10d4',sa:'Чэппиэр',ru:'Четверг'},
+  {id:'l10d5',sa:'Бээтинсэ',ru:'Пятница'},
+  {id:'l10d6',sa:'Субуота',ru:'Суббота'},
+  {id:'l10d7',sa:'Баскыһыанньа',ru:'Воскресенье'},
+  {id:'l10p1',sa:'Бүгүн сэрэдэ.',ru:'Сегодня среда.'},
+  {id:'l10p2',sa:'Сарсын бээтинсэ.',ru:'Завтра пятница.'},
+  {id:'l10p3',sa:'Бэҕэһээ чэппиэр этэ.',ru:'Вчера был четверг.',note:'Этэ — «был, была».'},
+  {id:'l10p4',sa:'Бүгүн өрөбүл.',ru:'Сегодня выходной.'},
+  {id:'l10p5',sa:'Нэдиэлэҕэ биэс күн үлэлиибит.',ru:'Мы работаем пять дней в неделю.'},
+  {id:'l10p6',sa:'Хас чааска?',ru:'Во сколько? (В котором часу?)'},
+  {id:'l10p7',sa:'Автобус биэс чааска барар.',ru:'Автобус отправляется в пять часов.'},
+  {id:'l10p8',sa:'Бириэмэм суох.',ru:'У меня нет времени.'},
+  {id:'l10p9',sa:'Сотору кэлиэм.',ru:'Скоро приду.'},
+  {id:'l10p10',sa:'Киэһэ көрсүөххэ!',ru:'До вечера! (Увидимся вечером!)'}]},
+ {id:'l11',title:'Город, дом и быт',intro:'Где живёшь, куда идёшь, просьбы по дому. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l11p1',sa:'Мин куоракка олоробун.',ru:'Я живу в городе.'},
+  {id:'l11p2',sa:'Дьиэбэр барабын.',ru:'Я иду домой.'},
+  {id:'l11p3',sa:'Мин дьиэм чугас.',ru:'Мой дом близко.'},
+  {id:'l11p4',sa:'Ааны ас, бука диэн.',ru:'Открой дверь, пожалуйста.'},
+  {id:'l11p5',sa:'Ааны сап.',ru:'Закрой дверь.'},
+  {id:'l11p6',sa:'Түннүгү ас.',ru:'Открой окно.'},
+  {id:'l11p7',sa:'Балыыһа ханна баарый?',ru:'Где больница?'},
+  {id:'l11p8',sa:'Оскуола ыраах дуо?',ru:'Школа далеко?'},
+  {id:'l11p9',sa:'Туалет ханна баарый?',ru:'Где туалет?'},
+  {id:'l11p10',sa:'Ас бэлэм.',ru:'Еда готова.'},
+  {id:'l11p11',sa:'Чэй оргут.',ru:'Вскипяти чай.'}]},
+ {id:'l12',title:'Здоровье, чувства, телефон',intro:'Сказать, что болит или что устал, и поговорить по телефону. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l12p1',sa:'Төбөм ыалдьар.',ru:'У меня болит голова.'},
+  {id:'l12p2',sa:'Мин ыалдьабын.',ru:'Я болею.'},
+  {id:'l12p3',sa:'Быраас ыҥыр!',ru:'Вызови врача!'},
+  {id:'l12p4',sa:'Балыыһаҕа барабын.',ru:'Я иду в больницу.'},
+  {id:'l12p5',sa:'Мин сылайдым.',ru:'Я устал(а).'},
+  {id:'l12p6',sa:'Сылайдым ахан.',ru:'Я очень устал(а).',note:'Ахан — усилительная частица: «очень, ох как».'},
+  {id:'l12p7',sa:'Мин сөбүлүүбүн.',ru:'Мне нравится.'},
+  {id:'l12p8',sa:'Үчүгэй!',ru:'Хорошо! Отлично!'},
+  {id:'l12p9',sa:'Мин эйиэхэ эрийиэм.',ru:'Я тебе позвоню.',note:'Эрий — крутить, вертеть; по телефону — звонить.'},
+  {id:'l12p10',sa:'Ким саҥарар?',ru:'Кто говорит? (по телефону)'}]},
+ {id:'l13',title:'Еда и за столом',intro:'Голоден, хочу пить, наелся — и просьбы за столом. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l13p1',sa:'Мин аччыктаатым.',ru:'Я проголодался(-ась).'},
+  {id:'l13p2',sa:'Мин утаттым.',ru:'Мне хочется пить.'},
+  {id:'l13p3',sa:'Уу иһиэхпин баҕарабын.',ru:'Я хочу пить (воды).'},
+  {id:'l13p4',sa:'Тото аһаатым.',ru:'Я наелся(-ась).'},
+  {id:'l13p5',sa:'Минньигэс ас.',ru:'Вкусная еда.'},
+  {id:'l13p6',sa:'Аһыыр чаас буолла.',ru:'Пора есть.'},
+  {id:'l13p7',sa:'Чэйдэ ис.',ru:'Попей чаю.'},
+  {id:'l13p8',sa:'Тууһу биэр, бука диэн.',ru:'Передай соль, пожалуйста.'},
+  {id:'l13p9',sa:'Мин балыгы сөбүлүүбүн.',ru:'Я люблю рыбу.'},
+  {id:'l13p10',sa:'Бу туох ас?',ru:'Что это за еда?'}]},
+ {id:'l14',title:'Работа и учёба',intro:'Кем работаешь, что изучаешь, «знаю / не знаю» и просьбы на занятии. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l14p1',sa:'Үлэҕэ барабын.',ru:'Я иду на работу.'},
+  {id:'l14p2',sa:'Эн ханна үлэлиигин?',ru:'Где ты работаешь?'},
+  {id:'l14p3',sa:'Мин учууталынан үлэлиибин.',ru:'Я работаю учителем.',note:'Подставьте свою профессию: -нан / -ынан — «кем».'},
+  {id:'l14p4',sa:'Мин саха тылын үөрэтэбин.',ru:'Я изучаю якутский язык.'},
+  {id:'l14p5',sa:'Мин билэбин.',ru:'Я знаю.'},
+  {id:'l14p6',sa:'Мин билбэппин.',ru:'Я не знаю.'},
+  {id:'l14p7',sa:'Өйдөөтүм.',ru:'Понял(а).'},
+  {id:'l14p8',sa:'Хатылаа, бука диэн.',ru:'Повтори, пожалуйста.'},
+  {id:'l14p9',sa:'Суруй, бука диэн.',ru:'Напиши, пожалуйста.'},
+  {id:'l14p10',sa:'Көмөлөс, бука диэн.',ru:'Помоги, пожалуйста.'},
+  {id:'l14p11',sa:'Бүгүн үлэ элбэх.',ru:'Сегодня много работы.'}]},
+ {id:'l15',title:'Праздники и Ысыах',intro:'Поздравления и пожелания. Фразы сверены по словарю sakhatyla.ru и якутским поздравительным текстам.',phrases:[
+  {id:'l15p1',sa:'Бырааһынньыгынан!',ru:'С праздником!'},
+  {id:'l15p2',sa:'Эйигин бырааһынньыгынан эҕэрдэлиибин.',ru:'Поздравляю тебя с праздником.'},
+  {id:'l15p3',sa:'Төрөөбүт күҥҥүнэн!',ru:'С днём рождения!'},
+  {id:'l15p4',sa:'Саҥа дьылынан!',ru:'С Новым годом!'},
+  {id:'l15p5',sa:'Ис сүрэхпиттэн эҕэрдэлиибин!',ru:'Сердечно поздравляю!',note:'Дословно «поздравляю от (моего) сердца».'},
+  {id:'l15p6',sa:'Дьоллоох буол!',ru:'Будь счастлив(а)!'},
+  {id:'l15p7',sa:'Ситиһиини, дьолу баҕарабын.',ru:'Желаю успехов и счастья.'},
+  {id:'l15p8',sa:'Бүгүн үөрүүлээх күн.',ru:'Сегодня радостный день.'},
+  {id:'l15p9',sa:'Ыһыахха барабыт.',ru:'Мы идём на Ысыах.',note:'Ысыах — летний праздник якутов в июне, праздник солнца и кумыса.'},
+  {id:'l15p10',sa:'Махтанабын!',ru:'Благодарю!'}]},
+ {id:'l16',title:'В дороге и природа',intro:'Собраться в путь, погода, лес и ягоды. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l16p1',sa:'Айаҥҥа хомун.',ru:'Собирайся в дорогу.'},
+  {id:'l16p2',sa:'Суол ыраах.',ru:'Дорога дальняя.'},
+  {id:'l16p3',sa:'Аара тохтоо.',ru:'Остановись по пути.'},
+  {id:'l16p4',sa:'Бүгүн хайдах күнүй?',ru:'Какая сегодня погода?',note:'Дословно «какой сегодня день?» — так спрашивают о погоде.'},
+  {id:'l16p5',sa:'Халлаан ыраас.',ru:'Небо ясное.'},
+  {id:'l16p6',sa:'Тыал күүстээх.',ru:'Сильный ветер.'},
+  {id:'l16p7',sa:'Тыаҕа барабыт.',ru:'Мы едем в лес (за город).',note:'Тыа — лес, тайга, а также сельская местность.'},
+  {id:'l16p8',sa:'Отон буспут.',ru:'Ягоды поспели.'},
+  {id:'l16p9',sa:'Отон хомуйабыт.',ru:'Мы собираем ягоды.'},
+  {id:'l16p10',sa:'Өрүс кэтит.',ru:'Река широкая.'},
+  {id:'l16p11',sa:'Бу кэрэ сир.',ru:'Это красивое место.'},
+  {id:'l16p12',sa:'Сынньанабыт.',ru:'Мы отдыхаем.'}]},
+ {id:'l17',title:'Охота и рыбалка',intro:'Идём на охоту и на рыбалку: ружьё, собака, пороша, сети. Сверено по словарю sakhatyla.ru.',phrases:[
+  {id:'l17p1',sa:'Мин булчуппун.',ru:'Я охотник.'},
+  {id:'l17p2',sa:'Бултуу барабыт.',ru:'Мы идём на охоту.'},
+  {id:'l17p3',sa:'Сааны ыл.',ru:'Возьми ружьё.'},
+  {id:'l17p4',sa:'Бу мин булчут ытым.',ru:'Это моя охотничья собака.'},
+  {id:'l17p5',sa:'Сонор түстэ.',ru:'Выпала первая пороша.',note:'Сонор — первый осенний снег, по которому хорошо видны следы зверя.'},
+  {id:'l17p6',sa:'Суол көстөр.',ru:'Видны следы.',note:'Суол — и дорога, и след.'},
+  {id:'l17p7',sa:'Бүгүн булт элбэх.',ru:'Сегодня добычи много.'},
+  {id:'l17p8',sa:'Булт суох.',ru:'Добычи нет.'},
+  {id:'l17p9',sa:'Балыктыы барабыт.',ru:'Мы идём рыбачить.'},
+  {id:'l17p10',sa:'Илим тардабыт.',ru:'Ставим сеть.'},
+  {id:'l17p11',sa:'Собо үчүгэйдик тутар.',ru:'Карась хорошо ловится.'},
+  {id:'l17p12',sa:'Бу тоҥ балык.',ru:'Это мороженая рыба.',note:'Некоторые сорта едят мороженой — строганиной.'}]}
+];
+const SOUNDS=[
+ {g:'Ҕ ҕ',n:'Мягкое «г» без смычки',d:'Как «г» в южнорусском «ага»: язык не касается нёба.',ex:'олороҕун'},
+ {g:'Ҥ ҥ',n:'Носовое «нг»',d:'Как в английском sing: звук идёт через нос.',ex:'саҥар'},
+ {g:'Ө ө',n:'«О», похожее на «ё»',d:'Губы как для «о», язык как для «э». Как немецкое ö.',ex:'өйдөөбөтүм'},
+ {g:'Ү ү',n:'«У», похожее на «ю»',d:'Губы как для «у», язык как для «и». Как немецкое ü.',ex:'үчүгэй'},
+ {g:'Һ һ',n:'Лёгкое придыхание',d:'Мягкий выдох, как английское h, а не русское «х».',ex:'баһыыба'},
+ {g:'аа ыы',n:'Долгие гласные',d:'Двойная буква тянется примерно вдвое дольше. От долготы зависит смысл слова.',ex:'дорообо'},
+ {g:'уо иэ',n:'Дифтонги',d:'Сочетания уо, үө, иэ, ыа читаются слитно, в один слог.',ex:'көрсүөххэ диэри'},
+ {g:'Дь',n:'Мягкое «дж»',d:'Одним звуком, как в английском jeans.',ex:'Дьокуускай'},
+ {g:'´',n:'Ударение',d:'Обычно падает на последний слог слова.',ex:'кэпсээ'}
+];
+const DIALOGUES=[
+ {id:'d1',title:'Встреча на улице',about:'Уроки 1–2',lines:[
+  ['a','Дорообо!','Привет!'],['b','Дорообо! Кэпсээ!','Привет! Рассказывай!'],
+  ['a','Сонун суох. Эн хайдах олороҕун?','Новостей нет. А ты как поживаешь?'],['b','Үчүгэйдик.','Хорошо.'],
+  ['a','Көрсүөххэ диэри!','До встречи!'],['b','Этэҥҥэ сылдьыҥ!','Всего доброго!']]},
+ {id:'d2',title:'Знакомство',about:'Урок 2',lines:[
+  ['a','Дорооболоруҥ! Эн аатыҥ кимий?','Здравствуйте! Как тебя зовут?'],['b','Мин аатым Айаал. Эн аатыҥ кимий?','Меня зовут Айаал. А тебя как зовут?'],
+  ['a','Мин аатым Сардаана. Эн ханна олороҕун?','Меня зовут Сардаана. Где ты живёшь?'],['b','Мин Дьокуускайга олоробун.','Я живу в Якутске.'],
+  ['a','Сахалыы саҥараҕын дуо?','Ты говоришь по-якутски?'],['b','Кыратык саҥарабын.','Немного говорю.']]},
+ {id:'d3',title:'В гостях',about:'Урок 4',lines:[
+  ['a','Киириҥ! Олоруҥ.','Входите! Садитесь.'],['b','Баһыыба!','Спасибо!'],
+  ['a','Чэй иһиэҥ дуо?','Будешь чай?'],['b','Сөп, баһыыба.','Да, спасибо.'],
+  ['a','Аһаа!','Угощайся!'],['b','Минньигэс! Бу туох?','Вкусно! Что это?'],
+  ['a','Бу кымыс.','Это кумыс.']]},
+ {id:'d4',title:'В магазине',about:'Уроки 5 и 7',lines:[
+  ['b','Дорообо! Килиэп баар дуо?','Здравствуйте! Хлеб есть?'],['a','Баар.','Есть.'],
+  ['b','Бу төһөнүй?','Сколько это стоит?'],['a','Отут солкуобай.','Тридцать рублей.'],
+  ['b','Маны биэр, бука диэн.','Дайте это, пожалуйста.'],['a','Баһыыба!','Спасибо!'],
+  ['b','Көрсүөххэ диэри!','До свидания!']]},
+ {id:'d5',title:'В такси',about:'Урок 6',lines:[
+  ['a','Дорообо! Ханна барабыт?','Здравствуйте! Куда едем?'],['b','Маҕаһыыҥҥа. Ыраах дуо?','В магазин. Это далеко?'],
+  ['a','Чугас.','Близко.'],['b','Уҥа бар.','Езжайте направо.'],
+  ['a','Сөп.','Хорошо.'],['b','Манна тохтоо. Баһыыба!','Остановитесь здесь. Спасибо!']]},
+ {id:'d6',title:'О себе',about:'Урок 9',lines:[
+  ['a','Эн хантан кэллиҥ?','Откуда ты приехал?'],['b','Мин Москваттан кэллим.','Я приехал из Москвы.'],
+  ['a','Сааһыҥ хаһый?','Сколько тебе лет?'],['b','Сааһым отутум.','Мне тридцать лет.'],
+  ['a','Эн кэргэннээххин дуо?','Ты женат?'],['b','Кэргэннээхпин. Икки оҕолоохпун.','Женат. У меня двое детей.']]},
+ {id:'d7',title:'Когда автобус?',about:'Урок 10',lines:[
+  ['b','Хас чаас буолла?','Который час?'],['a','Икки чаас.','Два часа.'],
+  ['b','Автобус хас чааска барар?','Во сколько отправляется автобус?'],['a','Автобус биэс чааска барар.','Автобус отправляется в пять.'],
+  ['b','Баһыыба! Киэһэ көрсүөххэ!','Спасибо! До вечера!']]},
+ {id:'d8',title:'Дома',about:'Урок 11',lines:[
+  ['a','Ас бэлэм!','Еда готова!'],['b','Баһыыба!','Спасибо!'],
+  ['a','Чэй иһиэҥ дуо?','Будешь чай?'],['b','Сөп, баһыыба.','Да, спасибо.'],
+  ['a','Ааны сап, бука диэн. Тымныы.','Закрой дверь, пожалуйста. Холодно.'],['b','Сөп.','Хорошо.']]},
+ {id:'d9',title:'По телефону',about:'Урок 12',lines:[
+  ['a','Алло! Ким саҥарар?','Алло! Кто говорит?'],['b','Мин Айаалбын. Хайдах олороҕун?','Это Айаал. Как поживаешь?'],
+  ['a','Төбөм ыалдьар. Сылайдым ахан.','Голова болит. Очень устал.'],['b','Сарсын эрийиэм.','Завтра позвоню.'],
+  ['a','Сөп. Көрсүөххэ диэри!','Ладно. До встречи!'],['b','Этэҥҥэ сылдьыҥ!','Всего доброго!']]},
+ {id:'d10',title:'За столом',about:'Урок 13',lines:[
+  ['a','Аччыктаатыҥ дуо?','Ты проголодался?'],['b','Аччыктаатым.','Проголодался.'],
+  ['a','Ас бэлэм. Аһаа!','Еда готова. Угощайся!'],['b','Минньигэс! Тууһу биэр, бука диэн.','Вкусно! Передай соль, пожалуйста.'],
+  ['a','Чэйдэ ис.','Попей чаю.'],['b','Баһыыба, тото аһаатым.','Спасибо, я наелся.']]},
+ {id:'d11',title:'Кем работаешь?',about:'Урок 14',lines:[
+  ['a','Эн ханна үлэлиигин?','Где ты работаешь?'],['b','Мин учууталынан үлэлиибин.','Я работаю учителем.'],
+  ['a','Саха тылын билэҕин дуо?','Ты знаешь якутский?'],['b','Кыратык. Саха тылын үөрэтэбин.','Немного. Я изучаю якутский.'],
+  ['a','Үчүгэй!','Отлично!'],['b','Бытааннык саҥар, бука диэн.','Говори медленнее, пожалуйста.']]},
+ {id:'d12',title:'День рождения',about:'Урок 15',lines:[
+  ['a','Бүгүн мин төрөөбүт күнүм.','Сегодня мой день рождения.'],['b','Төрөөбүт күҥҥүнэн! Дьоллоох буол!','С днём рождения! Будь счастлив!'],
+  ['a','Махтанабын!','Благодарю!'],['b','Ситиһиини, дьолу баҕарабын.','Желаю успехов и счастья.'],
+  ['a','Баһыыба! Кымыс иһиэҥ дуо?','Спасибо! Будешь кумыс?'],['b','Сөп, баһыыба.','Да, спасибо.']]},
+ {id:'d13',title:'За ягодами',about:'Урок 16',lines:[
+  ['a','Бүгүн хайдах күнүй?','Какая сегодня погода?'],['b','Халлаан ыраас, сылаас.','Небо ясное, тепло.'],
+  ['a','Тыаҕа барабыт дуо?','Поедем в лес?'],['b','Сөп! Отон хомуйабыт.','Давай! Соберём ягоды.'],
+  ['a','Айаҥҥа хомун!','Собирайся в дорогу!'],['b','Бэлэммин!','Я готов!']]},
+ {id:'d14',title:'Охотники',about:'Урок 17',lines:[
+  ['a','Бүгүн бултуу барабыт дуо?','Сегодня идём на охоту?'],['b','Сөп! Сонор түстэ.','Да! Выпала пороша.'],
+  ['a','Сааны ыл!','Возьми ружьё!'],['b','Бэлэммин!','Я готов!'],
+  ['a','Бүгүн булт элбэх буолуо.','Сегодня добычи будет много.'],['b','Үчүгэй!','Отлично!']]}
+];
+/* Словарь: Викисловарь (en.wiktionary.org) через kaikki.org, CC BY-SA; русские переводы значений — ИИ. [слово, часть речи, перевод, английское толкование] */
+const DICT=/*DICT*/[];
+/* Формы слов из фраз уроков: [начальная форма или '', значение формы] */
+const FORMS={'аатым':['аат','моё имя'],'аатыҥ':['аат','твоё имя'],'айаал':['','Айаал — мужское имя'],'баарый':['баар','есть ли? где находится?'],
+'барабыт':['бар','идём, едем (мы)'],'буолла':['буол','стало, наступило'],'буолуо':['буол','будет'],'дорооболоруҥ':['дорообо','здравствуйте (многим или на «вы»)'],
+'дуо':['','вопросительная частица: «ли?»'],'дьокуускайга':['','в Якутске (Дьокуускай — Якутск, -га — «в»)'],'иһиэҥ':['','будешь пить (от иһ- — пить)'],
+'киириҥ':['киир','входите'],'кимий':['ким','кто? (вопрос)'],'кыратык':['кыра','немного, слегка'],'көнөтүк':['көнө','прямо'],
+'көрсүөххэ':['көрүс','«до встречи» (букв. «чтобы встретиться»)'],'маны':['бу','это (кого? что?)'],'маҕаһыыҥҥа':['маҕаһыын','в магазин'],
+'миэхэ':['мин','мне'],'олоробун':['олор','живу'],'олороҕун':['олор','живёшь'],'олоруҥ':['олор','садитесь'],'саҥарабын':['саҥар','говорю'],
+'саҥараҕын':['саҥар','говоришь'],'солкуобай':['','рубль'],'сылдьыҥ':['сырыт','бывайте, ходите'],'такси':['','такси'],'тахсыбыт':['таҕыс','вышло, взошло'],
+'тохтуур':['тохтоо','останавливается'],'төһөнүй':['төһө','сколько (стоит)?'],'этэҥҥэ':['','благополучно'],'үлэлиибин':['үлэлээ','работаю'],
+'үчүгэйдик':['үчүгэй','хорошо (как?)'],'үөрэнэбин':['үөрэн','учусь'],'өйдөөбөтүм':['өйдөө','я не понял(а)'],
+'ийэм':['ийэ','моя мама'],'аҕам':['аҕа','мой папа'],'доҕорум':['доҕор','мой друг'],'кэргэннээххин':['кэргэннээх','ты женат (замужем)'],
+'кэргэннээхпин':['кэргэннээх','я женат (замужем)'],'оҕолооххун':['оҕолоох','у тебя есть дети'],'оҕолоохпун':['оҕолоох','у меня есть дети'],
+'сааһыҥ':['саас','твой возраст'],'хаһый':['хас','сколько? (вопрос)'],'сааһым':['саас','мой возраст'],'отутум':['отут','мне тридцать (лет)'],
+'кэллиҥ':['кэл','ты пришёл, приехал'],'москваттан':['','из Москвы'],'кэллим':['кэл','я пришёл, приехал'],'учууталбын':['учуутал','я учитель'],'этэ':['','был, была (прошедшее время от «быть»)'],'нэдиэлэҕэ':['нэдиэлэ','в неделю'],
+'үлэлиибит':['үлэлээ','мы работаем'],'чааска':['чаас','в … часов'],'барар':['бар','идёт, отправляется'],'бириэмэм':['','моё время (бириэмэ — время)'],
+'кэлиэм':['кэл','я приду'],'куоракка':['куорат','в городе, в город'],'дьиэбэр':['дьиэ','домой (в свой дом)'],'барабын':['бар','я иду, еду'],
+'дьиэм':['дьиэ','мой дом'],'төбөм':['төбө','моя голова'],'ыалдьабын':['','я болею (ыалдьар — больной, болит)'],
+'балыыһаҕа':['балыыһа','в больницу'],'сылайдым':['сылай','я устал(а)'],'ахан':['','очень (усилительная частица)'],'сөбүлүүбүн':['сөбүлээ','мне нравится (я люблю)'],
+'эйиэхэ':['эн','тебе'],'аччыктаатым':['аччыктаа','я проголодался(-ась)'],'аччыктаатыҥ':['аччыктаа','ты проголодался?'],
+'утаттым':['','мне хочется пить (утат — испытывать жажду)'],'иһиэхпин':['','(хочу) пить — от иһ- «пить»'],'баҕарабын':['баҕар','я хочу'],
+'тото':['','досыта (тот — сытость)'],'аһаатым':['аһаа','я поел(а)'],'аһыыр':['аһаа','есть, «едящий» (аһыыр чаас — время еды)'],
+'чэйдэ':['чэй','чаю (немного чая)'],'ис':['','пей (от иһ- «пить»)'],'тууһу':['туус','соль (кого? что?)'],'балыгы':['балык','рыбу'],'үлэҕэ':['үлэ','на работу, на работе'],'үлэлиигин':['үлэлээ','ты работаешь'],'учууталынан':['учуутал','учителем (кем?)'],
+'тылын':['тыл','язык (саха тылын — якутский язык)'],'үөрэтэбин':['үөрэт','я изучаю'],'билбэппин':['бил','я не знаю'],'билэбин':['бил','я знаю'],
+'өйдөөтүм':['өйдөө','я понял(а)'],'бырааһынньыгынан':['бырааһынньык','с праздником'],'эйигин':['эн','тебя'],
+'эҕэрдэлиибин':['','поздравляю (эҕэрдэ — поздравление)'],'күҥҥүнэн':['күн','с (твоим) днём'],'дьылынан':['дьыл','с годом'],
+'сүрэхпиттэн':['сүрэх','от (моего) сердца'],'ситиһиини':['','успехов (ситиһии — успех)'],'дьолу':['дьол','счастья (что?)'],
+'үөрүүлээх':['','радостный (үөрүү — радость)'],'ыһыахха':['ыһыах','на Ысыах'],'махтанабын':['махтан','благодарю'],'айаҥҥа':['айан','в дорогу, в путь'],'хомун':['','собирайся (от хомуй — собирать)'],
+'аара':['','по пути, в дороге'],'күнүй':['күн','день? (так спрашивают о погоде)'],'тыаҕа':['тыа','в лес, за город'],'буспут':['бус','поспели; сварилось'],
+'хомуйабыт':['хомуй','мы собираем'],'сынньанабыт':['сынньан','мы отдыхаем'],'бэлэммин':['бэлэм','я готов(а)'],'булчуппун':['булчут','я охотник'],'сүрдээх':['','очень сильный, здоровенный; очень'],'бултуу':['бултаа','на охоту (охотиться)'],'сааны':['саа','ружьё (что?)'],
+'ытым':['ыт','моя собака'],'түстэ':['түс','выпал, упал'],'көстөр':['көһүн','виден, видно'],'балыктыы':['','рыбачить (балыктаа — ловить рыбу)'],
+'тардабыт':['тарт','мы тянем, ставим (сеть)'],'тутар':['тут','ловится (о рыбе в сетях)'],'күнүм':['күн','мой день'],
+'барабыт':['бар','идём, едем (мы)'],'билэҕин':['бил','ты знаешь'],'эрийиэм':['эрий','я позвоню'],'саҥарар':['саҥар','говорит'],'алло':['','алло'],'айаалбын':['','это я, Айаал (-бын — «я есть»)'],'ааны':['аан','дверь (кого? что?)'],'түннүгү':['түннүк','окно (кого? что?)'],'туалет':['','туалет'],
+'кэргэннээхпин':['кэргэннээх','я женат (замужем)']};
+const DMAP=new Map(DICT.map((d,i)=>[d[0].toLowerCase(),i]));
+const DICT_BASE=DICT.length;
+function rebuildDict(){DICT.length=DICT_BASE;for(const [k,i] of DMAP)if(i>=DICT_BASE)DMAP.delete(k);
+ (E.words||[]).forEach(w=>{const r=[w.sa,w.pos||'',w.ru,w.ex||''];r.u=w.id;const k=w.sa.toLowerCase();if(!DMAP.has(k))DMAP.set(k,DICT.length);DICT.push(r)})}
+/* Встроенная озвучка: {id:{sa,t,d(base64)}} */
+const BUILTIN_AUDIO={};
+/* Мини-грамматика к урокам. {слово} — якутский пример. */
+const GRAMMAR={
+ l1:['{Дорообо} — одному человеку, {Дорооболоруҥ} — многим или на «вы». Окончание -ҥ часто означает обращение к нескольким людям или вежливое «вы».',
+     '{Кэпсээ!} — повелительная форма, это просто основа глагола {кэпсээ} (рассказывать).',
+     'Вопросительные слова: {хайдах} — как, {ханна} — где, {ким} — кто.'],
+ l2:['Глагол в настоящем времени: основа + окончание лица. {саҥарабын} — я говорю, {саҥараҕын} — ты говоришь; {олоробун} — живу, {олороҕун} — живёшь.',
+     'Окончания подстраиваются под гласные слова (сингармонизм): -бын / -бин / -бун / -бүн. Сравните {олоробун} и {үөрэнэбин}.',
+     '«Мой» и «твой» — тоже окончания: {аат} — имя, {аатым} — моё имя, {аатыҥ} — твоё имя.',
+     'Вопрос «да или нет» — частица {дуо} в конце фразы. Окончание -га значит «в»: {Дьокуускайга} — в Якутске.'],
+ l3:['Отрицание встроено в глагол: {өйдөө} — понимать, {өйдөөбөппүн} — не понимаю, {өйдөөбөтүм} — не понял.',
+     'Наречия часто образуются окончанием -тык / -нык / -дик: {кыра} → {кыратык} (немного), {үчүгэй} → {үчүгэйдик} (хорошо), {бытааннык} (медленно).',
+     '{Суох} — «нет» и «не имеется»: {Сонун суох} — новостей нет.'],
+ l4:['Просьба к одному человеку — основа глагола: {Аһаа!}, {Олор!}. Вежливо или многим — с окончанием -ҥ: {Киириҥ!}, {Олоруҥ!}',
+     '{Бу} — «это»: {Бу туох?} — Что это? {Бу кымыс} — Это кумыс. Слово «есть, является» в таких фразах не нужно.',
+     'Окончание -иэҥ / -ыаҥ — «ты будешь …»: {иһиэҥ} — будешь пить.'],
+ l5:['{баар} — есть, имеется; {суох} — нет: {Килиэп баар дуо?} — {Баар}.',
+     '«Мне нужно …» — {Миэхэ … наада}: {Миэхэ үүт наада}.',
+     'Короткое -ый / -ий / -уй в конце делает вопрос живее: {баарый}, {кимий}, {төһөнүй}.',
+     '{бу} (это) в роли дополнения становится {маны}: {Маны биэр} — дай это.'],
+ l6:['Указания водителю — повелительная форма: {бар} — езжай, {тохтоо} — остановись.',
+     '{көнө} (прямой) → {көнөтүк} (прямо) — то же -тык, что в уроке 3.',
+     '{тохтуур} — «останавливается» (обычное, повторяющееся действие).'],
+ l7:['Составные числа строятся по порядку, как в русском: {уон биир} — 11, {сүүрбэ биэс} — 25.',
+     'Десятки от 40 до 90 — число + {уон}: {түөрт уон} — 40, {биэс уон} — 50.',
+     'Порядковые числа — окончание -ис / -ус / -с: {иккис} — второй, {үһүс} — третий.'],
+ l9:['«Мой» — окончание: после гласной -м, после согласной -ым / -им / -ум / -үм: {ийэ} → {ийэм} (моя мама), {доҕор} → {доҕорум} (мой друг), {саас} → {сааһым} (мой возраст).',
+     '-лаах / -лээх / -нээх / -таах значит «имеющий»: {оҕо} → {оҕолоох} (с детьми), {кэргэн} → {кэргэннээх} (семейный). С окончанием лица: {кэргэннээхпин} — я женат, {кэргэннээххин} — ты женат.',
+     'Названия сестёр и братьев зависят от того, кто говорит: у девушки {аҕас} — старшая сестра, {балыс} — младшая; у мужчины старшая сестра — {эдьиий}, младшая — {балты}. {убай} — старший брат.',
+     '-ттан / -тан — «из, от»: {Москваттан} — из Москвы, {хантан} — откуда.'],
+ l10:['Дни недели в словаре заимствованы из русского: {бэнидиэнньик}, {оптуорунньук}, {сэрэдэ}, {чэппиэр}, {бээтинсэ}, {субуота}, {баскыһыанньа}. В 2024 году в Якутии предложили и новые названия: {аан күн}, {ханыы күн}, {орто күн}, {чэбэр күн}, {чөл күн}, {сүбэ күн}, {өрөбүл күн}. Можно услышать оба варианта.',
+     '«Во сколько» — окончание -ка / -кэ / -га: {чаас} → {чааска}, {биэс чааска} — в пять часов, {Хас чааска?} — во сколько?',
+     '«В неделю» — {нэдиэлэҕэ}; окончание то же, что в «Дьокуускайга».',
+     '«Был» — {этэ}: {Бэҕэһээ чэппиэр этэ}. «Приду» — {кэлиэм}: -иэм / -ыам значит «я сделаю».'],
+ l11:['«Куда» и «где» — окончание -га / -ка / -ҕа / -бэр и др.: {куорат} → {куоракка} (в городе, в город; т переходит в к), {дьиэ} → {дьиэбэр} (домой, в свой дом).',
+     'Кого? что? — окончание -ы / -и / -у / -ү: {аан} → {ааны}, {түннүк} → {түннүгү} (к между гласными становится г). {Ааны ас} — открой дверь, {Ааны сап} — закрой дверь.',
+     '«Мой дом» — {дьиэм}; «домой, в мой дом» — {дьиэбэр}.'],
+ l12:['«У меня болит …» — часть тела с окончанием «мой» + {ыалдьар}: {төбө} → {Төбөм ыалдьар} — у меня болит голова.',
+     'Прошедшее «я сделал» — окончание -тым / -дым / -ным: {сылайдым} — я устал, {өйдөөбөтүм} — я не понял.',
+     'Будущее «я сделаю» — -иэм / -ыам: {эрийиэм} — позвоню, {кэлиэм} — приду.',
+     '«Мне» — {миэхэ}, «тебе» — {эйиэхэ}: {Мин эйиэхэ эрийиэм} — я тебе позвоню.'],
+ l13:['«Хочу сделать» — {иһиэхпин баҕарабын} (хочу пить): глагол в форме «чтобы» + {баҕар} (хотеть).',
+     'Прошедшее -тым / -дым (уже знакомо): {аччыктаатым} — проголодался, {утаттым} — захотелось пить, {аһаатым} — поел.',
+     'Кого? что? — -ы / -и / -у / -ү, а конечные согласные меняются: {балык} → {балыгы} (к → г), {туус} → {тууһу} (с → һ).',
+     '«С чем-то» — -лаах / -лээх / -таах: {саахардаах} — с сахаром, сладкий.'],
+ l14:['«Кем» — окончание -нан / -ынан: {учууталынан үлэлиибин} — работаю учителем.',
+     'Знаю — не знаю: {билэбин} / {билбэппин}. Отрицание -бэт- / -бат- стоит внутри глагола.',
+     '«Якутский язык» как объект — {саха тылын}: {тыл} (язык) + окончание принадлежности. {Саха тылын үөрэтэбин} — изучаю якутский.',
+     'Просьба к одному — основа глагола: {хатылаа} (повтори), {суруй} (напиши), {көмөлөс} (помоги) + {бука диэн}.'],
+ l15:['«С праздником» — окончание -нан / -ынан: {бырааһынньыгынан} (с праздником), {Саҥа дьылынан} (с Новым годом), {Төрөөбүт күҥҥүнэн} (с твоим днём рождения).',
+     '{эҕэрдэ} — поздравление, привет; {эҕэрдэлиибин} — поздравляю. Кого? — {эйигин} (тебя).',
+     'Что желают — в форме «что?»: {ситиһии} → {ситиһиини} (успехов), {дьол} → {дьолу} (счастья) + {баҕарабын}.',
+     '{Ыһыах} — летний праздник в июне; там пьют кумыс и танцуют осуохай — большой хоровод с песней.'],
+ l16:['«Мы делаем» — окончание -быт / -бит: {барабыт} (идём), {хомуйабыт} (собираем), {сынньанабыт} (отдыхаем). Сравните: {барабын} — я иду.',
+     'Похожее -быт сразу после основы значит «уже произошло»: {Отон буспут} — ягоды поспели, {Күн тахсыбыт} — солнце вышло.',
+     'Направление -ҥҥа / -ҕа: {айан} → {айаҥҥа} (в дорогу), {тыа} → {тыаҕа} (в лес).',
+     'Связка «быть» не нужна: {Суол ыраах} — дорога дальняя, {Өрүс кэтит} — река широкая.'],
+ l17:['«Идти охотиться / рыбачить» — глагол на -ыы / -уу + {бар}: {бултаа} → {бултуу бар} (идти на охоту), {балыктаа} → {балыктыы бар} (идти рыбачить).',
+     '«Я — охотник» — окончание -бын / -пын: {учууталбын}, {булчуппун} (т + б дают пп).',
+     'Кого? что? после гласной — -ны / -ни: {саа} → {сааны ыл} (возьми ружьё).',
+     '«На охоте» — {булка}. {булт} — охота и добыча, {булчут} — охотник, {булчут ыт} — охотничья собака.'],
+ l8:['Связка «быть» в настоящем времени не нужна: {Бүгүн тымныы} — Сегодня холодно (букв. «сегодня холодный»).',
+     '«Будет» — {буолуо}: {Сарсын сылаас буолуо} — Завтра будет тепло.',
+     'Окончание -быт — о том, что уже произошло: {Күн тахсыбыт} — Солнце вышло (выглянуло).']
+};
+/* Базовые слова для озвучки (из словаря) */
+const WORDS=[{"id":"w001","sa":"киһи","ru":"человек; кто-то","g":"Люди и семья"},{"id":"w002","sa":"дьон","ru":"люди; народный; жители","g":"Люди и семья"},{"id":"w003","sa":"эр","ru":"мужчина; муж; (после деепр. на -ан) начинать делать","g":"Люди и семья"},{"id":"w004","sa":"дьахтар","ru":"женщина; жена","g":"Люди и семья"},{"id":"w005","sa":"оҕо","ru":"ребёнок; детёныш","g":"Люди и семья"},{"id":"w006","sa":"уол","ru":"сын; мальчик, парень","g":"Люди и семья"},{"id":"w007","sa":"кыыс","ru":"девушка; дочь; краснеть","g":"Люди и семья"},{"id":"w008","sa":"ийэ","ru":"мать, мама","g":"Люди и семья"},{"id":"w009","sa":"аҕа","ru":"отец","g":"Люди и семья"},{"id":"w010","sa":"убай","ru":"старший брат","g":"Люди и семья"},{"id":"w011","sa":"ини","ru":"младший брат; наверное; конечно","g":"Люди и семья"},{"id":"w012","sa":"аҕас","ru":"старшая сестра","g":"Люди и семья"},{"id":"w013","sa":"балыс","ru":"младшая сестра","g":"Люди и семья"},{"id":"w014","sa":"эһэ","ru":"дедушка; медведь","g":"Люди и семья"},{"id":"w015","sa":"эбэ","ru":"бабушка","g":"Люди и семья"},{"id":"w016","sa":"кэргэн","ru":"семья; член семьи, супруг(а)","g":"Люди и семья"},{"id":"w017","sa":"ойох","ru":"жена, женщина","g":"Люди и семья"},{"id":"w018","sa":"доҕор","ru":"друг","g":"Люди и семья"},{"id":"w019","sa":"атас","ru":"друг","g":"Люди и семья"},{"id":"w020","sa":"ыалдьыт","ru":"гость","g":"Люди и семья"},{"id":"w021","sa":"аймах","ru":"родственник, родня","g":"Люди и семья"},{"id":"w022","sa":"төрөппүт","ru":"родитель","g":"Люди и семья"},{"id":"w023","sa":"оҕонньор","ru":"старик; муж","g":"Люди и семья"},{"id":"w024","sa":"эмээхсин","ru":"старушка; жена","g":"Люди и семья"},{"id":"w025","sa":"учуутал","ru":"учитель","g":"Люди и семья"},{"id":"w026","sa":"быраас","ru":"врач","g":"Люди и семья"},{"id":"w027","sa":"төбө","ru":"голова; верхушка; вершина","g":"Тело"},{"id":"w028","sa":"баттах","ru":"волосы; костыль, посох","g":"Тело"},{"id":"w029","sa":"харах","ru":"глаз; зрение","g":"Тело"},{"id":"w030","sa":"кулгаах","ru":"ухо","g":"Тело"},{"id":"w031","sa":"мурун","ru":"нос","g":"Тело"},{"id":"w032","sa":"айах","ru":"рот","g":"Тело"},{"id":"w033","sa":"тиис","ru":"зуб; зубец; резвиться","g":"Тело"},{"id":"w034","sa":"тыл","ru":"язык (орган и речь); слово","g":"Тело"},{"id":"w035","sa":"моой","ru":"шея","g":"Тело"},{"id":"w036","sa":"илии","ru":"рука, кисть","g":"Тело"},{"id":"w037","sa":"тарбах","ru":"палец; спица (колеса)","g":"Тело"},{"id":"w038","sa":"атах","ru":"нога; ступня","g":"Тело"},{"id":"w039","sa":"сүрэх","ru":"сердце; душа; усердие","g":"Тело"},{"id":"w040","sa":"ис","ru":"внутренний; внутренность; живот","g":"Тело"},{"id":"w041","sa":"сирэй","ru":"лицо; сторона; страница","g":"Тело"},{"id":"w042","sa":"уос","ru":"губа","g":"Тело"},{"id":"w043","sa":"түөс","ru":"грудь","g":"Тело"},{"id":"w044","sa":"ас","ru":"еда; волосы; открывать","g":"Еда и посуда"},{"id":"w045","sa":"уу","ru":"вода; сон","g":"Еда и посуда"},{"id":"w046","sa":"чэй","ru":"чай","g":"Еда и посуда"},{"id":"w047","sa":"үүт","ru":"молоко; дыра, отверстие","g":"Еда и посуда"},{"id":"w048","sa":"эт","ru":"мясо; тело; сказать","g":"Еда и посуда"},{"id":"w049","sa":"балык","ru":"рыба","g":"Еда и посуда"},{"id":"w050","sa":"килиэп","ru":"хлеб","g":"Еда и посуда"},{"id":"w051","sa":"арыы","ru":"масло, жир; остров","g":"Еда и посуда"},{"id":"w052","sa":"туус","ru":"соль","g":"Еда и посуда"},{"id":"w053","sa":"саахар","ru":"сахар","g":"Еда и посуда"},{"id":"w054","sa":"отон","ru":"ягода","g":"Еда и посуда"},{"id":"w055","sa":"кымыс","ru":"кумыс","g":"Еда и посуда"},{"id":"w056","sa":"сүөгэй","ru":"сливки","g":"Еда и посуда"},{"id":"w057","sa":"миин","ru":"суп, бульон; садиться верхом, ехать верхом","g":"Еда и посуда"},{"id":"w058","sa":"луук","ru":"лук (репчатый)","g":"Еда и посуда"},{"id":"w059","sa":"хортуоппуй","ru":"картофель","g":"Еда и посуда"},{"id":"w060","sa":"моркуоп","ru":"морковь","g":"Еда и посуда"},{"id":"w061","sa":"аһылык","ru":"еда; корм","g":"Еда и посуда"},{"id":"w062","sa":"чааскы","ru":"чашка","g":"Еда и посуда"},{"id":"w063","sa":"луоска","ru":"ложка","g":"Еда и посуда"},{"id":"w064","sa":"дьиэ","ru":"дом, жилище; здание","g":"Дом и вещи"},{"id":"w065","sa":"аан","ru":"дверь; начало, первый","g":"Дом и вещи"},{"id":"w066","sa":"түннүк","ru":"окно","g":"Дом и вещи"},{"id":"w067","sa":"остуол","ru":"стол","g":"Дом и вещи"},{"id":"w068","sa":"олоппос","ru":"стул","g":"Дом и вещи"},{"id":"w069","sa":"орон","ru":"кровать; выбираться (с трудом)","g":"Дом и вещи"},{"id":"w070","sa":"оһох","ru":"печь; очаг, камин","g":"Дом и вещи"},{"id":"w071","sa":"уот","ru":"огонь; откармливать","g":"Дом и вещи"},{"id":"w072","sa":"мас","ru":"дерево; древесина; дрова","g":"Дом и вещи"},{"id":"w073","sa":"быһах","ru":"нож","g":"Дом и вещи"},{"id":"w074","sa":"сүгэ","ru":"топор","g":"Дом и вещи"},{"id":"w075","sa":"кинигэ","ru":"книга","g":"Дом и вещи"},{"id":"w076","sa":"харчы","ru":"деньги","g":"Дом и вещи"},{"id":"w077","sa":"таҥас","ru":"ткань; одежда","g":"Дом и вещи"},{"id":"w078","sa":"бэргэһэ","ru":"шапка","g":"Дом и вещи"},{"id":"w079","sa":"ыстаан","ru":"штаны, брюки","g":"Дом и вещи"},{"id":"w080","sa":"сон","ru":"пальто, шуба","g":"Дом и вещи"},{"id":"w081","sa":"суорҕан","ru":"одеяло","g":"Дом и вещи"},{"id":"w082","sa":"сыттык","ru":"подушка","g":"Дом и вещи"},{"id":"w083","sa":"солуур","ru":"ведро","g":"Дом и вещи"},{"id":"w084","sa":"массыына","ru":"машина","g":"Дом и вещи"},{"id":"w085","sa":"куорат","ru":"город","g":"Город и места"},{"id":"w086","sa":"суол","ru":"дорога; путь; след","g":"Город и места"},{"id":"w087","sa":"уулусса","ru":"улица","g":"Город и места"},{"id":"w088","sa":"оскуола","ru":"школа","g":"Город и места"},{"id":"w089","sa":"балыыһа","ru":"больница","g":"Город и места"},{"id":"w090","sa":"маҕаһыын","ru":"магазин","g":"Город и места"},{"id":"w091","sa":"баһаар","ru":"базар","g":"Город и места"},{"id":"w092","sa":"дойду","ru":"страна; край, мир","g":"Город и места"},{"id":"w093","sa":"сир","ru":"земля; местность, земли; пренебрегать, отвергать","g":"Город и места"},{"id":"w094","sa":"тыа","ru":"лес, тайга; деревня, сельская местность","g":"Город и места"},{"id":"w095","sa":"күн","ru":"солнце; день","g":"Природа"},{"id":"w096","sa":"ый","ru":"луна; месяц; указывать","g":"Природа"},{"id":"w097","sa":"сулус","ru":"звезда","g":"Природа"},{"id":"w098","sa":"халлаан","ru":"небо","g":"Природа"},{"id":"w099","sa":"былыт","ru":"облако","g":"Природа"},{"id":"w100","sa":"тыал","ru":"ветер","g":"Природа"},{"id":"w101","sa":"самыыр","ru":"дождь","g":"Природа"},{"id":"w102","sa":"хаар","ru":"снег","g":"Природа"},{"id":"w103","sa":"муус","ru":"лёд","g":"Природа"},{"id":"w104","sa":"таас","ru":"камень; стекло","g":"Природа"},{"id":"w105","sa":"өрүс","ru":"река (большая)","g":"Природа"},{"id":"w106","sa":"күөл","ru":"озеро","g":"Природа"},{"id":"w107","sa":"муора","ru":"море","g":"Природа"},{"id":"w108","sa":"хайа","ru":"гора; какой, который","g":"Природа"},{"id":"w109","sa":"ойуур","ru":"лес","g":"Природа"},{"id":"w110","sa":"от","ru":"трава, сено","g":"Природа"},{"id":"w111","sa":"чэчик","ru":"цветок","g":"Природа"},{"id":"w112","sa":"хонуу","ru":"поле; луг","g":"Природа"},{"id":"w113","sa":"кумах","ru":"песок","g":"Природа"},{"id":"w114","sa":"салгын","ru":"воздух","g":"Природа"},{"id":"w115","sa":"ат","ru":"лошадь, конь; холощёный","g":"Животные"},{"id":"w116","sa":"сылгы","ru":"лошадь","g":"Животные"},{"id":"w117","sa":"ынах","ru":"корова","g":"Животные"},{"id":"w118","sa":"оҕус","ru":"бык; вол; ударить","g":"Животные"},{"id":"w119","sa":"ыт","ru":"собака; стрелять","g":"Животные"},{"id":"w120","sa":"куоска","ru":"кошка","g":"Животные"},{"id":"w121","sa":"таба","ru":"олень; удачный, верный","g":"Животные"},{"id":"w122","sa":"бөрө","ru":"волк","g":"Животные"},{"id":"w123","sa":"саһыл","ru":"лиса","g":"Животные"},{"id":"w124","sa":"куобах","ru":"заяц","g":"Животные"},{"id":"w125","sa":"тииҥ","ru":"белка","g":"Животные"},{"id":"w126","sa":"кус","ru":"утка","g":"Животные"},{"id":"w127","sa":"көтөр","ru":"птица","g":"Животные"},{"id":"w128","sa":"чыычаах","ru":"птичка","g":"Животные"},{"id":"w129","sa":"тайах","ru":"лось; трость, палка","g":"Животные"},{"id":"w130","sa":"сибиинньэ","ru":"свинья","g":"Животные"},{"id":"w131","sa":"бүгүн","ru":"сегодня","g":"Время"},{"id":"w132","sa":"сарсын","ru":"завтра","g":"Время"},{"id":"w133","sa":"бэҕэһээ","ru":"вчера","g":"Время"},{"id":"w134","sa":"сарсыарда","ru":"утром; утро","g":"Время"},{"id":"w135","sa":"күнүс","ru":"день, полдень; днём","g":"Время"},{"id":"w136","sa":"киэһэ","ru":"вечером; вечер","g":"Время"},{"id":"w137","sa":"түүн","ru":"ночь; ночью","g":"Время"},{"id":"w138","sa":"сыл","ru":"год","g":"Время"},{"id":"w139","sa":"нэдиэлэ","ru":"неделя","g":"Время"},{"id":"w140","sa":"саас","ru":"весна; возраст","g":"Время"},{"id":"w141","sa":"сайын","ru":"лето; развиваться","g":"Время"},{"id":"w142","sa":"күһүн","ru":"осенью; осень","g":"Время"},{"id":"w143","sa":"кыһын","ru":"зима","g":"Время"},{"id":"w144","sa":"кэм","ru":"мера; время, эпоха; время","g":"Время"},{"id":"w145","sa":"чаас","ru":"час","g":"Время"},{"id":"w146","sa":"мүнүүтэ","ru":"минута","g":"Время"},{"id":"w147","sa":"билигин","ru":"сейчас, теперь","g":"Время"},{"id":"w148","sa":"биир","ru":"один","g":"Числа"},{"id":"w149","sa":"икки","ru":"пара; два; между","g":"Числа"},{"id":"w150","sa":"үс","ru":"три","g":"Числа"},{"id":"w151","sa":"түөрт","ru":"четыре","g":"Числа"},{"id":"w152","sa":"биэс","ru":"пять","g":"Числа"},{"id":"w153","sa":"алта","ru":"шесть","g":"Числа"},{"id":"w154","sa":"сэттэ","ru":"семь","g":"Числа"},{"id":"w155","sa":"аҕыс","ru":"восемь","g":"Числа"},{"id":"w156","sa":"тоҕус","ru":"девять","g":"Числа"},{"id":"w157","sa":"уон","ru":"десять","g":"Числа"},{"id":"w158","sa":"сүүрбэ","ru":"двадцать","g":"Числа"},{"id":"w159","sa":"отут","ru":"тридцать","g":"Числа"},{"id":"w160","sa":"сүүс","ru":"сто; лоб; лобный","g":"Числа"},{"id":"w161","sa":"тыһыынча","ru":"тысяча","g":"Числа"},{"id":"w162","sa":"үчүгэй","ru":"хороший; ладно, хорошо","g":"Признаки"},{"id":"w163","sa":"куһаҕан","ru":"плохой; злой","g":"Признаки"},{"id":"w164","sa":"улахан","ru":"большой; взрослый","g":"Признаки"},{"id":"w165","sa":"кыра","ru":"маленький","g":"Признаки"},{"id":"w166","sa":"саҥа","ru":"новый; речь; голос","g":"Признаки"},{"id":"w167","sa":"эргэ","ru":"старый (о вещах)","g":"Признаки"},{"id":"w168","sa":"эдэр","ru":"молодой","g":"Признаки"},{"id":"w169","sa":"кырдьаҕас","ru":"старый (о людях, животных)","g":"Признаки"},{"id":"w170","sa":"итии","ru":"горячий, жаркий; жара","g":"Признаки"},{"id":"w171","sa":"тымныы","ru":"холодный; морозный; холод, мороз","g":"Признаки"},{"id":"w172","sa":"сылаас","ru":"тёплый; тепло","g":"Признаки"},{"id":"w173","sa":"уһун","ru":"длинный, высокий; плавать","g":"Признаки"},{"id":"w174","sa":"кылгас","ru":"короткий; краткий","g":"Признаки"},{"id":"w175","sa":"үрдүк","ru":"высокий; высота","g":"Признаки"},{"id":"w176","sa":"чугас","ru":"близкий, близко","g":"Признаки"},{"id":"w177","sa":"ыраах","ru":"далёкий, далеко","g":"Признаки"},{"id":"w178","sa":"элбэх","ru":"много, многие","g":"Признаки"},{"id":"w179","sa":"аҕыйах","ru":"мало, немного","g":"Признаки"},{"id":"w180","sa":"кэрэ","ru":"красивый; красота","g":"Признаки"},{"id":"w181","sa":"минньигэс","ru":"сладкий; вкусный","g":"Признаки"},{"id":"w182","sa":"түргэн","ru":"быстрый","g":"Признаки"},{"id":"w183","sa":"бытаан","ru":"медленный","g":"Признаки"},{"id":"w184","sa":"ыраас","ru":"чистый","g":"Признаки"},{"id":"w185","sa":"кыһыл","ru":"красный","g":"Цвета"},{"id":"w186","sa":"арыы саһархай","ru":"оранжевый (букв. «жёлтый, как масло»)","g":"Цвета"},{"id":"w187","sa":"саһархай","ru":"жёлтый","g":"Цвета"},{"id":"w188","sa":"араҕас","ru":"жёлтый","g":"Цвета"},{"id":"w189","sa":"от күөҕэ","ru":"зелёный","g":"Цвета"},{"id":"w190","sa":"халлаан күөх","ru":"небесно-голубой","g":"Цвета"},{"id":"w191","sa":"күөх","ru":"голубой, синий; зелёный","g":"Цвета"},{"id":"w192","sa":"хара саарыл","ru":"фиолетовый","g":"Цвета"},{"id":"w193","sa":"үрүҥ","ru":"белый","g":"Цвета"},{"id":"w194","sa":"хара","ru":"чёрный","g":"Цвета"},{"id":"w195","sa":"бороҥ","ru":"серый","g":"Цвета"},{"id":"w196","sa":"күрэҥ","ru":"коричневый","g":"Цвета"},{"id":"w197","sa":"бар","ru":"идти, ехать (куда-л.); уходить, уезжать; идти (о делах)","g":"Действия"},{"id":"w198","sa":"кэл","ru":"приходить; приезжать, прибывать","g":"Действия"},{"id":"w199","sa":"көр","ru":"видеть, смотреть; забава, развлечение","g":"Действия"},{"id":"w200","sa":"бил","ru":"знать; таймень","g":"Действия"},{"id":"w201","sa":"олор","ru":"сидеть; жить (где-л.); жить","g":"Действия"},{"id":"w202","sa":"тур","ru":"стоять","g":"Действия"},{"id":"w203","sa":"утуй","ru":"спать","g":"Действия"},{"id":"w204","sa":"аһаа","ru":"есть, кушать","g":"Действия"},{"id":"w205","sa":"сиэ","ru":"есть, съедать; истреблять; объедаться","g":"Действия"},{"id":"w206","sa":"иһит","ru":"слышать; слушать; посуда","g":"Действия"},{"id":"w207","sa":"саҥар","ru":"говорить; говорить (на языке)","g":"Действия"},{"id":"w208","sa":"диэ","ru":"говорить, сказать; думать, считать","g":"Действия"},{"id":"w209","sa":"оҥор","ru":"делать, строить; превращать; готовить (еду)","g":"Действия"},{"id":"w210","sa":"үлэлээ","ru":"работать; нанимать","g":"Действия"},{"id":"w211","sa":"үөрэн","ru":"учиться","g":"Действия"},{"id":"w212","sa":"аах","ru":"читать; считать; считать (кем-л.)","g":"Действия"},{"id":"w213","sa":"суруй","ru":"писать","g":"Действия"},{"id":"w214","sa":"ыл","ru":"брать; получать","g":"Действия"},{"id":"w215","sa":"биэр","ru":"давать; (вспом.) сделать для другого","g":"Действия"},{"id":"w216","sa":"ыйыт","ru":"спрашивать","g":"Действия"},{"id":"w217","sa":"кэпсээ","ru":"рассказывай! (приветствие); рассказывать","g":"Действия"},{"id":"w218","sa":"күүт","ru":"ждать","g":"Действия"},{"id":"w219","sa":"көмөлөс","ru":"помогать","g":"Действия"},{"id":"w220","sa":"баҕар","ru":"может быть; допустим; хотя бы","g":"Действия"},{"id":"w221","sa":"сөбүлээ","ru":"соглашаться; нравиться","g":"Действия"},{"id":"w222","sa":"киир","ru":"заходить (о солнце); входить","g":"Действия"},{"id":"w223","sa":"таҕыс","ru":"подниматься; взбираться; выходить","g":"Действия"},{"id":"w224","sa":"сап","ru":"нитка; звук втягиваемого воздуха; накрывать","g":"Действия"},{"id":"w225","sa":"бул","ru":"находить; получать","g":"Действия"},{"id":"w226","sa":"сүтэр","ru":"терять","g":"Действия"},{"id":"w227","sa":"атыылас","ru":"покупать","g":"Действия"},{"id":"w228","sa":"төлөө","ru":"платить","g":"Действия"},{"id":"w229","sa":"ыллаа","ru":"петь","g":"Действия"},{"id":"w230","sa":"оонньоо","ru":"играть (в игру, на инструменте)","g":"Действия"},{"id":"w231","sa":"сынньан","ru":"отдыхать","g":"Действия"},{"id":"w232","sa":"өйдөө","ru":"помнить; понимать","g":"Действия"},{"id":"w233","sa":"умун","ru":"забывать","g":"Действия"},{"id":"w234","sa":"ким","ru":"кто; давить, жать; пробиваться вперёд","g":"Слова-помощники"},{"id":"w235","sa":"туох","ru":"что","g":"Слова-помощники"},{"id":"w236","sa":"ханна","ru":"где","g":"Слова-помощники"},{"id":"w237","sa":"хаһан","ru":"когда","g":"Слова-помощники"},{"id":"w238","sa":"хайдах","ru":"как; как же …!","g":"Слова-помощники"},{"id":"w239","sa":"тоҕо","ru":"почему, зачем","g":"Слова-помощники"},{"id":"w240","sa":"төһө","ru":"сколько; насколько","g":"Слова-помощники"},{"id":"w241","sa":"ханнык","ru":"какой, который","g":"Слова-помощники"},{"id":"w242","sa":"уонна","ru":"и","g":"Слова-помощники"},{"id":"w243","sa":"эбэтэр","ru":"или","g":"Слова-помощники"},{"id":"w244","sa":"суох","ru":"нет; без, без-; не имеется","g":"Слова-помощники"},{"id":"w245","sa":"баар","ru":"есть, имеется","g":"Слова-помощники"},{"id":"w246","sa":"сөп","ru":"верный, правильный; да, ладно","g":"Слова-помощники"},{"id":"w247","sa":"бу","ru":"этот; как …!; какой …!","g":"Слова-помощники"},{"id":"w248","sa":"ол","ru":"тот; оно","g":"Слова-помощники"},{"id":"w249","sa":"мин","ru":"я","g":"Слова-помощники"},{"id":"w250","sa":"эн","ru":"ты","g":"Слова-помощники"},{"id":"w251","sa":"кини","ru":"он, она, оно","g":"Слова-помощники"},{"id":"w252","sa":"биһиги","ru":"мы","g":"Слова-помощники"},{"id":"w253","sa":"эһиги","ru":"вы","g":"Слова-помощники"},{"id":"w254","sa":"кинилэр","ru":"они","g":"Слова-помощники"},{"id":"w255","sa":"олус","ru":"очень","g":"Слова-помощники"},{"id":"w256","sa":"эмиэ","ru":"снова; тоже","g":"Слова-помощники"},{"id":"w257","sa":"өссө","ru":"ещё","g":"Слова-помощники"},{"id":"w258","sa":"баһыыба","ru":"спасибо","g":"Слова-помощники"},{"id":"w259","sa":"махтал","ru":"спасибо; благодарность","g":"Слова-помощники"}];
+const WMAP=new Map(WORDS.map(w=>[w.sa.toLowerCase(),w]));
+const DLINES=DIALOGUES.flatMap(d=>d.lines.map((l,k)=>({id:d.id+'l'+k,sa:l[1],ru:l[2],dl:true})));
+const DLG_OF={l1:'d1',l2:'d2',l4:'d3',l5:'d4',l6:'d5',l9:'d6',l10:'d7',l11:'d8',l12:'d9',l13:'d10',l14:'d11',l15:'d12',l16:'d13',l17:'d14'};
+const INTERVALS=[0,1,3,7,14,30];
+const KEY='sakha-phrases-v1', EKEY='sakha-edits-v1';
+const DEF_PH={};DEFAULT_LESSONS.forEach(l=>l.phrases.forEach(p=>DEF_PH[p.id]=p));
+
+function today(){const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5)}
+function fresh(){return {cards:{},done:{},dlg:{},streak:{count:0,last:null},lastBackup:null}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.cards)return Object.assign(fresh(),s)}catch(e){}return fresh()}
+let S=load();
+const META='sakha-meta-v1';
+function metaGet(){try{return JSON.parse(localStorage.getItem(META))||{}}catch(e){return {}}}
+function metaSet(n,at){const m=metaGet();m[n]=at;try{localStorage.setItem(META,JSON.stringify(m))}catch(e){}}
+function touch(n){metaSet(n,Date.now());cloudQueue(n)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}touch('progress')}
+
+/* ---------- Правки пользователя ---------- */
+function freshE(){return {phrases:{},deleted:[],added:{},lessons:[],words:[]}}
+function loadE(){try{const e=JSON.parse(localStorage.getItem(EKEY));if(e&&e.phrases)return Object.assign(freshE(),e)}catch(x){}return freshE()}
+let E=loadE(), LESSONS=[], ALL=[];
+function saveE(){try{localStorage.setItem(EKEY,JSON.stringify(E))}catch(x){}touch('edits')}
+function rebuild(){
+  const del=new Set(E.deleted);
+  const mine=id=>(E.added[id]||[]).map(p=>({...p,mine:true}));
+  LESSONS=DEFAULT_LESSONS.map(l=>({...l,custom:false,phrases:l.phrases.filter(p=>!del.has(p.id))
+      .map(p=>E.phrases[p.id]?{...p,...E.phrases[p.id],edited:true}:{...p}).concat(mine(l.id))}))
+    .concat(E.lessons.map(l=>({...l,custom:true,phrases:mine(l.id)})));
+  ALL=LESSONS.flatMap(l=>l.phrases.map(p=>({...p,lesson:l.id})));
+ rebuildDict();
+}
+rebuild();
+function commit(){saveE();rebuild()}
+function uid(){return 'u'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function forget(id){if(S.cards[id]){delete S.cards[id];save()}if(REC.has.has(id))recDel(id).catch(()=>{})}
+function savePhrase(lid,pid,data){
+  if(!pid){(E.added[lid]=E.added[lid]||[]).push({id:uid(),...data})}
+  else if(DEF_PH[pid]){
+    const cur=ALL.find(p=>p.id===pid),d=DEF_PH[pid];
+    if(cur&&cur.sa!==data.sa)forget(pid);
+    if(d.sa===data.sa&&d.ru===data.ru&&(d.note||'')===data.note)delete E.phrases[pid];else E.phrases[pid]=data;
+  }else{
+    const arr=E.added[lid]||[],i=arr.findIndex(p=>p.id===pid);
+    if(i>=0){if(arr[i].sa!==data.sa)forget(pid);arr[i]={id:pid,...data}}
+  }
+  commit();
+}
+function deletePhrase(lid,pid){
+  if(DEF_PH[pid]){if(!E.deleted.includes(pid))E.deleted.push(pid)}
+  else E.added[lid]=(E.added[lid]||[]).filter(p=>p.id!==pid);
+  forget(pid);commit();
+}
+function revertPhrase(pid){const cur=ALL.find(p=>p.id===pid);if(cur&&cur.sa!==DEF_PH[pid].sa)forget(pid);delete E.phrases[pid];commit()}
+function defIds(lid){const l=DEFAULT_LESSONS.find(x=>x.id===lid);return l?l.phrases.map(p=>p.id):[]}
+function deletedCount(lid){const ids=defIds(lid);return E.deleted.filter(id=>ids.includes(id)).length}
+function restoreDeleted(lid){const ids=defIds(lid);E.deleted=E.deleted.filter(id=>!ids.includes(id));commit()}
+function deleteLesson(lid){(E.added[lid]||[]).forEach(p=>forget(p.id));delete E.added[lid];E.lessons=E.lessons.filter(l=>l.id!==lid);commit()}
+
+/* ---------- Записи (IndexedDB) ---------- */
+const REC={db:null,has:new Set(),ok:false};
+let recState=null, player=null, pendingAudioId=null;
+function idbOpen(){return new Promise((res,rej)=>{try{const r=indexedDB.open('sakha-rec',1);r.onupgradeneeded=()=>r.result.createObjectStore('rec');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}})}
+function tx(mode,fn){return new Promise((res,rej)=>{const t=REC.db.transaction('rec',mode),r=fn(t.objectStore('rec'));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})}
+async function recInit(){try{REC.db=await idbOpen();REC.has=new Set(await tx('readonly',st=>st.getAllKeys()));REC.ok=true}catch(e){REC.ok=false}if(view.name!=='ex')render()}
+async function recPut(id,blob){const b=await new Response(blob).arrayBuffer();await tx('readwrite',st=>st.put({t:blob.type||'audio/wav',b},id));REC.has.add(id)}
+async function recGet(id){const v=await tx('readonly',st=>st.get(id));if(!v)return v;if(v instanceof Blob)return v;return v.b?new Blob([v.b],{type:v.t}):undefined}
+async function recDel(id){await tx('readwrite',st=>st.delete(id));REC.has.delete(id)}
+function blobToDataURL(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsDataURL(b)})}
+function b64ToBlob(b64,type){const bin=atob(b64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:type||'audio/webm'})}
+let seqToken=0;
+async function playSeq(ids){const my=++seqToken;for(const id of ids){if(my!==seqToken)return;await play(id,true)}}
+async function play(id,wait){
+  if(String(id).startsWith('dw:')){const w=WMAP.get(id.slice(3).toLowerCase());if(w)return play(w.id,wait)}
+  try{const c=getCtx();if(c.resume)c.resume()}catch(e){}
+  let blob;try{blob=await recGet(id)}catch(e){}
+  if(!blob){const p=ALL.find(x=>x.id===id)||WORDS.find(x=>x.id===id)||DLINES.find(x=>x.id===id)||(String(id).startsWith('dw:')?{id,sa:id.slice(3)}:null),bi=biGet(id);
+    if(p&&bi&&bi.sa===p.sa)blob=b64ToBlob(bi.d,bi.t);
+    else if(p&&(id[0]==='w'||p.dl)){const al=wordAlias(p);if(al&&al!==id)return play(al,wait)}}
+  if(!blob){if(!wait)toast('Запись не найдена.');return}
+  if(player){try{player.pause()}catch(e){}}
+  try{const c=getCtx();const ab=await decodeAudio(await new Response(blob).arrayBuffer());
+    if(curSrc){try{curSrc.stop()}catch(e){}}
+    curSrc=c.createBufferSource();curSrc.buffer=ab;curSrc.connect(c.destination);
+    const done=new Promise(r=>{curSrc.onended=r;setTimeout(r,(ab.duration+0.5)*1000)});curSrc.start(0);if(wait)await done;return}catch(e){}
+  try{const url=URL.createObjectURL(blob);player=new Audio(url);player.onended=()=>URL.revokeObjectURL(url);await player.play()}
+  catch(e){try{player=new Audio(await blobToDataURL(blob));await player.play()}catch(e2){toast('Не получилось воспроизвести запись в этом окне. Попробуйте открыть ссылку в браузере телефона.')}}
+}
+async function startRec(id){
+  if(recState){stopRec();return}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){toast('Микрофон здесь недоступен. Загрузите запись файлом.');return}
+  let stream;
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+  catch(e){toast('Нет доступа к микрофону. Разрешите его в браузере или загрузите запись файлом.');return}
+  const mr=new MediaRecorder(stream),chunks=[];
+  mr.ondataavailable=ev=>{if(ev.data&&ev.data.size)chunks.push(ev.data)};
+  mr.onstop=async()=>{stream.getTracks().forEach(t=>t.stop());clearTimeout(recState&&recState.timer);recState=null;
+    const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});
+    if(blob.size){try{await recPut(id,blob);toast('Запись сохранена.')}catch(e){toast('Не удалось сохранить запись.')}}
+    render()};
+  recState={id,mr,timer:setTimeout(()=>{if(mr.state==='recording')mr.stop()},15000)};
+  mr.start();render();
+}
+function stopRec(){if(recState&&recState.mr.state==='recording')recState.mr.stop()}
+let toastTimer=null;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),4500)}
+
+/* ---------- Резервная копия ---------- */
+async function getCap(name){try{return window.claude&&window.claude.use?await window.claude.use(name):null}catch(e){return null}}
+/* В Claude — окно сохранения Claude; в скачанной копии — обычное скачивание браузера. */
+async function getSaver(){
+  const cap=await getCap('downloads');if(cap)return cap;
+  if(window.claude)return null;
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  if(standalone&&navigator.canShare){return {save:async({filename,data})=>{const f=new File([data],filename,{type:data.type||'application/json'});
+    if(navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:filename});return {status:'saved'}}catch(e){if(e&&e.name==='AbortError')throw {code:'declined'};throw e}}
+    const a=document.createElement('a');a.href=URL.createObjectURL(data);a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);return {status:'saved'}}}}
+  return {save:async({filename,data})=>{const a=document.createElement('a');a.href=URL.createObjectURL(data);a.download=filename;
+    document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);return {status:'saved'}}};
+}
+async function exportData(){
+  const recordings={};
+  if(REC.ok){for(const id of REC.has){try{const b=await recGet(id);if(b)recordings[id]={type:b.type,data:(await blobToDataURL(b)).split(',')[1]}}catch(e){}}}
+  const d=new Date(),ymd=d.toISOString().slice(0,10);
+  const payload=JSON.stringify({app:'sakha-phrases',version:1,date:d.toISOString(),progress:S,edits:E,recordings});
+  const dl=await getSaver();
+  if(!dl){toast('Сохранение файла недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
+  try{await dl.save({filename:`sahalyy-sanar-${ymd}.json`,data:new Blob([payload],{type:'application/json'})});
+    S.lastBackup=today();save();render();toast('Резервная копия сохранена.')}
+  catch(e){if(e&&e.code==='declined')return;toast(e&&e.code==='rate_limited'?'Окно сохранения уже открыто.':'Не удалось сохранить файл.')}
+}
+async function importData(file){
+  let obj;
+  try{obj=JSON.parse(await file.text());if(!obj||obj.app!=='sakha-phrases'||!obj.progress)throw 0}
+  catch(e){toast('Это не резервная копия «Сахалыы саҥар». Выберите файл .json, сохранённый из приложения.');return}
+  if(!confirm('Заменить текущий прогресс, правки и записи данными из файла?'))return;
+  S=Object.assign(fresh(),obj.progress);E=Object.assign(freshE(),obj.edits||{});save();saveE();rebuild();
+  if(REC.ok){try{await tx('readwrite',st=>st.clear());REC.has=new Set();
+    for(const [id,v] of Object.entries(obj.recordings||{}))await recPut(id,b64ToBlob(v.data,v.type))}catch(e){toast('Данные загружены, но часть записей не восстановилась.');go({name:'home'});return}}
+  toast('Данные из файла загружены.');go({name:'home'});
+}
+
+/* ---------- Пакет озвучки ---------- */
+async function exportPhrases(){
+  const dl=await getSaver();
+  if(!dl){toast('Сохранение файла недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
+  const payload=JSON.stringify({app:'sakha-phrases',kind:'phrases',version:1,items:ALL.map(p=>({id:p.id,sa:p.sa,ru:p.ru}))},null,1);
+  try{await dl.save({filename:'frazy-dlya-ozvuchki.json',data:new Blob([payload],{type:'application/json'})});toast(`Выгружено фраз: ${ALL.length}.`)}
+  catch(e){if(e&&e.code==='declined')return;toast('Не удалось сохранить файл.')}
+}
+async function importPack(file){
+  if(!REC.ok){toast('Хранилище записей недоступно в этом браузере.');return}
+  let obj;
+  try{obj=JSON.parse(await file.text());if(!obj||obj.kind!=='audio-pack'||!obj.items)throw 0}
+  catch(e){toast('Это не пакет озвучки. Выберите файл ozvuchka-paket.json, собранный скриптом.');return}
+  const cur=Object.fromEntries(ALL.map(p=>[p.id,p.sa]));
+  const fit=Object.entries(obj.items).filter(([id,v])=>cur[id]===v.sa);
+  const stale=Object.keys(obj.items).length-fit.length;
+  const clash=fit.filter(([id])=>REC.has.has(id)).length;
+  let replace=false;
+  if(clash)replace=confirm(`У ${clash} ${plural(clash,'фразы','фраз','фраз')} уже есть своя запись. Заменить их озвучкой из пакета? «Отмена» — оставить ваши записи.`);
+  let added=0;
+  try{for(const [id,v] of fit){if(REC.has.has(id)&&!replace)continue;await recPut(id,b64ToBlob(v.data,v.type||'audio/wav'));added++}}
+  catch(e){toast(`Сохранено ${added}, дальше не получилось: не хватает места в браузере.`);render();return}
+  render();
+  toast(`Добавлено записей: ${added}.`+(stale?` Пропущено ${stale}: фраза с тех пор изменилась или удалена.`:''));
+}
+
+/* ---------- Озвучка на телефоне (запись экрана) ---------- */
+const VKEY='sakha-voice-v1', SR=22050;
+let actx=null, vx=null, curSrc=null;
+function vLoad(){try{return JSON.parse(localStorage.getItem(VKEY))||{}}catch(e){return {}}}
+function vSave(v){try{localStorage.setItem(VKEY,JSON.stringify(v))}catch(e){}touch('voice')}
+
+/* ---------- Облако: личное хранилище в Claude (если доступно) ---------- */
+var CLOUD=null,cloudPending=new Set(),cloudTimer=null,cloudState='';
+function cloudVal(n){return n==='progress'?S:n==='edits'?E:vLoad()}
+function cloudQueue(n){if(!CLOUD)return;cloudPending.add(n);clearTimeout(cloudTimer);cloudTimer=setTimeout(cloudFlush,1200)}
+async function cloudFlush(){
+  if(!CLOUD)return;const names=[...cloudPending];cloudPending.clear();
+  for(const n of names){const body={v:JSON.parse(JSON.stringify(cloudVal(n))),at:metaGet()[n]||Date.now()};
+    try{await CLOUD.ref(n).set(body);cloudState='ok'}catch(e){try{await new Promise(r=>setTimeout(r,800+Math.random()*800));await CLOUD.ref(n).set(body);cloudState='ok'}catch(e2){cloudState='Ошибка записи: '+((e2&&(e2.code||e2.message))||'неизвестно')}}}
+}
+async function cloudInit(){
+  if(!window.claude){cloudState='Скачанная копия — хранение в браузере';return}
+  const db=await getCap('db'),user=await getCap('user');
+  if(!db||!user){cloudState='Хранилище Claude недоступно в этом окне ('+(!db?'db':'user')+')';render();return}
+  let uid=null;try{uid=await user.id()}catch(e){cloudState='Не удалось узнать пользователя: '+((e&&(e.code||e.message))||'');render();return}
+  if(!uid){cloudState='Не удалось узнать пользователя';render();return}
+  const ref=n=>db.doc('data/users/'+uid+'/'+n);
+  let snaps;try{snaps=await Promise.all(['progress','edits','voice'].map(n=>ref(n).get()))}catch(e){cloudState='Ошибка чтения: '+((e&&(e.code||e.message))||'неизвестно');render();return}
+  cloudState='ok';
+  CLOUD={ref};const meta=metaGet();let changed=false;
+  ['progress','edits','voice'].forEach((n,i)=>{
+    const sn=snaps[i],d=sn.exists?sn.data():null,cAt=d&&d.at||0,lAt=meta[n]||0;
+    if(d&&d.v&&cAt>=lAt){const v=JSON.parse(JSON.stringify(d.v));
+      if(n==='progress'){S=Object.assign(fresh(),v);try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+      else if(n==='edits'){E=Object.assign(freshE(),v);try{localStorage.setItem(EKEY,JSON.stringify(E))}catch(e){}}
+      else{try{localStorage.setItem(VKEY,JSON.stringify(v))}catch(e){}}
+      metaSet(n,cAt);changed=true}
+    else if(lAt>cAt||!d)cloudQueue(n);
+  });
+  if(changed)rebuild();
+  if(view.name!=='ex'&&view.name!=='voicebusy'&&view.name!=='voicereview')render();
+}
+function yurl(t){return 'https://translate.yandex.ru/?source_lang=sah&target_lang=ru&text='+encodeURIComponent(t)}
+function biGet(id){let b=BUILTIN_AUDIO[id];if(b&&b.r){const t=BUILTIN_AUDIO[b.r];b=t?{sa:b.sa,t:t.t,d:t.d}:null}return b}
+function hasOwnAudio(p){const b=biGet(p.id);return REC.has.has(p.id)||!!(b&&b.sa===p.sa)}
+function normW(t){return t.toLowerCase().replace(/[^\p{L} ]/gu,'').trim()}
+function wordAlias(w){const n=normW(w.sa),ph=ALL.find(p=>normW(p.sa)===n&&hasOwnAudio(p));return ph?ph.id:null}
+function hasAudio(p){if(p.id.startsWith('dw:')){const w=WMAP.get(p.sa.toLowerCase());return (!!w&&hasAudio(w))||hasOwnAudio(p)}return hasOwnAudio(p)||((p.id[0]==='w'||p.dl)&&!!wordAlias(p))}
+function noAudioPh(){const pk=vLoad().packed||{};return ALL.concat(DLINES).filter(p=>!hasAudio(p)&&pk[p.id]!==p.sa)}
+function vMode(){return vLoad().mode==='words'?'words':'phrases'}
+function POOL(){return vMode()==='words'?WORDS:ALL.concat(DLINES)}
+function packedNow(){const pk=vLoad().packed||{};return POOL().filter(p=>!hasAudio(p)&&pk[p.id]===p.sa)}
+function noAudio(){const pk=vLoad().packed||{};return POOL().filter(p=>!hasAudio(p)&&pk[p.id]!==p.sa)}
+function batchNow(){const V=vLoad(),size=vMode()==='words'?(V.wsize||'40'):(V.size||'all'),t=noAudio();return size==='all'?t:t.slice(0,+size)}
+function rememberBatch(){const V=vLoad();V.batch=batchNow().map(p=>({id:p.id,sa:p.sa}));vSave(V)}
+function getCtx(){if(!actx){const C=window.AudioContext||window.webkitAudioContext;actx=new C()}return actx}
+function decodeAudio(buf){return new Promise((res,rej)=>{const r=getCtx().decodeAudioData(buf,res,rej);if(r&&r.then)r.then(res,rej)})}
+function toMono(ab){
+  const n=ab.length,ch=ab.numberOfChannels,ratio=ab.sampleRate/SR,outN=Math.floor(n/ratio),o=new Float32Array(outN);
+  const chans=[];for(let c=0;c<ch;c++)chans.push(ab.getChannelData(c));
+  const w=Math.max(1,Math.round(ratio));
+  for(let i=0;i<outN;i++){const i0=Math.floor(i*ratio);let s=0,k=0;
+    for(let j=0;j<w&&i0+j<n;j++){for(let c=0;c<ch;c++)s+=chans[c][i0+j];k+=ch}o[i]=k?s/k:0}
+  return o;
+}
+function letters(t){return (t.match(/\p{L}/gu)||[]).length}
+function quant(a,q){const b=Array.from(a).sort((x,y)=>x-y);return b[Math.min(b.length-1,Math.floor(q*b.length))]}
+function segmentAudio(x,items){
+  const FR=Math.round(SR*0.01),nf=Math.floor(x.length/FR),E=new Float32Array(nf);
+  for(let f=0;f<nf;f++){let s=0;for(let i=f*FR;i<(f+1)*FR;i++)s+=x[i]*x[i];E[f]=Math.sqrt(s/FR)}
+  const thr=Math.max(quant(E,.1)*3,quant(E,.95)*.08,1e-4);
+  let first=-1,last=-1;for(let f=0;f<nf;f++)if(E[f]>thr){if(first<0)first=f;last=f}
+  if(first<0)return {error:'silent'};
+  const gaps=[];let run=-1;
+  for(let f=first;f<=last+1;f++){const v=f<=last&&E[f]>thr;if(!v){if(run<0)run=f}else if(run>=0){if(f-run>=12)gaps.push({s:run,e:f,len:f-run});run=-1}}
+  const N=items.length,K=gaps.length;
+  if(K<N-1)return {error:'few',found:K+1,need:N};
+  const w=items.map(it=>letters(it.sa)+4+4*((it.sa.match(/[,;:—–-]/g)||[]).length)),W=w.reduce((a,b)=>a+b,0),T=last-first+1,avg=T/N;
+  const med=quant(gaps.map(g=>g.len),.5)||1,rate=T/W;
+  const bonus=k=>1.2*Math.min(gaps[k].len/med,4);
+  const seg=(j,s0,e0)=>{const d=e0-s0;if(d<=5)return Infinity;const l=Math.log(d/(w[j]*rate));return 4*l*l};
+  const cuts=[];
+  if(N>1){
+    let dp=new Float64Array(K).fill(Infinity);const back=[null];
+    for(let k=0;k<K;k++)dp[k]=seg(0,first,gaps[k].s)-bonus(k);
+    for(let j=1;j<N-1;j++){
+      const nd=new Float64Array(K).fill(Infinity),bp=new Int32Array(K).fill(-1);
+      for(let k=j;k<K;k++){const bk=bonus(k);
+        for(let q=j-1;q<k;q++){if(dp[q]===Infinity)continue;const v=dp[q]+seg(j,gaps[q].e,gaps[k].s)-bk;if(v<nd[k]){nd[k]=v;bp[k]=q}}}
+      dp=nd;back.push(bp);
+    }
+    let k=-1,bv=Infinity;for(let i=0;i<K;i++){const v=dp[i]+seg(N-1,gaps[i].e,last+1);if(v<bv){bv=v;k=i}}
+    if(k<0)return {error:'few',found:K+1,need:N};
+    for(let j=N-2;j>=0;j--){cuts[j]=k;if(j>0)k=back[j][k]}
+  }
+  const segs=[],totalL=items.reduce((a,it)=>a+letters(it.sa),0);
+  for(let i=0;i<N;i++){
+    const gs=i>0?gaps[cuts[i-1]]:null,ge=i<N-1?gaps[cuts[i]]:null;
+    let a=i===0?first:gs.e,b=i===N-1?last+1:ge.s;
+    a=Math.max(i===0?0:Math.ceil((gs.s+gs.e)/2),a-8);b=Math.min(i===N-1?nf:Math.floor((ge.s+ge.e)/2),b+15);
+    const dur=(b-a)/100,expd=T/100*w[i]/W,r=dur/expd;
+    segs.push({a:a*FR,b:Math.min(x.length,b*FR),dur,flag:r<.5||r>2});
+  }
+  const cps=totalL/(T/100);
+  return {segs,warn:cps>28?'Звук закончился подозрительно быстро: возможно, Яндекс прочитал не весь текст. Проверьте последние фразы.':''};
+}
+function wavBlob(f){
+  const n=f.length,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);
+  let peak=0;for(let i=0;i<n;i++){const a=Math.abs(f[i]);if(a>peak)peak=a}
+  const g=peak>0?0.9/peak:1,wr=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
+  wr(0,'RIFF');v.setUint32(4,36+n*2,true);wr(8,'WAVE');wr(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,SR,true);v.setUint32(28,SR*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);wr(36,'data');v.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++)v.setInt16(44+i*2,Math.max(-1,Math.min(1,f[i]*g))*32767,true);
+  return new Blob([buf],{type:'audio/wav'});
+}
+async function processVoice(file){
+  const V=vLoad(),items=(V.batch&&V.batch.length?V.batch:batchNow().map(p=>({id:p.id,sa:p.sa})));
+  if(!items.length){toast('Нет фраз для озвучки.');return}
+  go({name:'voicebusy'});await new Promise(r=>setTimeout(r,50));
+  let res;
+  try{const ab=await decodeAudio(await file.arrayBuffer());vx=toMono(ab);res=segmentAudio(vx,items)}
+  catch(e){go({name:'voice',err:'Не получилось достать звук из этого файла. Попробуйте выбрать видео через «Файлы» или сохранить из него только звук.'});return}
+  if(res.error==='silent'){go({name:'voice',err:'В записи нет звука. Проверьте, что при записи экрана звук телефона был включён, а не только микрофон.'});return}
+  if(res.error==='few'){go({name:'voice',err:`В записи нашлось только ${res.found} ${plural(res.found,'кусок','куска','кусков')} на ${res.need} ${plural(res.need,'фразу','фразы','фраз')}. Скорее всего, Яндекс прочитал не весь текст. Выберите порцию поменьше и запишите ещё раз.`});return}
+  const cur=Object.fromEntries(ALL.concat(WORDS,DLINES).map(p=>[p.id,p]));
+  const rows=items.map((it,i)=>{const p=cur[it.id],ok=!!p&&p.sa===it.sa;return {...it,...res.segs[i],ok,checked:ok&&!res.segs[i].flag}});
+  go({name:'voicereview',rows,warn:res.warn});
+}
+function playSeg(i){
+  const c=getCtx();if(c.resume)c.resume();const r=view.rows[i],len=r.b-r.a;if(len<=0)return;
+  const ab=c.createBuffer(1,len,SR);ab.getChannelData(0).set(vx.subarray(r.a,r.b));
+  if(curSrc){try{curSrc.stop()}catch(e){}}
+  curSrc=c.createBufferSource();curSrc.buffer=ab;curSrc.connect(c.destination);curSrc.start(0);
+}
+async function saveVoice(){
+  const rows=view.rows.filter(r=>r.checked&&r.ok);let n=0;
+  if(!rows.length){toast('Не отмечено ни одной фразы.');return}
+  try{for(const r of rows){await recPut(r.id,wavBlob(vx.subarray(r.a,r.b)));n++}}
+  catch(e){toast(`Сохранено ${n} из ${rows.length}. Браузер не дал записать остальное (${(e&&(e.name||e.message))||'ошибка хранилища'}). Пришлите этот текст Claude.`);render();return}
+  const V=vLoad();delete V.batch;vSave(V);vx=null;
+  const left=noAudio().length;
+  toast(`Сохранено записей: ${n}.`+(left?` Без озвучки осталось ${left}.`:' Озвучены все фразы.'));
+  go({name:'voice'});
+}
+async function packVoice(){
+  const rows=view.rows.filter(r=>r.checked&&r.ok);
+  if(!rows.length){toast('Не отмечено ни одной фразы.');return}
+  const dl=await getSaver();
+  if(!dl){toast('Скачивание недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
+  const items={};
+  for(const r of rows)items[r.id]={sa:r.sa,type:'audio/wav',data:(await blobToDataURL(wavBlob(vx.subarray(r.a,r.b)))).split(',')[1]};
+  const payload=JSON.stringify({app:'sakha-phrases',kind:'audio-pack',version:1,source:'Яндекс Переводчик, только для личного использования',items});
+  const name=`ozvuchka-${new Date().toISOString().slice(0,10)}-${rows[0].id}-${rows.length}.json`;
+  try{await dl.save({filename:name,data:new Blob([payload],{type:'application/json'})})}
+  catch(e){if(e&&e.code==='declined')return;toast(e&&e.code==='rate_limited'?'Окно сохранения уже открыто.':'Не удалось сохранить файл.');return}
+  const V=vLoad();V.packed=V.packed||{};rows.forEach(r=>{V.packed[r.id]=r.sa});delete V.batch;vSave(V);vx=null;
+  const left=noAudio().length;
+  toast(`Пакет скачан: ${rows.length} ${plural(rows.length,'фраза','фразы','фраз')}. Пришлите файл Claude в чат.`+(left?` Осталось озвучить: ${left}.`:' Все фразы озвучены.'));
+  go({name:'voice'});
+}
+function voiceView(){
+  if(!REC.ok)return `<button class="back" data-act="settings">‹ Настройки</button><h1>Озвучка на телефоне</h1><p class="lead">В этом браузере недоступно хранилище записей.</p>`;
+  const V=vLoad(),wm=vMode()==='words',size=wm?(V.wsize||'40'):(V.size||'all'),todo=noAudio(),batch=batchNow(),text=batch.map(p=>p.sa).join('\n'),pk=packedNow().length;
+  const U=wm?['слово','слова','слов']:['фраза','фразы','фраз'];
+  const opt=(v,l)=>`<option value="${v}" ${size===v?'selected':''}>${l}</option>`;
+  return `<button class="back" data-act="settings">‹ Настройки</button>
+    <h1>Озвучка на телефоне</h1>
+    <p class="lead">Яндекс прочитает ${wm?'слова':'фразы'} подряд, вы запишете экран, а приложение само разрежет звук.</p>
+    <div class="row" role="group" aria-label="Что озвучивать"><button class="${wm?'mini':'btn'}" style="margin-top:0" data-act="vmode" data-m="phrases">Фразы</button><button class="${wm?'btn':'mini'}" style="margin-top:0" data-act="vmode" data-m="words">Слова словаря</button></div>
+    ${view.err?`<p class="err" role="alert">${esc(view.err)}</p>`:''}
+    ${pk?`<p class="legend">Скачано в пакеты и ждёт встраивания: ${pk} ${plural(pk,U[0],U[1],U[2])}. Пришлите файлы пакетов Claude в чат. <button class="linkbtn" data-act="vunpack">Вернуть их в очередь</button></p>`:''}
+    ${!todo.length?'<section class="panel"><p class="pt">Озвучивать больше нечего</p><p class="ps">Когда добавите новые фразы, они появятся здесь.</p></section>':`
+    <section class="panel"><p class="pt">Без озвучки: ${todo.length} ${plural(todo.length,U[0],U[1],U[2])}</p>
+      <label for="vsize">Сколько за один проход</label>
+      <select id="vsize" class="inp">${wm?opt('50','По 50')+opt('40','По 40')+opt('20','По 20'):opt('all','Все сразу ('+todo.length+')')+opt('40','По 40')+opt('20','По 20')+opt('10','По 10')}</select>
+      <p class="hint">Если Яндекс читает не весь текст, выберите порцию поменьше.</p></section>
+    <ol class="steps">
+      <li>Включите запись экрана в Пункте управления.</li>
+      <li>Откройте Яндекс — ${batch.length} ${plural(batch.length,U[0],U[1],U[2])} уже ${batch.length===1?'вписано':'вписаны'}. Нажмите на динамик у якутского текста и дождитесь конца.<br>
+        <a class="btn" href="${esc(yurl(text))}" target="_blank" rel="noopener" data-act="vopen">Открыть в Яндексе</a></li>
+      <li>Остановите запись экрана и вернитесь сюда.</li>
+      <li>Выберите видео из Фото.<br><button class="btn" data-act="vupload">Загрузить запись экрана</button></li>
+    </ol>
+    <p class="hint">Если фразы не вставились, <button class="linkbtn" data-act="vcopy">скопируйте их</button> и вставьте в Яндекс вручную.</p>
+    <p class="note">Записи — голос Яндекса. Используйте их только для личной учёбы.</p>`}`;
+}
+function voiceBusyView(){return `<h1>Обрабатываю запись…</h1><p class="lead">Достаю звук и режу его на фразы. Это может занять до минуты.</p>`}
+function voiceReviewView(){
+  const rows=view.rows,c=rows.filter(r=>r.checked&&r.ok).length;
+  return `<button class="back" data-act="voice">‹ Назад</button>
+    <h1>Проверьте нарезку</h1>
+    <p class="lead">Послушайте несколько фраз. Снимите галочку, если звук не совпадает с текстом: такие фразы попадут в следующий проход. Затем скачайте пакет и пришлите файл Claude в чат.</p>
+    ${view.warn?`<p class="legend">${esc(view.warn)}</p>`:''}
+    <ul class="phrases">${rows.map((r,i)=>`<li>
+      <label class="chk"><input type="checkbox" data-vchk="${i}" ${r.checked?'checked':''} ${r.ok?'':'disabled'}><span class="sa" lang="sah">${hl(r.sa)}</span></label>
+      <div class="row"><button class="mini play" data-act="vplay" data-i="${i}">▶ ${r.dur.toFixed(1)} с</button></div>
+      ${r.flag&&r.ok?'<p class="tag">Длина необычная — послушайте</p>':''}${r.ok?'':'<p class="tag">Фраза изменилась, не сохранится</p>'}
+    </li>`).join('')}</ul>
+    <div class="stick"><button class="btn wide" id="vpack" data-act="vpack" ${c?'':'disabled'}>Скачать пакет озвучки (${c})</button>
+      <button class="btn ghost wide" id="vsave" data-act="vsave" ${c?'':'disabled'} style="background:var(--bg)">Сохранить только на этом устройстве</button></div>`;
+}
+
+/* ---------- Утилиты ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function hl(s){return esc(s).replace(/([ҕҥөһүҔҤӨҺҮ])/g,'<span class="sp">$1</span>')}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function plural(n,a,b,c){const m=n%10,h=n%100;if(m===1&&h!==11)return a;if(m>=2&&m<=4&&(h<12||h>14))return b;return c}
+function words(s){return s.trim().split(/\s+/)}
+function dueList(){const t=today();return ALL.filter(p=>{const c=S.cards[p.id];return c&&c.due<=t})}
+function known(l){return l.phrases.filter(p=>(S.cards[p.id]?.box||0)>=1).length}
+function fmtDay(n){const d=new Date(n*864e5);return d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',timeZone:'UTC'})}
+function streakNow(){return S.streak.last!==null&&S.streak.last>=today()-1?S.streak.count:0}
+
+const $app=document.getElementById('app');
+let view={name:'home'},sess=null,lastField='f-sa';
+function go(v){view=v;render();window.scrollTo(0,0)}
+
+function render(){
+  document.body.classList.toggle('in-session',view.name==='ex'||view.name==='voicebusy');
+  const tab={marathon:'marathon',sounds:'sounds',dict:'dict',wform:'dict',settings:'settings',voice:'settings',voicereview:'settings'}[view.name]||'home';
+  document.querySelectorAll('.nav button').forEach(b=>b.dataset.tab===tab?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  $app.innerHTML=({home,lesson:lessonView,review:reviewView,sounds:soundsView,ex:exView,result:resultView,form:formView,lform:lformView,dialogs:dialogsView,dialog:dialogView,voice:voiceView,voicebusy:voiceBusyView,voicereview:voiceReviewView,dict:dictView,wform:wformView,marathon:marathonView,settings:settingsView})[view.name]();
+  if(view.name==='ex'){const f=document.getElementById('f-type');if(f&&!f.disabled){lastField='f-type';try{f.focus()}catch(x){}}}
+}
+
+function reviewPanel(){
+  const due=dueList().length, st=streakNow();
+  return `<section class="panel">
+    <p class="pt">${due?`Сегодня на повторение: ${due} ${plural(due,'фраза','фразы','фраз')}`:'Сегодня повторять нечего'}</p>
+    <p class="ps">${S.streak.last===null?'Пройдите первый урок — его фразы начнут возвращаться на повторение.':st?`Занимаетесь ${st} ${plural(st,'день','дня','дней')} подряд`:'Серия прервалась — начните новую сегодня.'}</p>
+    <div class="row" style="margin-top:12px">${due?'<button class="btn" data-act="review">Повторить</button>':''}<button class="btn ghost" data-act="quick">5 фраз за минуту</button><button class="btn ghost" data-act="marathon">Марафон</button></div>
+  </section>`;
+}
+
+const LOGO_DARK=document.querySelector('#splash img').src;
+function hideSplash(){const e=document.getElementById('splash');if(!e)return;
+  setTimeout(()=>{e.classList.add('out');setTimeout(()=>e.remove(),550)},Math.max(0,1500-(Date.now()-(window.SPLASH_AT||0))))}
+function home(){
+  const dl=view.seg==='dialogs';
+  return `<header class="hero"><div class="brand"><img class="logo logo-d" src="${LOGO_DARK}" alt=""><img class="logo logo-l" src="emblem-light.webp" alt="">
+    <h1 lang="sah">Сахалыы<br>саҥар</h1></div>
+    <p class="lead">Разговорный якутский: фразы для знакомства, магазина, дороги и визита в гости.</p><div class="band" aria-hidden="true"></div></header>
+    ${reviewPanel()}
+    <div class="seg" role="tablist"><button class="${dl?'':'on'}" role="tab" aria-selected="${!dl}" data-act="segph">Фразы</button><button class="${dl?'on':''}" role="tab" aria-selected="${dl}" data-act="dialogs">Диалоги</button></div>
+    ${dl?dialogsList():`    <ol class="lessons">${LESSONS.map((l,i)=>{const n=known(l),t=l.phrases.length;return `<li><button class="lesson ${l.custom?'mine':''}" data-act="lesson" data-id="${l.id}">
+      <span class="num">${i+1}</span><span class="lt"><span class="lname">${esc(l.title)}</span>
+      <span class="lsub sa" lang="sah">${t?l.phrases.slice(0,2).map(p=>hl(p.sa)).join(' '):'Пока без фраз'}</span>
+      <span class="meter"><span style="width:${t?n/t*100:0}%"></span></span>
+      <span class="lcount">${l.custom?'Свой урок. ':''}Знаю ${n} из ${t}</span></span></button></li>`}).join('')}</ol>
+    <button class="btn ghost wide" data-act="newlesson">Создать свой урок</button>`}
+    `;
+}
+
+const APP_AUTHOR='Евсеев А.В.';
+function settingsView(){
+  const st=CLOUD&&cloudState==='ok';
+  return `<h1>Настройки</h1>
+    <section class="backup" style="border-top:0;padding-top:0;margin-top:10px"><h2 style="margin-top:0">Хранение</h2>
+      <p class="ps">${st?'Прогресс, правки и свои уроки сохраняются в вашем личном хранилище Claude и не пропадают при перезапуске.':'Прогресс, ваши слова и записи хранятся на этом устройстве. Время от времени сохраняйте резервную копию в файл, чтобы не потерять их.'}</p>
+      ${cloudState&&cloudState!=='ok'?`<p class="legend">Состояние: ${esc(cloudState)}</p>`:''}</section>
+    <section class="backup"><h2 style="margin-top:0">Резервная копия</h2>
+      <p class="ps">Файл с прогрессом, правками, вашими словами и записями. Через него данные переносятся на другое устройство или в установленное приложение.${S.lastBackup!==null?` Последняя копия: ${fmtDay(S.lastBackup)}.`:' Копий ещё не было.'}</p>
+      <div class="row"><button class="btn" data-act="export">Сохранить в файл</button><button class="btn ghost" data-act="import">Загрузить из файла</button></div></section>
+    
+    <section class="backup"><h2 style="margin-top:0">Прогресс</h2>
+      <p class="ps">Обнуляет «Знаю N из M», повторение и серию дней. Правки фраз, свои уроки и озвучка останутся.</p>
+      <div class="row"><button class="btn ghost" data-act="reset" style="color:var(--bad);border-color:var(--bad)">Сбросить прогресс</button></div></section>
+    <section class="backup"><h2 style="margin-top:0">О приложении</h2>
+ <p class="ps">© 2026${APP_AUTHOR?' '+esc(APP_AUTHOR):''}${/\.$/.test(APP_AUTHOR)?'':'.'} «Сахалыы саҥар» — самоучитель разговорного якутского.</p>
+ <p class="ps" style="margin-top:8px">Фразы, диалоги и мини-грамматику составил ИИ; слова и образцы фраз сверены по словарю sakhatyla.ru (CC BY-SA). Сомнительные формы стоит показать носителю языка. Исправить любую фразу можно кнопкой «Править» в уроке.</p>
+ <p class="ps" style="margin-top:8px">Словарь — Викисловарь (en.wiktionary.org) через kaikki.org, лицензия CC BY-SA; переводы значений на русский сделал ИИ. Словарная часть распространяется на тех же условиях CC BY-SA.</p>
+ <p class="ps" style="margin-top:8px">Озвучка — синтезированный голос модели Silero (silero.ai), лицензия CC BY-NC 4.0: только для некоммерческого использования.</p></section>`;
+}
+function lessonView(){
+  const l=LESSONS.find(x=>x.id===view.id);if(!l){view={name:'home'};return home()}
+  const ed=!!view.edit, dc=l.custom?0:deletedCount(l.id);
+  const list=l.phrases.length?`<ul class="phrases">${l.phrases.map(p=>`<li>
+      <p class="psa sa" lang="sah">${ed?hl(p.sa):wordsHtml(p.sa)}</p><p class="pru">${esc(p.ru)}</p>${p.note?`<p class="pnote">${esc(p.note)}</p>`:''}
+      ${p.edited?'<p class="tag">Изменено вами</p>':''}${p.mine&&!l.custom?'<p class="tag">Ваша фраза</p>':''}
+      ${ed?'':`<div class="row">${hasAudio(p)?`<button class="mini" data-act="play" data-id="${p.id}" aria-label="Слушать запись">▶ Слушать</button>`:''}</div>`}
+      ${ed?`<div class="row"><button class="mini" data-act="editp" data-id="${p.id}">Изменить</button>${p.edited?`<button class="mini" data-act="revertp" data-id="${p.id}">Вернуть исходную</button>`:''}<button class="mini danger" data-act="delp" data-id="${p.id}">Удалить</button></div>
+      ${REC.ok?`<div class="row">${recState&&recState.id===p.id?`<button class="mini rec" data-act="rec" data-id="${p.id}">■ Остановить запись</button>`
+        :`<button class="mini" data-act="rec" data-id="${p.id}" ${recState?'disabled':''}>● ${REC.has.has(p.id)?'Перезаписать':'Записать'}</button><button class="mini" data-act="upaudio" data-id="${p.id}">Загрузить аудио</button>${REC.has.has(p.id)?`<button class="mini" data-act="play" data-id="${p.id}">▶</button><button class="mini danger" data-act="delrec" data-id="${p.id}">Удалить запись</button>`:''}`}</div>`:''}`:''}
+    </li>`).join('')}</ul>`:`<p class="note">В уроке пока нет фраз. ${ed?'Добавьте первую.':'Нажмите «Править», чтобы добавить первую.'}</p>`;
+  return `<div class="head"><button class="back" data-act="home">‹ Все уроки</button><button class="mini" data-act="toggleedit">${ed?'Готово':'Править'}</button></div>
+    <h1>${esc(l.title)}</h1>${l.intro?`<p class="lead">${esc(l.intro)}</p>`:''}
+    ${l.custom&&ed?`<div class="row"><button class="mini" data-act="renamel">Переименовать урок</button><button class="mini danger" data-act="dellesson">Удалить урок</button></div>`:''}
+    ${ed?'':gramCard(l.id)}
+    ${!ed&&DLG_OF[l.id]?`<div class="row"><button class="btn ghost" data-act="dialog" data-id="${DLG_OF[l.id]}">Диалог к уроку</button></div>`:''}
+    ${ed||!l.phrases.length?'':'<p class="legend">Подчёркнутые буквы — звуки, которых нет в русском (см. «Звуки»). Нажмите на слово, чтобы увидеть перевод.</p>'}
+    ${list}
+    ${ed?`<div class="row" style="margin-top:18px"><button class="btn" data-act="addp">Добавить фразу</button>${dc?`<button class="btn ghost" data-act="restore">Вернуть удалённые (${dc})</button>`:''}</div>`
+      :(l.phrases.length?`<div class="stick"><button class="btn wide" data-act="practice">Тренировать урок</button></div>`:'')}`;
+}
+
+function keysBar(){return `<div class="keys" role="group" aria-label="Якутские буквы">${[...'ҕҥөһүҔҤӨҺҮ'].map(k=>`<button type="button" class="key" data-ins="${k}" aria-label="Вставить ${k}">${k}</button>`).join('')}</div>
+  <p class="hint">Буквы вставляются в поле, где стоит курсор.</p>`}
+
+function formView(){
+  const p=view.pid?ALL.find(x=>x.id===view.pid):null;
+  const v=view.draft||{sa:p?.sa||'',ru:p?.ru||'',note:p?.note||''};
+  return `<button class="back" data-act="backlesson">‹ Отмена</button>
+    <h1>${p?'Изменить фразу':'Новая фраза'}</h1>
+    <label for="f-sa">По-якутски</label><input id="f-sa" class="inp sa" lang="sah" value="${esc(v.sa)}" autocomplete="off" spellcheck="false">
+    ${keysBar()}
+    <label for="f-ru">Перевод</label><input id="f-ru" class="inp" value="${esc(v.ru)}" autocomplete="off">
+    <label for="f-note">Пояснение <small>(необязательно)</small></label><input id="f-note" class="inp" value="${esc(v.note)}" autocomplete="off">
+    ${p?'<p class="hint" style="margin-top:14px">Если изменить якутский текст, прогресс по этой фразе начнётся заново, а её запись удалится.</p>':''}
+    ${view.err?`<p class="err" role="alert">${esc(view.err)}</p>`:''}
+    <button class="btn wide" data-act="savep" style="margin-top:22px">Сохранить</button>`;
+}
+
+function wformView(){
+ const w=view.wid?(E.words||[]).find(x=>x.id===view.wid):null;
+ const v=view.draft||{sa:w?.sa||view.pre||'',ru:w?.ru||'',pos:w?.pos||'',ex:w?.ex||''};
+ const P=['','сущ','гл','прил','нар','числ','мест','послелог','част','союз','межд','фраза'];
+ return `<button class="back" data-act="dict">‹ Отмена</button>
+ <h1>${w?'Изменить слово':'Новое слово'}</h1>
+ <label for="f-sa">По-якутски</label><input id="f-sa" class="inp sa" lang="sah" value="${esc(v.sa)}" autocomplete="off" autocapitalize="off" spellcheck="false">
+ ${keysBar()}
+ <label for="f-ru">Перевод</label><input id="f-ru" class="inp" value="${esc(v.ru)}" autocomplete="off">
+ <label for="f-pos">Часть речи <small>(необязательно)</small></label><select id="f-pos" class="inp">${P.map(p=>`<option value="${p}" ${p===v.pos?'selected':''}>${p||'—'}</option>`).join('')}</select>
+ <label for="f-ex">Пример по-якутски <small>(необязательно)</small></label><input id="f-ex" class="inp sa" lang="sah" value="${esc(v.ex)}" autocomplete="off" autocapitalize="off" spellcheck="false">
+ ${view.err?`<p class="err" role="alert">${esc(view.err)}</p>`:''}
+ <p class="hint" style="margin-top:14px">Озвучить слово можно своим голосом: после сохранения нажмите «Записать своим голосом» под ним.</p>
+ <button class="btn wide" data-act="savew" style="margin-top:22px">Сохранить</button>`;
+}
+
+function lformView(){
+  const l=view.lid?E.lessons.find(x=>x.id===view.lid):null;
+  const v=view.draft||{title:l?.title||'',intro:l?.intro||''};
+  return `<button class="back" data-act="${l?'backlesson':'home'}">‹ Отмена</button>
+    <h1>${l?'Переименовать урок':'Новый урок'}</h1>
+    <label for="f-title">Название</label><input id="f-title" class="inp" value="${esc(v.title)}" placeholder="Например: На рыбалке" autocomplete="off">
+    <label for="f-intro">Описание <small>(необязательно)</small></label><input id="f-intro" class="inp" value="${esc(v.intro)}" autocomplete="off">
+    ${view.err?`<p class="err" role="alert">${esc(view.err)}</p>`:''}
+    <button class="btn wide" data-act="savel" style="margin-top:22px">${l?'Сохранить':'Создать урок'}</button>`;
+}
+
+function reviewView(){
+  return `<h1>Повторение</h1>
+    <p class="lead">Выученные фразы возвращаются через 1, 3, 7, 14 и 30 дней. Ошиблись — фраза вернётся сегодня же.</p>
+    ${reviewPanel()}
+    <p class="note"><button class="btn ghost" data-act="reset">Сбросить прогресс</button></p>
+    <p class="note">Сброс обнуляет только прогресс. Ваши правки и свои уроки останутся.</p>`;
+}
+
+function soundsView(){
+  return `<h1>Звуки</h1><p class="lead">В якутском есть звуки, которых нет в русском. Прочитайте пример вслух, следуя подсказке.</p>
+    <ul class="sounds">${SOUNDS.map(s=>`<li><span class="glyph" aria-hidden="true">${esc(s.g)}</span><div>
+      <p class="sname">${esc(s.n)}</p><p>${esc(s.d)}</p><p class="sex">Пример: <span class="sa" lang="sah">${hl(s.ex)}</span></p></div></li>`).join('')}</ul>`;
+}
+
+/* ---------- Диалоги ---------- */
+function dialogsList(){
+  return `<p class="lead" style="margin-bottom:12px">Короткие сценки из уроков. Вы отвечаете за второго собеседника — выберите подходящую реплику.</p>
+    <ol class="lessons">${DIALOGUES.map((d,i)=>`<li><button class="lesson" data-act="dialog" data-id="${d.id}">
+      <span class="num">${i+1}</span><span class="lt"><span class="lname">${esc(d.title)}</span>
+      <span class="lsub sa" lang="sah">${hl(d.lines[0][1])}</span>
+      <span class="lcount">${esc(d.about)}${S.dlg[d.id]?'. Пройден':''}</span></span></button></li>`).join('')}</ol>
+    <p class="note">Диалоги составлены ИИ по фразам из уроков. Их стоит проверить у носителя языка.</p>`;
+}
+function dialogsView(){view={name:'home',seg:'dialogs'};return home()}
+function dlgIds(did,a,b){const out=[];for(let k=a;k<b;k++){const it=DLINES.find(x=>x.id===did+'l'+k);if(it&&hasAudio(it))out.push(it.id)}return out}
+function dAdvance(d){const L=DIALOGUES.find(x=>x.id===d.id).lines;while(d.i<L.length&&L[d.i][0]==='a')d.i++;d.opts=null;d.wrong=[]}
+function dOpts(d){
+  const L=DIALOGUES.find(x=>x.id===d.id).lines, correct=L[d.i][1];
+  const pool=shuffle(L.filter((l,k)=>k!==d.i).map(l=>l[1])).concat(shuffle(DIALOGUES.flatMap(x=>x.lines.filter(l=>l[0]==='b').map(l=>l[1]))));
+  const seen=new Set([correct]),picks=[];
+  for(const t of pool){if(picks.length===2)break;if(!seen.has(t)){seen.add(t);picks.push(t)}}
+  return shuffle(picks.concat(correct));
+}
+function dialogView(){
+  const d=view.d, D=DIALOGUES.find(x=>x.id===d.id), L=D.lines, done=d.i>=L.length;
+  if(!done&&!d.opts)d.opts=dOpts(d);
+  const shown=L.slice(0,d.i).map((l,k)=>{const it=DLINES.find(x=>x.id===d.id+'l'+k);return `<li class="line ${l[0]}"><span class="who">${l[0]==='b'?'Вы':'Собеседник'}</span><span class="sa" lang="sah">${hl(l[1])}</span><span class="ru">${esc(l[2])}</span>${it&&hasAudio(it)?`<button class="mini" style="margin-top:6px" data-act="play" data-id="${it.id}" aria-label="Слушать реплику">▶</button>`:''}</li>`}).join('');
+  const turn=done?`<div class="turn"><p class="pt">Диалог пройден${d.mistakes?`, ошибок: ${d.mistakes}`:' без ошибок'}.</p>
+      <div class="row"><button class="btn ghost" data-act="dialog" data-id="${d.id}">Пройти ещё раз</button>${(()=>{const n=DIALOGUES[DIALOGUES.findIndex(x=>x.id===d.id)+1];return n?`<button class="btn" data-act="dialog" data-id="${n.id}">Следующий</button>`:''})()}<button class="btn ghost" data-act="dialogs">Все диалоги</button></div></div>`
+    :`<div class="turn"><p class="ask" style="margin-top:0">Ваша реплика. По смыслу: «${esc(L[d.i][2])}»</p>
+      ${d.opts.map((o,k)=>`<button class="opt sa ${d.wrong.includes(k)?'wrong':''}" lang="sah" data-act="dpick" data-i="${k}" ${d.wrong.includes(k)?'disabled':''}>${hl(o)}</button>`).join('')}</div>`;
+  return `<button class="back" data-act="dialogs">‹ Все диалоги</button><h1>${esc(D.title)}</h1>
+    <ul class="chat">${shown}</ul>${turn}`;
+}
+
+/* ---------- Словарь ---------- */
+function dictLookup(tok){
+  const t=tok.toLowerCase().replace(/[^\p{L}-]/gu,'');if(!t)return null;
+  if(FORMS[t]){const [l,m]=FORMS[t];return {d:l&&DMAP.has(l)?DICT[DMAP.get(l)]:null,form:m,lemma:l,exact:false,known:true}}
+  if(DMAP.has(t))return {d:DICT[DMAP.get(t)],exact:true};
+  for(let n=t.length-1;n>=3;n--){const st=t.slice(0,n);if(DMAP.has(st)&&t.length-n<=8)return {d:DICT[DMAP.get(st)],exact:false}}
+  return null;
+}
+function escRe(t){return t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+let DMATCH=new Map();
+function dictSearch(q){
+  DMATCH=new Map();const t=q.toLowerCase().trim();if(!t)return [];
+  const re=new RegExp('(^|[^\\p{L}])'+escRe(t)+'($|[^\\p{L}])','u'),out=[];
+  DICT.forEach((d,i)=>{const w=d[0].toLowerCase(),r=d[2].toLowerCase();let sc=-1;
+    if(w===t)sc=100;else if(w.startsWith(t))sc=80;else if(re.test(r))sc=60;else if(r.includes(t))sc=40;else if(w.includes(t))sc=30;
+    if(sc>=0){out.push([sc,i]);DMATCH.set(d,sc===60||sc===40?'ru':'sa')}});
+  out.sort((a,b)=>b[0]-a[0]||DICT[a[1]][0].length-DICT[b[1]][0].length);
+  let res=out.slice(0,60).map(x=>DICT[x[1]]);
+  if(!res.length){const lk=dictLookup(t);if(lk&&lk.d)res=[lk.d]}
+  return res;
+}
+function dkey(sa){const x=WMAP.get(String(sa).toLowerCase());return x?x.id:'dw:'+sa}
+function dSound(k){if(REC.has.has(k))return true;if(k.startsWith('dw:'))return !!BUILTIN_AUDIO[k];const x=WORDS.find(w=>w.id===k);return !!x&&hasAudio(x)}
+function playBtn(k){return `<button class="mini" data-act="play" data-id="${esc(k)}">▶ Слушать</button>`}
+function wBtn(w){const k=dkey(w);return dSound(k)?playBtn(k):''}
+function recRow(k){if(!REC.ok)return '';
+ if(recState&&recState.id===k)return `<div class="row"><button class="mini rec" data-act="rec" data-id="${esc(k)}">■ Остановить запись</button></div>`;
+ return `<div class="row"><button class="mini" data-act="rec" data-id="${esc(k)}" ${recState?'disabled':''}>● ${REC.has.has(k)?'Перезаписать своим голосом':'Записать своим голосом'}</button>${REC.has.has(k)?`<button class="mini danger" data-act="delrec" data-id="${esc(k)}">Удалить запись</button>`:''}</div>`}
+function styUrl(w){return 'https://sakhatyla.ru/translate?q='+encodeURIComponent(w)}
+function dictItems(list){
+ return `<ul class="dlist">${list.map(d=>{const k=d.u||dkey(d[0]);return `<li><details data-k="${esc(k)}" ${view.dopen===k?'open':''}><summary>${DMATCH.get(d)==='ru'?`<span class="dtop">${esc(d[2])}</span><span class="dpos">${esc(d[1])}</span><span class="dru sa" lang="sah">${hl(d[0])}</span>`:`<span class="sa" lang="sah">${hl(d[0])}</span><span class="dpos">${esc(d[1])}</span><span class="dru">${esc(d[2])}</span>`}</summary>
+ ${d.u?`${d[3]?`<p class="en">Пример: <span class="sa" lang="sah">${hl(d[3])}</span></p>`:''}<p class="tag">Ваше слово</p>`:`<p class="en">Викисловарь: ${esc(d[3])}</p>`}
+ ${REC.has.has(k)&&!d.u?'<p class="hint">Звучит ваша запись. Удалите её, чтобы вернуть встроенный голос.</p>':''}
+ <div class="row">${dSound(k)?playBtn(k):''}<a class="mini" href="${esc(styUrl(d[0]))}" target="_blank" rel="noopener">Открыть на sakhatyla.ru</a></div>
+ ${recRow(k)}
+ ${d.u?`<div class="row"><button class="mini" data-act="editw" data-id="${esc(d.u)}">Изменить слово</button><button class="mini danger" data-act="delw" data-id="${esc(d.u)}">Удалить слово</button></div>`:''}</details></li>`}).join('')}</ul>`;
+}
+function dictResults(q){
+  if(!q.trim())return '<p class="note">Начните вводить слово — по-якутски или по-русски. Например: «тымныы» или «холодный».</p><p class="legend">Цвета по-якутски: одно слово часто охватывает несколько оттенков. {күөх} — синий, голубой и зелёный; {кыһыл} — красный (и фиолетовые оттенки); {саһархай} — жёлтый и оранжевый. Уточняют образцом: {от күөҕэ} — зелёный («цвета травы»), {халлаан күөх} — голубой («цвета неба»), {арыы саһархай} — оранжевый («жёлтый, как масло»), {хара саарыл} — фиолетовый.</p>'.replace(/\{([^}]*)\}/g,(m,x)=>`<span class="sa" lang="sah">${hl(x)}</span>`);
+  const r=dictSearch(q);
+  return r.length?dictItems(r):'<p class="note">Ничего не нашлось. Попробуйте начальную форму слова, поищите на sakhatyla.ru, если есть интернет, или добавьте слово сами.</p>'+`<div class="row"><button class="mini" data-act="addw" data-q="${esc(q.trim())}">Добавить в словарь</button><a class="mini" href="${esc(styUrl(q.trim()))}" target="_blank" rel="noopener">Искать на sakhatyla.ru</a></div>`;
+}
+function dictView(){
+  const q=view.q||'';
+  return `<h1>Словарь</h1><p class="lead">${DICT.length} якутских слов с переводом. Работает без интернета.</p>
+ <div class="row"><button class="btn ghost" data-act="addw">+ Добавить слово</button></div>
+    <input id="f-dict" class="inp sa" lang="sah" placeholder="Слово по-якутски или по-русски" value="${esc(q)}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Поиск по словарю">
+    ${keysBar()}
+    <div id="dict-res">${dictResults(q)}</div>
+    <p class="note">Источник: Викисловарь (en.wiktionary.org), данные kaikki.org, лицензия CC BY-SA. Переводы значений на русский сделал ИИ по английским толкованиям, возможны неточности — для сверки у каждого слова есть ссылка на sakhatyla.ru.</p>`;
+}
+function gramHtml(t){return esc(t).replace(/\{([^}]*)\}/g,(m,x)=>`<span class="sa" lang="sah" style="font-size:1.12rem">${hl(x)}</span>`)}
+function gramCard(id){const g=GRAMMAR[id];if(!g)return '';
+  return `<details class="panel gram" style="margin-top:14px"><summary class="pt" style="cursor:pointer">Как это устроено</summary>
+    <ul style="padding-left:1.1em;margin:10px 0 0">${g.map(x=>`<li style="margin-bottom:10px">${gramHtml(x)}</li>`).join('')}</ul>
+    <p class="hint">Составлено ИИ, стоит показать носителю языка.</p></details>`}
+function wordsHtml(sa){return sa.split(/([\p{L}-]+)/u).map((part,i)=>i%2?`<span class="w" data-act="word" data-w="${esc(part)}">${hl(part)}</span>`:esc(part)).join('')}
+function openSheet(tok){
+  const r=dictLookup(tok),sh=document.getElementById('sheet');
+  sh.innerHTML=`<div><button class="x" data-act="sclose" aria-label="Закрыть">×</button>
+    <p class="sw" lang="sah">${hl(tok)}</p>
+    ${r&&r.known?`<p style="font-size:1.15rem">${esc(r.form)}</p>`:''}
+    ${r&&r.d?`${r.exact?'':`<p class="hint">${r.known?'Начальная форма':'Похоже на форму слова (угадано автоматически, может быть неверно)'}: <span class="sa" lang="sah" style="font-size:1.1rem">${hl(r.d[0])}</span></p>`}
+      <p><span class="dpos" style="margin-left:0">${esc(r.d[1])}</span></p><p style="font-size:1.1rem">${esc(r.d[2])}</p>${r.d.u?(r.d[3]?`<p class="en">Пример: ${esc(r.d[3])}</p>`:'')+'<p class="tag">Ваше слово</p>':`<p class="en">Викисловарь: ${esc(r.d[3])}</p>`}`
+      :(r&&r.known?'':'<p>Этого слова нет в словаре. Возможно, это имя или форма слова, которую приложение не распознало.</p>')}
+    <div class="row">${wBtn(r&&r.d?r.d[0]:tok)}${r&&r.d?`<button class="mini" data-act="dsearch" data-q="${esc(r.d[0])}">Открыть в словаре</button>`:''}<a class="mini" href="${esc(styUrl(r&&r.d?r.d[0]:tok))}" target="_blank" rel="noopener">sakhatyla.ru</a></div></div>`;
+  sh.classList.add('show');document.getElementById('sheet-bg').classList.add('show');
+}
+function closeSheet(){document.getElementById('sheet').classList.remove('show');document.getElementById('sheet-bg').classList.remove('show')}
+
+/* ---------- Марафон ---------- */
+let DITEMS=null;
+function getDItems(){if(!DITEMS)DITEMS=DICT.map(d=>({id:'dw:'+d[0],sa:d[0],ru:d[2].split(';')[0].trim(),lesson:'dict'}));return DITEMS}
+function mType(p){const t=['sa2ru','ru2sa'];if(p.lesson!=='dict'&&canBuild(p))t.push('build');if((S.cards[p.id]?.box||0)>=1)t.push('type');return t[Math.floor(Math.random()*t.length)]}
+function mBatch(src){
+  const pool=src==='words'?getDItems():ALL,t=today();
+  const due=[],rest=[];for(const p of pool){const c=S.cards[p.id];(c&&c.due<=t?due:rest).push(p)}
+  return shuffle(due).concat(shuffle(rest)).slice(0,30).map(p=>({p,type:mType(p)}));
+}
+function startMarathon(src,mode){
+  const pool=src==='words'?getDItems():ALL;
+  const queue=mode==='all'?shuffle(pool).map(p=>({p,type:mType(p)})):mBatch(src);
+  if(sess&&sess.timer)clearInterval(sess.timer);
+  sess={kind:'marathon',src,mode,queue,i:0,res:{},done:0,run:0,best:0,total0:pool.length,end:mode==='timed'?Date.now()+5*60000:0};
+  if(mode==='timed')sess.timer=setInterval(()=>{const el=document.getElementById('mclock');if(el)el.textContent=clockText()},500);
+  go({name:'ex'});
+}
+function clockText(){const left=Math.max(0,Math.ceil((sess.end-Date.now())/1000));return Math.floor(left/60)+':'+String(left%60).padStart(2,'0')}
+function marathonView(){
+  const wa=WORDS.filter(w=>hasAudio(w)).length;
+  const block=(src,title,sub)=>`<section class="panel"><p class="pt">${title}</p><p class="ps">${sub}</p>
+    <div class="row"><button class="btn" data-act="mstart" data-src="${src}" data-mode="endless">Без конца</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="all">Все по разу</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="timed">5 минут</button></div></section>`;
+  return `<h1>Марафон</h1>
+    <p class="lead">Задания идут подряд, без деления на уроки. Ошибки возвращаются через несколько заданий, пока не ответите верно. Выйти можно в любой момент — результат сохранится.</p>
+    ${block('phrases','Фразы',`${ALL.length} ${plural(ALL.length,'фраза','фразы','фраз')} из всех уроков`)}
+    ${block('words','Слова словаря',`${DICT.length} слов. С озвучкой пока ${wa}; остальные зазвучат, когда пришлёте пакеты слов.`)}
+    <p class="note">«Без конца» — пока не надоест, сначала то, что пора повторить. «Все по разу» — каждое по одному разу в случайном порядке. «5 минут» — сколько успеете.</p>`;
+}
+
+/* ---------- Тренировка ---------- */
+function canBuild(p){return words(p.sa).length>1}
+function startSession(phrases,kind,lessonId){
+  const first=shuffle(phrases).map(p=>({p,type:'sa2ru'}));
+  let queue;
+  if(kind==='lesson'){
+    const second=shuffle(phrases).map(p=>{const t=['ru2sa'];if(canBuild(p))t.push('build','build');
+      if((S.cards[p.id]?.box||0)>=1)t.push('type','type','type');return {p,type:t[Math.floor(Math.random()*t.length)]}});
+    queue=first.concat(second);
+  }else if(kind==='quick'){
+    queue=phrases.map(p=>({p,type:Math.random()<.5?'sa2ru':'ru2sa'}));
+  }else{
+    queue=shuffle(phrases).slice(0,12).map(p=>{const t=['sa2ru','ru2sa'];if(canBuild(p))t.push('build');if((S.cards[p.id]?.box||0)>=1)t.push('type','type');return {p,type:t[Math.floor(Math.random()*t.length)]}});
+  }
+  sess={kind,lessonId,queue,i:0,res:{}};
+  go({name:'ex'});
+}
+function normType(t){return t.toLowerCase().replace(/[^\p{L}\s]/gu,' ').replace(/\s+/g,' ').trim()}
+function typeDiff(a,b){
+  const n=a.length,m=b.length,D=[];for(let i=0;i<=n;i++){D[i]=new Array(m+1).fill(0);D[i][0]=i}for(let j=0;j<=m;j++)D[0][j]=j;
+  for(let i=1;i<=n;i++)for(let j=1;j<=m;j++)D[i][j]=Math.min(D[i-1][j]+1,D[i][j-1]+1,D[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  const marks=new Set();let i=n,j=m;
+  while(i>0||j>0){
+    if(i>0&&j>0&&D[i][j]===D[i-1][j-1]+(a[i-1]===b[j-1]?0:1)){if(a[i-1]!==b[j-1])marks.add(j-1);i--;j--}
+    else if(j>0&&D[i][j]===D[i][j-1]+1){marks.add(j-1);j--}
+    else{marks.add(Math.max(0,Math.min(m-1,j)));i--}
+  }
+  return {dist:D[n][m],marks};
+}
+function markedAnswer(e){return [...e.bNorm].map((ch,k)=>e.marks.includes(k)?`<mark class="miss">${esc(ch)}</mark>`:hl(ch)).join('')}
+function bigrams(t){const x=t.toLowerCase().replace(/[^\p{L}]/gu,''),s=new Set();for(let i=0;i<x.length-1;i++)s.add(x.slice(i,i+2));return s}
+function similar(a,b){const A=bigrams(a),B=bigrams(b);if(!A.size||!B.size)return 0;let n=0;A.forEach(x=>{if(B.has(x))n++});return 2*n/(A.size+B.size)}
+/* Варианты подбираем похожими на правильный: та же длина, та же тема, похожее звучание. */
+function distractors(p,field,n,pool){
+  const right=p[field],cand=(pool||ALL).filter(q=>q.id!==p.id&&q[field]!==right);
+  const seen=new Set([right]),scored=[];
+  for(const q of cand){
+    if(seen.has(q[field]))continue;seen.add(q[field]);
+    const dl=Math.abs(q[field].length-right.length)/Math.max(right.length,q[field].length);
+    const base=similar(q[field],right);
+    if(base>0.75)continue; /* слишком похоже — ответ стал бы спорным */
+    const sim=base+(field==='sa'?similar(q.ru,p.ru)*0.5:similar(q.sa,p.sa)*0.5);
+    scored.push([(q.lesson===p.lesson?0.5:0)+sim*1.5-dl*1.2+Math.random()*0.25,q[field]]);
+  }
+  scored.sort((a,b)=>b[0]-a[0]);
+  return shuffle(scored.slice(0,Math.max(n,Math.min(scored.length,n+3)))).slice(0,n).map(x=>x[1]);
+}
+/* Без знаков препинания и заглавных — чтобы они не подсказывали порядок слов. */
+function noP(t){return String(t).replace(/[.!?…]+(?=\s)/g,',').replace(/,\s*\//g,' /').replace(/[.!?…]+$/,'').trim()}
+function cleanTok(t){return t.replace(/[^\p{L}-]/gu,'').toLowerCase()}
+function initEx(e){
+  e.init=true;
+  if(e.type==='type')return;
+  if(e.type==='build'){
+    const real=words(e.p.sa).map(cleanTok).filter(Boolean),used=new Set(real);
+    const pool=[];
+    for(const q of ALL){if(q.id===e.p.id)continue;for(const w of words(q.sa)){const k=cleanTok(w);if(k&&!used.has(k)){used.add(k);pool.push(k)}}}
+    const near=pool.map(w=>[Math.abs(w.length-(e.p.sa.length/real.length))+Math.random()*2,w]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+    const extra=real.length>=4?2:real.length>=2?1:0;
+    const toks=real.map(t=>({t,real:true})).concat(near.slice(0,extra).map(t=>({t,real:false})));
+    e.tokens=shuffle(toks).map((o,i)=>({t:o.t,i}));e.chosen=[];return;
+  }
+  const field=e.type==='sa2ru'?'ru':'sa';
+  e.opts=shuffle(distractors(e.p,field,3,e.p.lesson==='dict'?getDItems():ALL).concat(e.p[field]));e.correct=e.p[field];
+}
+/* Звук отдельного слова при сборке фразы, если такое слово озвучено. */
+function playWord(tok){
+  const w=WMAP.get(normW(tok));
+  if(w&&hasAudio(w))play(w.id);
+}
+function mark(e,ok){
+  e.answered=true;e.ok=ok;
+  if(sess.kind==='marathon'){
+    sess.done++;if(ok){sess.run++;sess.best=Math.max(sess.best,sess.run)}else sess.run=0;
+    if(!ok){sess.res[e.p.id]=false;sess.queue.splice(Math.min(sess.queue.length,sess.i+5+Math.floor(Math.random()*6)),0,{p:e.p,type:e.type==='sa2ru'?'ru2sa':'sa2ru',retry:true})}
+    else if(!(e.p.id in sess.res))sess.res[e.p.id]=true;
+    return;
+  }
+  if(!ok){sess.res[e.p.id]=false;if(!e.retry)sess.queue.push({p:e.p,type:e.type==='sa2ru'?'ru2sa':'sa2ru',retry:true})}
+  else if(!(e.p.id in sess.res))sess.res[e.p.id]=true;
+}
+function exView(){
+  const e=sess.queue[sess.i];if(!e.init)initEx(e);
+  const p=e.p,pct=Math.round(sess.i/sess.queue.length*100);
+  let body='';
+  if(e.type==='type'){
+    const special=e.answered&&e.marks&&e.marks.some(k=>'ҕҥөһү'.includes(e.bNorm[k]));
+    body=`<p class="ask">Напишите по-якутски</p><p class="prompt ru">${esc(noP(p.ru))}</p>
+      <input id="f-type" class="inp sa" lang="sah" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="${esc(e.typed||'')}" ${e.answered?'disabled':''} aria-label="Ваш ответ">
+      ${e.answered?(e.ok&&!e.near?'':`<p class="fbp" style="margin-top:14px">${e.near?'Ошибка отмечена':'Где расходится'}: <span class="sa" lang="sah" style="font-size:1.2rem">${markedAnswer(e)}</span></p>${special?'<p class="hint">Проверьте особые буквы ҕ ҥ ө һ ү — их можно вставить кнопками под полем ввода.</p>':''}`)
+        :`${keysBar()}<button class="btn wide" data-act="tcheck" style="margin-top:18px">Проверить</button>`}`;
+  }else if(e.type==='build'){
+    body=`<p class="ask">Соберите фразу по-якутски</p><p class="prompt ru">${esc(noP(p.ru))}</p>
+      <div class="answer" aria-label="Ваш ответ">${e.chosen.map((ti,k)=>`<button class="chip" lang="sah" data-act="untok" data-k="${k}" ${e.answered?'disabled':''}>${hl(e.tokens[ti].t)}</button>`).join('')}</div>
+      <div class="pool">${e.tokens.map((tk,ti)=>`<button class="chip ${e.chosen.includes(ti)?'used':''}" lang="sah" data-act="tok" data-ti="${ti}" ${e.answered?'disabled':''}>${hl(tk.t)}</button>`).join('')}</div>
+      ${e.answered?'':`<button class="btn wide" data-act="check" style="margin-top:24px" ${e.chosen.length?'':'disabled'}>Проверить</button>`}`;
+  }else{
+    const isSa=e.type==='sa2ru';
+    body=`<p class="ask">${isSa?'Что это значит?':'Как сказать по-якутски?'}</p>
+      <p class="prompt ${isSa?'sa':'ru'}" ${isSa?'lang="sah"':''}>${isSa?hl(noP(p.sa)):esc(noP(p.ru))}</p>
+      ${e.opts.map((o,i)=>{let c='';if(e.answered){if(o===e.correct)c='right';else if(i===e.picked)c='wrong'}
+        return `<button class="opt ${isSa?'':'sa'} ${c}" data-act="pick" data-i="${i}" ${isSa?'':'lang="sah"'} ${e.answered?'disabled':''}>${isSa?esc(noP(o)):hl(noP(o))}</button>`}).join('')}`;
+  }
+  const fb=e.answered?`<div class="fb ${e.ok?'ok':'bad'}" role="status"><div>
+      <p class="fbt">${e.near?'Почти верно — засчитано':e.ok?'Верно':'Правильный ответ'}</p>
+      <p class="fbp"><span class="sa" lang="sah">${hl(p.sa)}</span> — ${esc(p.ru)}</p>${hasAudio(p)?`<button class="mini play" data-act="play" data-id="${p.id}">▶ Слушать</button>`:''}
+      <button class="btn wide" data-act="next">Дальше</button></div></div>`:'';
+  const M=sess.kind==='marathon';
+  const mpct=M&&sess.mode==='all'?Math.round(Object.keys(sess.res).length/sess.total0*100):pct;
+  return `<div class="shead"><button class="x" data-act="quit" aria-label="${M?'Закончить марафон':'Выйти из тренировки'}">×</button>
+    ${M&&sess.mode!=='all'?`<p class="ps" style="flex:1;margin:0">Пройдено ${sess.done} · серия ${sess.run}${sess.mode==='timed'?` · <b id="mclock">${clockText()}</b>`:''}</p>`
+      :`<div class="bar" role="progressbar" aria-valuenow="${mpct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${mpct}%"></span></div>`}</div>
+    ${M&&sess.mode==='all'?`<p class="hint">${Object.keys(sess.res).length} из ${sess.total0} · серия ${sess.run}</p>`:''}
+    ${body}${fb}`;
+}
+function finish(){
+  if(sess.timer){clearInterval(sess.timer);sess.timer=null}
+  const t=today();let good=0;
+  for(const [id,ok] of Object.entries(sess.res)){
+    const c=S.cards[id]||{box:0,due:t};
+    if(ok){c.box=Math.min(c.box+1,5);c.due=t+INTERVALS[c.box];good++}else{c.box=0;c.due=t}
+    S.cards[id]=c;
+  }
+  if(sess.kind==='lesson')S.done[sess.lessonId]=true;
+  if(S.streak.last!==t){S.streak.count=S.streak.last===t-1?S.streak.count+1:1;S.streak.last=t}
+  save();
+  sess.good=good;sess.total=Object.keys(sess.res).length;
+  go({name:'result'});
+}
+function resultView(){
+  if(sess.kind==='marathon'){const U=sess.src==='words'?['слова','слов','слов']:['фразы','фраз','фраз'];
+    return `<p class="big" lang="sah">${sess.best>=10?'Бэрт!':'Сөп!'}</p><h1>Марафон окончен</h1>
+    <p class="lead">Заданий пройдено: ${sess.done}. Лучшая серия без ошибок: ${sess.best}. С первой попытки верно: ${sess.good} из ${sess.total} ${plural(sess.total,U[0],U[1],U[2])}.</p>
+    <button class="btn wide" data-act="mstart" data-src="${sess.src}" data-mode="${sess.mode}">Ещё раз</button>
+    <p><button class="btn ghost wide" data-act="marathon">Другой марафон</button></p>`}
+  const idx=LESSONS.findIndex(l=>l.id===sess.lessonId), nx=sess.kind==='lesson'?LESSONS[idx+1]:null, next=nx&&nx.phrases.length?nx:null;
+  return `<p class="big" lang="sah">${sess.good===sess.total?'Бэрт!':'Сөп!'}</p>
+    <h1>${sess.kind==='lesson'?'Урок пройден':sess.kind==='quick'?'Готово!':'Повторение завершено'}</h1>
+    <p class="lead">С первой попытки: ${sess.good} из ${sess.total} ${plural(sess.total,'фразы','фраз','фраз')}. ${sess.good<sess.total?'Фразы с ошибками вернутся на повторение сегодня.':'Эти фразы вернутся на повторение позже.'}</p>
+    ${next?`<button class="btn wide" data-act="lesson" data-id="${next.id}">Следующий урок: ${esc(next.title)}</button>`:''}
+    <p><button class="btn ${next?'ghost':''} wide" data-act="home">К урокам</button></p>`;
+}
+
+/* ---------- События ---------- */
+document.addEventListener('input',ev=>{if(ev.target&&ev.target.id==='f-dict'){view.q=ev.target.value;const r=document.getElementById('dict-res');if(r)r.innerHTML=dictResults(view.q)}});
+document.addEventListener('toggle',ev=>{const d=ev.target;if(d&&d.tagName==='DETAILS'&&d.dataset&&d.dataset.k){if(d.open)view.dopen=d.dataset.k;else if(view.dopen===d.dataset.k)view.dopen=null}},true);
+document.addEventListener('keydown',ev=>{if(ev.target&&ev.target.id==='f-type'&&ev.key==='Enter'){ev.preventDefault();const b=document.querySelector('[data-act=tcheck]');if(b)b.click()}});
+document.addEventListener('focusin',ev=>{if(ev.target.classList&&ev.target.classList.contains('inp'))lastField=ev.target.id});
+document.addEventListener('pointerdown',ev=>{if(ev.target.closest('[data-ins]'))ev.preventDefault()});
+function val(id){const el=document.getElementById(id);return el?el.value.trim().replace(/\s+/g,' '):''}
+
+document.addEventListener('click',ev=>{
+  const ins=ev.target.closest('[data-ins]');
+  if(ins){const f=document.getElementById(lastField)||document.getElementById('f-sa');if(f){const s=f.selectionStart??f.value.length,en=f.selectionEnd??s;f.setRangeText(ins.dataset.ins,s,en,'end');f.focus();f.dispatchEvent(new Event('input',{bubbles:true}))}return}
+  const b=ev.target.closest('[data-act]');if(!b||b.disabled)return;
+  const a=b.dataset.act,e=sess&&sess.queue[sess.i];
+  switch(a){
+    case 'home':go({name:'home'});break;
+    case 'reviewtab':go({name:'review'});break;
+    case 'dialogs':case 'segph':{const seg=a==='dialogs'?'dialogs':'phrases';
+      if(view.name==='home'){view.seg=seg;render()}
+      else{go({name:'home',seg});const el=document.querySelector('.seg');if(el)el.scrollIntoView({block:'start'})}
+      break}
+    case 'dict':lastField='f-dict';go({name:'dict',q:view.name==='dict'||view.name==='wform'?view.q:''});break;
+    case 'addw':go({name:'wform',q:view.q||'',pre:b.dataset.q||''});break;
+    case 'editw':go({name:'wform',q:view.q||'',wid:b.dataset.id});break;
+    case 'savew':{const data={sa:val('f-sa'),ru:val('f-ru'),pos:(document.getElementById('f-pos')||{}).value||'',ex:val('f-ex')};
+      if(!data.sa||!data.ru){view.draft=data;view.err=!data.sa?'Впишите слово по-якутски.':'Впишите перевод.';render();document.getElementById(!data.sa?'f-sa':'f-ru').focus();break}
+      E.words=E.words||[];let id=view.wid;const cur=id&&E.words.find(x=>x.id===id);
+      {const lw=data.sa.toLowerCase(),dup=DICT.find(d=>d[0].toLowerCase()===lw&&!(id&&d.u===id));
+       if(dup&&!(cur&&cur.sa.toLowerCase()===lw)&&!confirm(`Слово «${dup[0]}» уже есть в словаре${dup.u?' (ваше слово)':''}: ${dup[2]}.\n\nВсё равно добавить?`)){view.draft=data;view.err='';render();break}}
+      if(cur)Object.assign(cur,data);else{id=uid();E.words.push({id,...data})}
+      commit();lastField='f-dict';go({name:'dict',q:data.sa,dopen:id});toast('Слово сохранено.');break}
+    case 'delw':{if(!confirm('Удалить это слово из словаря? Ваша запись этого слова тоже удалится.'))break;const id=b.dataset.id;
+      E.words=(E.words||[]).filter(x=>x.id!==id);commit();if(REC.has.has(id))recDel(id).catch(()=>{});render();break}
+    case 'word':openSheet(b.dataset.w);break;
+    case 'sclose':closeSheet();break;
+    case 'dsearch':closeSheet();lastField='f-dict';go({name:'dict',q:b.dataset.q});break;
+    case 'dialog':{const d={id:b.dataset.id,i:0,mistakes:0};dAdvance(d);go({name:'dialog',d});playSeq(dlgIds(d.id,0,d.i));break}
+    case 'dpick':{const d=view.d,L=DIALOGUES.find(x=>x.id===d.id).lines,k=+b.dataset.i;
+      if(d.opts[k]===L[d.i][1]){const from=d.i;d.i++;dAdvance(d);playSeq(dlgIds(d.id,from,d.i));if(d.i>=L.length){S.dlg[d.id]=true;save()}render();const c=document.querySelector('.turn');if(c)c.scrollIntoView({block:'nearest'})}
+      else{d.wrong.push(k);d.mistakes++;render()}
+      break}
+    case 'play':play(b.dataset.id);break;
+    case 'rec':startRec(b.dataset.id);break;
+    case 'upaudio':pendingAudioId=b.dataset.id;document.getElementById('audio-file').click();break;
+    case 'delrec':if(confirm('Удалить эту запись?')){recDel(b.dataset.id).then(render)}break;
+    case 'export':exportData();break;
+    case 'import':document.getElementById('backup-file').click();break;
+    case 'exportph':exportPhrases();break;
+    case 'voice':go({name:'voice'});break;
+    case 'vmode':{const V=vLoad();V.mode=b.dataset.m;delete V.batch;vSave(V);view.err='';render();break}
+    case 'vopen':rememberBatch();return;
+    case 'vcopy':{rememberBatch();const t=batchNow().map(p=>p.sa).join('\n');
+      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Фразы скопированы. Вставьте их в левое поле Яндекса.'),()=>toast('Не получилось скопировать в этом окне.'));break}
+    case 'vupload':{getCtx();const V=vLoad();if(!V.batch||!V.batch.length)rememberBatch();document.getElementById('voice-file').click();break}
+    case 'vplay':playSeg(+b.dataset.i);break;
+    case 'vsave':saveVoice();break;
+    case 'vpack':packVoice();break;
+    case 'vunpack':if(confirm('Вернуть скачанные фразы в очередь на озвучку? Файлы пакетов при этом не удаляются.')){const V=vLoad();delete V.packed;delete V.batch;vSave(V);render()}break;
+    case 'importpack':document.getElementById('pack-file').click();break;
+    case 'sounds':go({name:'sounds'});break;
+    case 'lesson':go({name:'lesson',id:b.dataset.id});break;
+    case 'toggleedit':stopRec();view.edit=!view.edit;render();break;
+    case 'backlesson':go({name:'lesson',id:view.lid,edit:true});break;
+    case 'addp':lastField='f-sa';go({name:'form',lid:view.id});break;
+    case 'editp':lastField='f-sa';go({name:'form',lid:view.id,pid:b.dataset.id});break;
+    case 'revertp':revertPhrase(b.dataset.id);render();break;
+    case 'delp':{const p=ALL.find(x=>x.id===b.dataset.id);if(p&&confirm(`Удалить фразу «${p.sa}»?`)){deletePhrase(view.id,p.id);render()}break}
+    case 'restore':restoreDeleted(view.id);render();break;
+    case 'savep':{
+      const data={sa:val('f-sa'),ru:val('f-ru'),note:val('f-note')};
+      if(!data.sa||!data.ru){view.draft=data;view.err=!data.sa?'Впишите фразу по-якутски.':'Впишите перевод.';render();document.getElementById(!data.sa?'f-sa':'f-ru').focus();break}
+      savePhrase(view.lid,view.pid,data);go({name:'lesson',id:view.lid,edit:true});break}
+    case 'newlesson':go({name:'lform'});break;
+    case 'renamel':go({name:'lform',lid:view.id});break;
+    case 'savel':{
+      const d={title:val('f-title'),intro:val('f-intro')};
+      if(!d.title){view.draft=d;view.err='Впишите название урока.';render();document.getElementById('f-title').focus();break}
+      if(view.lid){Object.assign(E.lessons.find(x=>x.id===view.lid),d);commit();go({name:'lesson',id:view.lid,edit:true})}
+      else{const id=uid();E.lessons.push({id,...d});commit();go({name:'lesson',id,edit:true})}
+      break}
+    case 'dellesson':{const l=LESSONS.find(x=>x.id===view.id);if(l&&confirm(`Удалить урок «${l.title}» со всеми его фразами?`)){deleteLesson(l.id);go({name:'home'})}break}
+    case 'practice':{const l=LESSONS.find(x=>x.id===view.id);startSession(ALL.filter(q=>q.lesson===l.id),'lesson',l.id);break}
+    case 'review':{const d=dueList();if(d.length)startSession(d,'review');break}
+    case 'quick':{const due=shuffle(dueList()),known=shuffle(ALL.filter(p=>(S.cards[p.id]?.box||0)>=1&&!due.includes(p))),rest=shuffle(ALL.filter(p=>!due.includes(p)&&!known.includes(p)));
+      const pick=due.concat(known,rest).slice(0,5);if(pick.length)startSession(pick,'quick');break}
+    case 'reset':if(confirm('Сбросить весь прогресс? Это нельзя отменить.')){S=fresh();save();render()}break;
+    case 'quit':if(sess&&sess.kind==='marathon'){if(player)player.pause();finish();break}if(confirm('Выйти? Результаты этой тренировки не сохранятся.')){sess=null;if(player)player.pause();go({name:'home'})}break;
+    case 'pick':if(!e.answered){e.picked=+b.dataset.i;mark(e,e.opts[e.picked]===e.correct);if(hasAudio(e.p))play(e.p.id);render()}break;
+    case 'tok':{const ti=+b.dataset.ti;if(!e.chosen.includes(ti)){e.chosen.push(ti);render()}break}
+    case 'untok':e.chosen.splice(+b.dataset.k,1);render();break;
+    case 'tcheck':{const inp=document.getElementById('f-type');if(!inp)break;e.typed=inp.value;
+      const a=normType(e.typed),bn=normType(e.p.sa);if(!a){inp.focus();break}
+      const r=typeDiff(a,bn),lim=bn.length<=10?1:2;e.bNorm=bn;e.marks=[...r.marks];e.near=r.dist>0&&r.dist<=lim;
+      mark(e,r.dist<=lim);if(hasAudio(e.p))play(e.p.id);render();break}
+    case 'check':mark(e,e.chosen.map(ti=>e.tokens[ti].t).join(' ')===words(e.p.sa).map(cleanTok).filter(Boolean).join(' '));if(hasAudio(e.p))play(e.p.id);render();break;
+    case 'next':sess.i++;
+      if(sess.kind==='marathon'){
+        if(sess.mode==='timed'&&Date.now()>=sess.end){finish();break}
+        if(sess.mode!=='all'&&sess.queue.length-sess.i<5)sess.queue=sess.queue.concat(mBatch(sess.src));
+      }
+      if(sess.i>=sess.queue.length)finish();else{render();window.scrollTo(0,0)}break;
+    case 'marathon':go({name:'marathon'});break;
+    case 'settings':go({name:'settings'});break;
+    case 'mstart':startMarathon(b.dataset.src,b.dataset.mode);break;
+  }
+});
+document.getElementById('audio-file').addEventListener('change',async ev=>{
+  const f=ev.target.files[0];ev.target.value='';if(!f||!pendingAudioId)return;
+  if(f.size>8*1024*1024){toast('Файл слишком большой: нужна запись до 8 МБ.');return}
+  try{await recPut(pendingAudioId,f.slice(0,f.size,f.type));toast('Запись сохранена.')}catch(e){toast('Не удалось сохранить запись.')}
+  pendingAudioId=null;render();
+});
+document.getElementById('backup-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)importData(f)});
+document.getElementById('voice-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)processVoice(f)});
+document.addEventListener('change',ev=>{
+  const t=ev.target;
+  if(t.id==='vsize'){const V=vLoad();if(vMode()==='words')V.wsize=t.value;else V.size=t.value;delete V.batch;vSave(V);view.err='';render();return}
+  if(t.dataset&&t.dataset.vchk!==undefined&&view.rows){view.rows[+t.dataset.vchk].checked=t.checked;
+    const c=view.rows.filter(r=>r.checked&&r.ok).length,bp=document.getElementById('vpack'),bs=document.getElementById('vsave');
+    if(bp){bp.textContent=`Скачать пакет озвучки (${c})`;bp.disabled=!c}if(bs)bs.disabled=!c}
+});
+document.getElementById('pack-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)importPack(f)});
+render();
+hideSplash();
+recInit();
+cloudInit();
+</script>
+
+<!--PWA-->
+<div id="upd" class="upd" hidden><span>Доступна новая версия</span><button class="btn" id="upd-btn">Обновить</button></div>
+<style>.upd{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--accent);box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:536px;margin:0 auto}
+.upd[hidden]{display:none}.upd span{font-weight:700}.audio-wait{font-size:.88rem;color:var(--muted)}</style>
+<script>
+/* ---------- PWA: озвучка отдельными файлами, офлайн и обновления ---------- */
+const AUDIO_FILES=/*AUDIO_FILES*/[];
+Promise.all(AUDIO_FILES.map(f=>fetch(f).then(r=>{if(!r.ok)throw 0;return r.json()}))).then(parts=>{
+  parts.forEach(p=>Object.assign(BUILTIN_AUDIO,p));
+  if(view.name!=='ex'&&view.name!=='form'&&view.name!=='wform'&&view.name!=='lform')render();
+}).catch(()=>toast('Не удалось загрузить озвучку. Откройте приложение с интернетом один раз, чтобы она сохранилась.'));
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
+  let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    const show=()=>{const u=document.getElementById('upd');u.hidden=false;
+      document.getElementById('upd-btn').onclick=()=>{if(reg.waiting)reg.waiting.postMessage('skip');u.hidden=true}};
+    if(reg.waiting&&navigator.serviceWorker.controller)show();
+    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;
+      w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)show()})});
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update().catch(()=>{})});
+  }).catch(()=>{});
+  if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+}
+</script>
+<!--/PWA-->
+</body>
+</html>
