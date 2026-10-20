@@ -33,6 +33,8 @@ ASSETS = ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-
 EMBLEMS = ['emblem-dark.webp', 'emblem-light.webp']
 FONTS_DIR = 'fonts'
 SPLASH_DIR = 'splash'
+# Свой адрес сайта: GitHub Pages берёт его из файла CNAME. Менять нельзя — к адресу привязаны данные пользователей.
+DOMAIN = 'sakhalyy-sanar.ru'
 
 # Манифест приложения: название, иконки, цвета. Нужен для установки на телефон.
 MANIFEST = {
@@ -104,6 +106,8 @@ def build_site():
         shutil.copy(os.path.join(BASE, name), os.path.join(out, name))
     shutil.copytree(os.path.join(BASE, FONTS_DIR), os.path.join(out, FONTS_DIR))
     shutil.copytree(os.path.join(BASE, SPLASH_DIR), os.path.join(out, SPLASH_DIR))
+    with open(os.path.join(out, 'CNAME'), 'w', encoding='utf-8') as f:
+        f.write(DOMAIN + '\n')
     with open(os.path.join(out, 'manifest.webmanifest'), 'w', encoding='utf-8') as f:
         json.dump(MANIFEST, f, ensure_ascii=False, indent=1)
     # версия меняется при любой правке кода или списка озвучки — по ней обновляется кеш

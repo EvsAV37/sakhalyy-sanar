@@ -3,12 +3,13 @@
 Самоучитель разговорного якутского (саха) языка. Работает в браузере и без интернета,
 ставится на телефон как приложение.
 
-Адрес после включения GitHub Pages: https://evsav37.github.io/sakhalyy-sanar/
+Адрес: **https://sakhalyy-sanar.ru/** (свой домен, записи DNS у reg.ru указывают на GitHub Pages;
+файл `CNAME` создаёт сборка). Старый адрес evsav37.github.io/sakhalyy-sanar перенаправляет сюда.
 
 ## Что где лежит
 
 - **Корень репозитория** — готовый сайт, его показывает GitHub Pages: `index.html`, `sw.js`,
-  `manifest.webmanifest`, иконки, `fonts/`, `splash/` и озвучка `audio-*.json`.
+  `manifest.webmanifest`, `CNAME`, иконки, `fonts/`, `splash/` и озвучка `audio-*.json`.
   Руками здесь ничего не правится — всё получается сборкой.
 - **`src/`** — исходники: `app.html`, `dict.json`, `sborka.py`, `sw.js`, иконки, знаки,
   шрифты, картинки запуска и `СОСТОЯНИЕ-ПРОЕКТА.md` с описанием проекта и принятых решений.
