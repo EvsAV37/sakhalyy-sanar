@@ -37,7 +37,7 @@
   --bg:#F5F3EE; --surface:#FFFFFF; --ink:#13213F; --muted:#5B6782; --line:#DDE1EA;
   --accent:#16306B; --accent-ink:#FFFFFF; --sun:#B07F22; --sun-soft:#F6EAD0;
   --ok:#25805A; --ok-soft:#DCF1E6; --bad:#B23A3A; --bad-soft:#F7E1E1;
-  --sky:#2E7FD6; --link:#16306B; --hero-a:#E2AD45; --hero-b:#A8721C;
+  --sky:#2E7FD6; --link:#16306B; --hero-a:#E2AD45; --hero-b:#A8721C; --sun-ink:#8F6512;
   --body-bg:var(--bg); --btn-bg:var(--accent); --btn-shadow:none; --panel-bg:var(--surface);
   --nav-bg:var(--surface); --seg-on-bg:var(--accent); --seg-on-ink:var(--accent-ink);
   --logo-d:none; --logo-l:block;
@@ -51,7 +51,7 @@
     --bg:#081128; --surface:#0F1C3D; --ink:#EAF0FA; --muted:#97A8C8; --line:#1F3160;
     --accent:#E9C06E; --accent-ink:#1B1406; --sun:#E9C06E; --sun-soft:#2E2715;
     --ok:#6FD3A2; --ok-soft:#10301F; --bad:#F08C8C; --bad-soft:#3A1A22;
-    --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A;
+    --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A; --sun-ink:#E9C06E;
     --body-bg:radial-gradient(130% 420px at 50% -60px,#14295A 0%,rgba(8,17,40,0) 100%) no-repeat,#081128;
     --btn-bg:linear-gradient(180deg,#F4D58F,#DDAE57); --btn-shadow:0 6px 18px rgba(233,192,110,.18);
     --panel-bg:linear-gradient(180deg,#13234A,#0F1C3D); --nav-bg:rgba(10,20,46,.94);
@@ -63,7 +63,7 @@
   --bg:#081128; --surface:#0F1C3D; --ink:#EAF0FA; --muted:#97A8C8; --line:#1F3160;
   --accent:#E9C06E; --accent-ink:#1B1406; --sun:#E9C06E; --sun-soft:#2E2715;
   --ok:#6FD3A2; --ok-soft:#10301F; --bad:#F08C8C; --bad-soft:#3A1A22;
-  --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A;
+  --sky:#7CC3FF; --link:#7CC3FF; --hero-a:#FBEBC4; --hero-b:#D9A85A; --sun-ink:#E9C06E;
   --body-bg:radial-gradient(130% 420px at 50% -60px,#14295A 0%,rgba(8,17,40,0) 100%) no-repeat,#081128;
   --btn-bg:linear-gradient(180deg,#F4D58F,#DDAE57); --btn-shadow:0 6px 18px rgba(233,192,110,.18);
   --panel-bg:linear-gradient(180deg,#13234A,#0F1C3D); --nav-bg:rgba(10,20,46,.94);
@@ -109,7 +109,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 .lessons{list-style:none;margin:0;padding:0}
 .lesson{display:flex;gap:14px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
-.num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sun);color:var(--sun);display:grid;place-items:center;font-weight:700}
+.num{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sun);color:var(--sun-ink);display:grid;place-items:center;font-weight:700}
 .lesson.mine .num{border-style:dashed}
 .lt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .lname{font-weight:700;font-size:1.08rem}
@@ -118,7 +118,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .meter span{display:block;height:100%;background:var(--sky);border-radius:3px}
 .lcount{font-size:.9rem;color:var(--muted)}
 .note{font-size:.92rem;color:var(--muted);margin-top:22px}
-.tag{font-size:.85rem;color:var(--sun);font-weight:700;margin-top:4px}
+.tag{font-size:.85rem;color:var(--sun-ink);font-weight:700;margin-top:4px}
 
 .back{background:none;border:0;color:var(--link);padding:6px 0;font-weight:700}
 .legend{font-size:.92rem;color:var(--muted);margin-top:10px;padding-left:10px;border-left:3px solid var(--sun)}
@@ -127,7 +127,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .psa{font-size:1.45rem;line-height:1.3}
 .pru{margin-top:2px}
 .pnote{font-size:.92rem;color:var(--muted);margin-top:4px}
-.stick{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom,0px));padding-top:14px}
+.stick{position:sticky;bottom:calc(53px + env(safe-area-inset-bottom,0px));margin:0 -18px;padding:26px 18px 14px;
+  background:linear-gradient(to bottom,transparent,var(--bg) 24px)}
 
 label{display:block;font-weight:700;margin-top:18px}
 label small{font-weight:400;color:var(--muted);font-size:.9rem}
@@ -142,7 +143,7 @@ label small{font-weight:400;color:var(--muted);font-size:.9rem}
 .nav{position:fixed;left:0;right:0;bottom:0;background:var(--nav-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
 .nav div{max-width:560px;margin:0 auto;display:flex}
 .nav button{flex:1;background:none;border:0;padding:16px 4px;color:var(--muted);font-weight:700}
-.nav button[aria-current="page"]{color:var(--sun);box-shadow:inset 0 3px 0 var(--sun)}
+.nav button[aria-current="page"]{color:var(--sun-ink);box-shadow:inset 0 3px 0 var(--sun)}
 body.in-session .nav{display:none}
 
 .shead{display:flex;align-items:center;gap:12px}
@@ -168,7 +169,7 @@ body.in-session .nav{display:none}
 .sheet>div{max-width:560px;margin:0 auto}
 .sheet .x{float:right;margin:-6px -8px 0 0}
 .sw{font-family:"PT Serif",Georgia,serif;font-size:1.8rem;line-height:1.2;margin:0 0 6px}
-.dpos{font-size:.82rem;color:var(--sun);font-weight:700;margin-left:6px}
+.dpos{font-size:.82rem;color:var(--sun-ink);font-weight:700;margin-left:6px}
 .en{font-size:.88rem;color:var(--muted);margin-top:6px}
 .dlist{list-style:none;padding:0;margin:14px 0 0}
 .dlist li{border-bottom:1px solid var(--line)}
@@ -192,7 +193,7 @@ mark.miss{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:
 
 .sounds{list-style:none;padding:0;margin:18px 0 0}
 .sounds li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
-.glyph{flex:none;width:64px;font-family:"PT Serif",Georgia,serif;font-size:2.2rem;line-height:1;color:var(--accent)}
+.glyph{flex:none;min-width:64px;white-space:nowrap;font-family:"PT Serif",Georgia,serif;font-size:2.2rem;line-height:1;color:var(--accent)}
 .sname{font-weight:700}
 .sex{margin-top:4px;color:var(--muted)}
 .sex .sa{color:var(--ink);font-size:1.1rem}
@@ -247,8 +248,6 @@ select.inp{appearance:auto}
 <div id="sheet-bg" class="sheet-bg" data-act="sclose"></div><div id="sheet" class="sheet" role="dialog" aria-label="Слово"></div>
 <input type="file" id="audio-file" accept="audio/*" hidden>
 <input type="file" id="backup-file" accept=".json,application/json" hidden>
-<input type="file" id="pack-file" accept=".json,application/json" hidden>
-<input type="file" id="voice-file" accept="video/*,audio/*" hidden>
 <script>
 const DEFAULT_LESSONS=[
  {id:'l1',title:'Приветствие',intro:'Встреча начинается с «Дорообо», а разговор — с «Кэпсээ!»: так просят рассказать новости.',phrases:[
@@ -766,35 +765,9 @@ async function importData(file){
   toast('Данные из файла загружены.');go({name:'home'});
 }
 
-/* ---------- Пакет озвучки ---------- */
-async function exportPhrases(){
-  const dl=await getSaver();
-  if(!dl){toast('Сохранение файла недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
-  const payload=JSON.stringify({app:'sakha-phrases',kind:'phrases',version:1,items:ALL.map(p=>({id:p.id,sa:p.sa,ru:p.ru}))},null,1);
-  try{await dl.save({filename:'frazy-dlya-ozvuchki.json',data:new Blob([payload],{type:'application/json'})});toast(`Выгружено фраз: ${ALL.length}.`)}
-  catch(e){if(e&&e.code==='declined')return;toast('Не удалось сохранить файл.')}
-}
-async function importPack(file){
-  if(!REC.ok){toast('Хранилище записей недоступно в этом браузере.');return}
-  let obj;
-  try{obj=JSON.parse(await file.text());if(!obj||obj.kind!=='audio-pack'||!obj.items)throw 0}
-  catch(e){toast('Это не пакет озвучки. Выберите файл ozvuchka-paket.json, собранный скриптом.');return}
-  const cur=Object.fromEntries(ALL.map(p=>[p.id,p.sa]));
-  const fit=Object.entries(obj.items).filter(([id,v])=>cur[id]===v.sa);
-  const stale=Object.keys(obj.items).length-fit.length;
-  const clash=fit.filter(([id])=>REC.has.has(id)).length;
-  let replace=false;
-  if(clash)replace=confirm(`У ${clash} ${plural(clash,'фразы','фраз','фраз')} уже есть своя запись. Заменить их озвучкой из пакета? «Отмена» — оставить ваши записи.`);
-  let added=0;
-  try{for(const [id,v] of fit){if(REC.has.has(id)&&!replace)continue;await recPut(id,b64ToBlob(v.data,v.type||'audio/wav'));added++}}
-  catch(e){toast(`Сохранено ${added}, дальше не получилось: не хватает места в браузере.`);render();return}
-  render();
-  toast(`Добавлено записей: ${added}.`+(stale?` Пропущено ${stale}: фраза с тех пор изменилась или удалена.`:''));
-}
-
-/* ---------- Озвучка на телефоне (запись экрана) ---------- */
-const VKEY='sakha-voice-v1', SR=22050;
-let actx=null, vx=null, curSrc=null;
+/* ---------- Хранилище прежней озвучки с телефона (ключ оставлен ради совместимости) ---------- */
+const VKEY='sakha-voice-v1';
+let actx=null, curSrc=null;
 function vLoad(){try{return JSON.parse(localStorage.getItem(VKEY))||{}}catch(e){return {}}}
 function vSave(v){try{localStorage.setItem(VKEY,JSON.stringify(v))}catch(e){}touch('voice')}
 
@@ -808,7 +781,7 @@ async function cloudFlush(){
     try{await CLOUD.ref(n).set(body);cloudState='ok'}catch(e){try{await new Promise(r=>setTimeout(r,800+Math.random()*800));await CLOUD.ref(n).set(body);cloudState='ok'}catch(e2){cloudState='Ошибка записи: '+((e2&&(e2.code||e2.message))||'неизвестно')}}}
 }
 async function cloudInit(){
-  if(!window.claude){cloudState='Скачанная копия — хранение в браузере';return}
+  if(!window.claude)return;
   const db=await getCap('db'),user=await getCap('user');
   if(!db||!user){cloudState='Хранилище Claude недоступно в этом окне ('+(!db?'db':'user')+')';render();return}
   let uid=null;try{uid=await user.id()}catch(e){cloudState='Не удалось узнать пользователя: '+((e&&(e.code||e.message))||'');render();return}
@@ -827,168 +800,15 @@ async function cloudInit(){
     else if(lAt>cAt||!d)cloudQueue(n);
   });
   if(changed)rebuild();
-  if(view.name!=='ex'&&view.name!=='voicebusy'&&view.name!=='voicereview')render();
+  if(view.name!=='ex')render();
 }
-function yurl(t){return 'https://translate.yandex.ru/?source_lang=sah&target_lang=ru&text='+encodeURIComponent(t)}
 function biGet(id){let b=BUILTIN_AUDIO[id];if(b&&b.r){const t=BUILTIN_AUDIO[b.r];b=t?{sa:b.sa,t:t.t,d:t.d}:null}return b}
 function hasOwnAudio(p){const b=biGet(p.id);return REC.has.has(p.id)||!!(b&&b.sa===p.sa)}
 function normW(t){return t.toLowerCase().replace(/[^\p{L} ]/gu,'').trim()}
 function wordAlias(w){const n=normW(w.sa),ph=ALL.find(p=>normW(p.sa)===n&&hasOwnAudio(p));return ph?ph.id:null}
 function hasAudio(p){if(p.id.startsWith('dw:')){const w=WMAP.get(p.sa.toLowerCase());return (!!w&&hasAudio(w))||hasOwnAudio(p)}return hasOwnAudio(p)||((p.id[0]==='w'||p.dl)&&!!wordAlias(p))}
-function noAudioPh(){const pk=vLoad().packed||{};return ALL.concat(DLINES).filter(p=>!hasAudio(p)&&pk[p.id]!==p.sa)}
-function vMode(){return vLoad().mode==='words'?'words':'phrases'}
-function POOL(){return vMode()==='words'?WORDS:ALL.concat(DLINES)}
-function packedNow(){const pk=vLoad().packed||{};return POOL().filter(p=>!hasAudio(p)&&pk[p.id]===p.sa)}
-function noAudio(){const pk=vLoad().packed||{};return POOL().filter(p=>!hasAudio(p)&&pk[p.id]!==p.sa)}
-function batchNow(){const V=vLoad(),size=vMode()==='words'?(V.wsize||'40'):(V.size||'all'),t=noAudio();return size==='all'?t:t.slice(0,+size)}
-function rememberBatch(){const V=vLoad();V.batch=batchNow().map(p=>({id:p.id,sa:p.sa}));vSave(V)}
 function getCtx(){if(!actx){const C=window.AudioContext||window.webkitAudioContext;actx=new C()}return actx}
 function decodeAudio(buf){return new Promise((res,rej)=>{const r=getCtx().decodeAudioData(buf,res,rej);if(r&&r.then)r.then(res,rej)})}
-function toMono(ab){
-  const n=ab.length,ch=ab.numberOfChannels,ratio=ab.sampleRate/SR,outN=Math.floor(n/ratio),o=new Float32Array(outN);
-  const chans=[];for(let c=0;c<ch;c++)chans.push(ab.getChannelData(c));
-  const w=Math.max(1,Math.round(ratio));
-  for(let i=0;i<outN;i++){const i0=Math.floor(i*ratio);let s=0,k=0;
-    for(let j=0;j<w&&i0+j<n;j++){for(let c=0;c<ch;c++)s+=chans[c][i0+j];k+=ch}o[i]=k?s/k:0}
-  return o;
-}
-function letters(t){return (t.match(/\p{L}/gu)||[]).length}
-function quant(a,q){const b=Array.from(a).sort((x,y)=>x-y);return b[Math.min(b.length-1,Math.floor(q*b.length))]}
-function segmentAudio(x,items){
-  const FR=Math.round(SR*0.01),nf=Math.floor(x.length/FR),E=new Float32Array(nf);
-  for(let f=0;f<nf;f++){let s=0;for(let i=f*FR;i<(f+1)*FR;i++)s+=x[i]*x[i];E[f]=Math.sqrt(s/FR)}
-  const thr=Math.max(quant(E,.1)*3,quant(E,.95)*.08,1e-4);
-  let first=-1,last=-1;for(let f=0;f<nf;f++)if(E[f]>thr){if(first<0)first=f;last=f}
-  if(first<0)return {error:'silent'};
-  const gaps=[];let run=-1;
-  for(let f=first;f<=last+1;f++){const v=f<=last&&E[f]>thr;if(!v){if(run<0)run=f}else if(run>=0){if(f-run>=12)gaps.push({s:run,e:f,len:f-run});run=-1}}
-  const N=items.length,K=gaps.length;
-  if(K<N-1)return {error:'few',found:K+1,need:N};
-  const w=items.map(it=>letters(it.sa)+4+4*((it.sa.match(/[,;:—–-]/g)||[]).length)),W=w.reduce((a,b)=>a+b,0),T=last-first+1,avg=T/N;
-  const med=quant(gaps.map(g=>g.len),.5)||1,rate=T/W;
-  const bonus=k=>1.2*Math.min(gaps[k].len/med,4);
-  const seg=(j,s0,e0)=>{const d=e0-s0;if(d<=5)return Infinity;const l=Math.log(d/(w[j]*rate));return 4*l*l};
-  const cuts=[];
-  if(N>1){
-    let dp=new Float64Array(K).fill(Infinity);const back=[null];
-    for(let k=0;k<K;k++)dp[k]=seg(0,first,gaps[k].s)-bonus(k);
-    for(let j=1;j<N-1;j++){
-      const nd=new Float64Array(K).fill(Infinity),bp=new Int32Array(K).fill(-1);
-      for(let k=j;k<K;k++){const bk=bonus(k);
-        for(let q=j-1;q<k;q++){if(dp[q]===Infinity)continue;const v=dp[q]+seg(j,gaps[q].e,gaps[k].s)-bk;if(v<nd[k]){nd[k]=v;bp[k]=q}}}
-      dp=nd;back.push(bp);
-    }
-    let k=-1,bv=Infinity;for(let i=0;i<K;i++){const v=dp[i]+seg(N-1,gaps[i].e,last+1);if(v<bv){bv=v;k=i}}
-    if(k<0)return {error:'few',found:K+1,need:N};
-    for(let j=N-2;j>=0;j--){cuts[j]=k;if(j>0)k=back[j][k]}
-  }
-  const segs=[],totalL=items.reduce((a,it)=>a+letters(it.sa),0);
-  for(let i=0;i<N;i++){
-    const gs=i>0?gaps[cuts[i-1]]:null,ge=i<N-1?gaps[cuts[i]]:null;
-    let a=i===0?first:gs.e,b=i===N-1?last+1:ge.s;
-    a=Math.max(i===0?0:Math.ceil((gs.s+gs.e)/2),a-8);b=Math.min(i===N-1?nf:Math.floor((ge.s+ge.e)/2),b+15);
-    const dur=(b-a)/100,expd=T/100*w[i]/W,r=dur/expd;
-    segs.push({a:a*FR,b:Math.min(x.length,b*FR),dur,flag:r<.5||r>2});
-  }
-  const cps=totalL/(T/100);
-  return {segs,warn:cps>28?'Звук закончился подозрительно быстро: возможно, Яндекс прочитал не весь текст. Проверьте последние фразы.':''};
-}
-function wavBlob(f){
-  const n=f.length,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);
-  let peak=0;for(let i=0;i<n;i++){const a=Math.abs(f[i]);if(a>peak)peak=a}
-  const g=peak>0?0.9/peak:1,wr=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
-  wr(0,'RIFF');v.setUint32(4,36+n*2,true);wr(8,'WAVE');wr(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
-  v.setUint32(24,SR,true);v.setUint32(28,SR*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);wr(36,'data');v.setUint32(40,n*2,true);
-  for(let i=0;i<n;i++)v.setInt16(44+i*2,Math.max(-1,Math.min(1,f[i]*g))*32767,true);
-  return new Blob([buf],{type:'audio/wav'});
-}
-async function processVoice(file){
-  const V=vLoad(),items=(V.batch&&V.batch.length?V.batch:batchNow().map(p=>({id:p.id,sa:p.sa})));
-  if(!items.length){toast('Нет фраз для озвучки.');return}
-  go({name:'voicebusy'});await new Promise(r=>setTimeout(r,50));
-  let res;
-  try{const ab=await decodeAudio(await file.arrayBuffer());vx=toMono(ab);res=segmentAudio(vx,items)}
-  catch(e){go({name:'voice',err:'Не получилось достать звук из этого файла. Попробуйте выбрать видео через «Файлы» или сохранить из него только звук.'});return}
-  if(res.error==='silent'){go({name:'voice',err:'В записи нет звука. Проверьте, что при записи экрана звук телефона был включён, а не только микрофон.'});return}
-  if(res.error==='few'){go({name:'voice',err:`В записи нашлось только ${res.found} ${plural(res.found,'кусок','куска','кусков')} на ${res.need} ${plural(res.need,'фразу','фразы','фраз')}. Скорее всего, Яндекс прочитал не весь текст. Выберите порцию поменьше и запишите ещё раз.`});return}
-  const cur=Object.fromEntries(ALL.concat(WORDS,DLINES).map(p=>[p.id,p]));
-  const rows=items.map((it,i)=>{const p=cur[it.id],ok=!!p&&p.sa===it.sa;return {...it,...res.segs[i],ok,checked:ok&&!res.segs[i].flag}});
-  go({name:'voicereview',rows,warn:res.warn});
-}
-function playSeg(i){
-  const c=getCtx();if(c.resume)c.resume();const r=view.rows[i],len=r.b-r.a;if(len<=0)return;
-  const ab=c.createBuffer(1,len,SR);ab.getChannelData(0).set(vx.subarray(r.a,r.b));
-  if(curSrc){try{curSrc.stop()}catch(e){}}
-  curSrc=c.createBufferSource();curSrc.buffer=ab;curSrc.connect(c.destination);curSrc.start(0);
-}
-async function saveVoice(){
-  const rows=view.rows.filter(r=>r.checked&&r.ok);let n=0;
-  if(!rows.length){toast('Не отмечено ни одной фразы.');return}
-  try{for(const r of rows){await recPut(r.id,wavBlob(vx.subarray(r.a,r.b)));n++}}
-  catch(e){toast(`Сохранено ${n} из ${rows.length}. Браузер не дал записать остальное (${(e&&(e.name||e.message))||'ошибка хранилища'}). Пришлите этот текст Claude.`);render();return}
-  const V=vLoad();delete V.batch;vSave(V);vx=null;
-  const left=noAudio().length;
-  toast(`Сохранено записей: ${n}.`+(left?` Без озвучки осталось ${left}.`:' Озвучены все фразы.'));
-  go({name:'voice'});
-}
-async function packVoice(){
-  const rows=view.rows.filter(r=>r.checked&&r.ok);
-  if(!rows.length){toast('Не отмечено ни одной фразы.');return}
-  const dl=await getSaver();
-  if(!dl){toast('Скачивание недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
-  const items={};
-  for(const r of rows)items[r.id]={sa:r.sa,type:'audio/wav',data:(await blobToDataURL(wavBlob(vx.subarray(r.a,r.b)))).split(',')[1]};
-  const payload=JSON.stringify({app:'sakha-phrases',kind:'audio-pack',version:1,source:'Яндекс Переводчик, только для личного использования',items});
-  const name=`ozvuchka-${new Date().toISOString().slice(0,10)}-${rows[0].id}-${rows.length}.json`;
-  try{await dl.save({filename:name,data:new Blob([payload],{type:'application/json'})})}
-  catch(e){if(e&&e.code==='declined')return;toast(e&&e.code==='rate_limited'?'Окно сохранения уже открыто.':'Не удалось сохранить файл.');return}
-  const V=vLoad();V.packed=V.packed||{};rows.forEach(r=>{V.packed[r.id]=r.sa});delete V.batch;vSave(V);vx=null;
-  const left=noAudio().length;
-  toast(`Пакет скачан: ${rows.length} ${plural(rows.length,'фраза','фразы','фраз')}. Пришлите файл Claude в чат.`+(left?` Осталось озвучить: ${left}.`:' Все фразы озвучены.'));
-  go({name:'voice'});
-}
-function voiceView(){
-  if(!REC.ok)return `<button class="back" data-act="settings">‹ Настройки</button><h1>Озвучка на телефоне</h1><p class="lead">В этом браузере недоступно хранилище записей.</p>`;
-  const V=vLoad(),wm=vMode()==='words',size=wm?(V.wsize||'40'):(V.size||'all'),todo=noAudio(),batch=batchNow(),text=batch.map(p=>p.sa).join('\n'),pk=packedNow().length;
-  const U=wm?['слово','слова','слов']:['фраза','фразы','фраз'];
-  const opt=(v,l)=>`<option value="${v}" ${size===v?'selected':''}>${l}</option>`;
-  return `<button class="back" data-act="settings">‹ Настройки</button>
-    <h1>Озвучка на телефоне</h1>
-    <p class="lead">Яндекс прочитает ${wm?'слова':'фразы'} подряд, вы запишете экран, а приложение само разрежет звук.</p>
-    <div class="row" role="group" aria-label="Что озвучивать"><button class="${wm?'mini':'btn'}" style="margin-top:0" data-act="vmode" data-m="phrases">Фразы</button><button class="${wm?'btn':'mini'}" style="margin-top:0" data-act="vmode" data-m="words">Слова словаря</button></div>
-    ${view.err?`<p class="err" role="alert">${esc(view.err)}</p>`:''}
-    ${pk?`<p class="legend">Скачано в пакеты и ждёт встраивания: ${pk} ${plural(pk,U[0],U[1],U[2])}. Пришлите файлы пакетов Claude в чат. <button class="linkbtn" data-act="vunpack">Вернуть их в очередь</button></p>`:''}
-    ${!todo.length?'<section class="panel"><p class="pt">Озвучивать больше нечего</p><p class="ps">Когда добавите новые фразы, они появятся здесь.</p></section>':`
-    <section class="panel"><p class="pt">Без озвучки: ${todo.length} ${plural(todo.length,U[0],U[1],U[2])}</p>
-      <label for="vsize">Сколько за один проход</label>
-      <select id="vsize" class="inp">${wm?opt('50','По 50')+opt('40','По 40')+opt('20','По 20'):opt('all','Все сразу ('+todo.length+')')+opt('40','По 40')+opt('20','По 20')+opt('10','По 10')}</select>
-      <p class="hint">Если Яндекс читает не весь текст, выберите порцию поменьше.</p></section>
-    <ol class="steps">
-      <li>Включите запись экрана в Пункте управления.</li>
-      <li>Откройте Яндекс — ${batch.length} ${plural(batch.length,U[0],U[1],U[2])} уже ${batch.length===1?'вписано':'вписаны'}. Нажмите на динамик у якутского текста и дождитесь конца.<br>
-        <a class="btn" href="${esc(yurl(text))}" target="_blank" rel="noopener" data-act="vopen">Открыть в Яндексе</a></li>
-      <li>Остановите запись экрана и вернитесь сюда.</li>
-      <li>Выберите видео из Фото.<br><button class="btn" data-act="vupload">Загрузить запись экрана</button></li>
-    </ol>
-    <p class="hint">Если фразы не вставились, <button class="linkbtn" data-act="vcopy">скопируйте их</button> и вставьте в Яндекс вручную.</p>
-    <p class="note">Записи — голос Яндекса. Используйте их только для личной учёбы.</p>`}`;
-}
-function voiceBusyView(){return `<h1>Обрабатываю запись…</h1><p class="lead">Достаю звук и режу его на фразы. Это может занять до минуты.</p>`}
-function voiceReviewView(){
-  const rows=view.rows,c=rows.filter(r=>r.checked&&r.ok).length;
-  return `<button class="back" data-act="voice">‹ Назад</button>
-    <h1>Проверьте нарезку</h1>
-    <p class="lead">Послушайте несколько фраз. Снимите галочку, если звук не совпадает с текстом: такие фразы попадут в следующий проход. Затем скачайте пакет и пришлите файл Claude в чат.</p>
-    ${view.warn?`<p class="legend">${esc(view.warn)}</p>`:''}
-    <ul class="phrases">${rows.map((r,i)=>`<li>
-      <label class="chk"><input type="checkbox" data-vchk="${i}" ${r.checked?'checked':''} ${r.ok?'':'disabled'}><span class="sa" lang="sah">${hl(r.sa)}</span></label>
-      <div class="row"><button class="mini play" data-act="vplay" data-i="${i}">▶ ${r.dur.toFixed(1)} с</button></div>
-      ${r.flag&&r.ok?'<p class="tag">Длина необычная — послушайте</p>':''}${r.ok?'':'<p class="tag">Фраза изменилась, не сохранится</p>'}
-    </li>`).join('')}</ul>
-    <div class="stick"><button class="btn wide" id="vpack" data-act="vpack" ${c?'':'disabled'}>Скачать пакет озвучки (${c})</button>
-      <button class="btn ghost wide" id="vsave" data-act="vsave" ${c?'':'disabled'} style="background:var(--bg)">Сохранить только на этом устройстве</button></div>`;
-}
-
 /* ---------- Утилиты ---------- */
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function hl(s){return esc(s).replace(/([ҕҥөһүҔҤӨҺҮ])/g,'<span class="sp">$1</span>')}
@@ -1005,10 +825,10 @@ let view={name:'home'},sess=null,lastField='f-sa';
 function go(v){view=v;render();window.scrollTo(0,0)}
 
 function render(){
-  document.body.classList.toggle('in-session',view.name==='ex'||view.name==='voicebusy');
-  const tab={marathon:'marathon',sounds:'sounds',dict:'dict',wform:'dict',settings:'settings',voice:'settings',voicereview:'settings'}[view.name]||'home';
+  document.body.classList.toggle('in-session',view.name==='ex');
+  const tab={marathon:'marathon',sounds:'sounds',dict:'dict',wform:'dict',settings:'settings'}[view.name]||'home';
   document.querySelectorAll('.nav button').forEach(b=>b.dataset.tab===tab?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
-  $app.innerHTML=({home,lesson:lessonView,review:reviewView,sounds:soundsView,ex:exView,result:resultView,form:formView,lform:lformView,dialogs:dialogsView,dialog:dialogView,voice:voiceView,voicebusy:voiceBusyView,voicereview:voiceReviewView,dict:dictView,wform:wformView,marathon:marathonView,settings:settingsView})[view.name]();
+  $app.innerHTML=({home,lesson:lessonView,review:reviewView,sounds:soundsView,ex:exView,result:resultView,form:formView,lform:lformView,dialogs:dialogsView,dialog:dialogView,dict:dictView,wform:wformView,marathon:marathonView,settings:settingsView})[view.name]();
   if(view.name==='ex'){const f=document.getElementById('f-type');if(f&&!f.disabled){lastField='f-type';try{f.focus()}catch(x){}}}
 }
 
@@ -1215,7 +1035,7 @@ function dictResults(q){
 }
 function dictView(){
   const q=view.q||'';
-  return `<h1>Словарь</h1><p class="lead">${DICT.length} якутских слов с переводом. Работает без интернета.</p>
+  return `<h1>Словарь</h1><p class="lead">${DICT.length} ${plural(DICT.length,'якутское слово','якутских слова','якутских слов')} с переводом. Работает без интернета.</p>
  <div class="row"><button class="btn ghost" data-act="addw">+ Добавить слово</button></div>
     <input id="f-dict" class="inp sa" lang="sah" placeholder="Слово по-якутски или по-русски" value="${esc(q)}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Поиск по словарю">
     ${keysBar()}
@@ -1255,18 +1075,23 @@ function startMarathon(src,mode){
   const queue=mode==='all'?shuffle(pool).map(p=>({p,type:mType(p)})):mBatch(src);
   if(sess&&sess.timer)clearInterval(sess.timer);
   sess={kind:'marathon',src,mode,queue,i:0,res:{},done:0,run:0,best:0,total0:pool.length,end:mode==='timed'?Date.now()+5*60000:0};
-  if(mode==='timed')sess.timer=setInterval(()=>{const el=document.getElementById('mclock');if(el)el.textContent=clockText()},500);
+  if(mode==='timed')sess.timer=setInterval(()=>{
+    if(!sess||sess.kind!=='marathon'||!sess.timer)return;
+    const el=document.getElementById('mclock');if(el)el.textContent=clockText();
+    const e=sess.queue[sess.i];
+    if(Date.now()>=sess.end&&view.name==='ex'&&!(e&&e.answered)){if(player)player.pause();if(sess.done)finish();else{clearInterval(sess.timer);sess=null;go({name:'marathon'})}}
+  },500);
   go({name:'ex'});
 }
 function clockText(){const left=Math.max(0,Math.ceil((sess.end-Date.now())/1000));return Math.floor(left/60)+':'+String(left%60).padStart(2,'0')}
 function marathonView(){
-  const wa=WORDS.filter(w=>hasAudio(w)).length;
+  const wa=getDItems().filter(w=>hasAudio(w)).length;
   const block=(src,title,sub)=>`<section class="panel"><p class="pt">${title}</p><p class="ps">${sub}</p>
     <div class="row"><button class="btn" data-act="mstart" data-src="${src}" data-mode="endless">Без конца</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="all">Все по разу</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="timed">5 минут</button></div></section>`;
   return `<h1>Марафон</h1>
     <p class="lead">Задания идут подряд, без деления на уроки. Ошибки возвращаются через несколько заданий, пока не ответите верно. Выйти можно в любой момент — результат сохранится.</p>
     ${block('phrases','Фразы',`${ALL.length} ${plural(ALL.length,'фраза','фразы','фраз')} из всех уроков`)}
-    ${block('words','Слова словаря',`${DICT.length} слов. С озвучкой пока ${wa}; остальные зазвучат, когда пришлёте пакеты слов.`)}
+    ${block('words','Слова словаря',`${DICT.length} ${plural(DICT.length,'слово','слова','слов')}, с озвучкой ${wa}.`)}
     <p class="note">«Без конца» — пока не надоест, сначала то, что пора повторить. «Все по разу» — каждое по одному разу в случайном порядке. «5 минут» — сколько успеете.</p>`;
 }
 
@@ -1459,18 +1284,6 @@ document.addEventListener('click',ev=>{
     case 'delrec':if(confirm('Удалить эту запись?')){recDel(b.dataset.id).then(render)}break;
     case 'export':exportData();break;
     case 'import':document.getElementById('backup-file').click();break;
-    case 'exportph':exportPhrases();break;
-    case 'voice':go({name:'voice'});break;
-    case 'vmode':{const V=vLoad();V.mode=b.dataset.m;delete V.batch;vSave(V);view.err='';render();break}
-    case 'vopen':rememberBatch();return;
-    case 'vcopy':{rememberBatch();const t=batchNow().map(p=>p.sa).join('\n');
-      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Фразы скопированы. Вставьте их в левое поле Яндекса.'),()=>toast('Не получилось скопировать в этом окне.'));break}
-    case 'vupload':{getCtx();const V=vLoad();if(!V.batch||!V.batch.length)rememberBatch();document.getElementById('voice-file').click();break}
-    case 'vplay':playSeg(+b.dataset.i);break;
-    case 'vsave':saveVoice();break;
-    case 'vpack':packVoice();break;
-    case 'vunpack':if(confirm('Вернуть скачанные фразы в очередь на озвучку? Файлы пакетов при этом не удаляются.')){const V=vLoad();delete V.packed;delete V.batch;vSave(V);render()}break;
-    case 'importpack':document.getElementById('pack-file').click();break;
     case 'sounds':go({name:'sounds'});break;
     case 'lesson':go({name:'lesson',id:b.dataset.id});break;
     case 'toggleedit':stopRec();view.edit=!view.edit;render();break;
@@ -1498,7 +1311,7 @@ document.addEventListener('click',ev=>{
     case 'quick':{const due=shuffle(dueList()),known=shuffle(ALL.filter(p=>(S.cards[p.id]?.box||0)>=1&&!due.includes(p))),rest=shuffle(ALL.filter(p=>!due.includes(p)&&!known.includes(p)));
       const pick=due.concat(known,rest).slice(0,5);if(pick.length)startSession(pick,'quick');break}
     case 'reset':if(confirm('Сбросить весь прогресс? Это нельзя отменить.')){S=fresh();save();render()}break;
-    case 'quit':if(sess&&sess.kind==='marathon'){if(player)player.pause();finish();break}if(confirm('Выйти? Результаты этой тренировки не сохранятся.')){sess=null;if(player)player.pause();go({name:'home'})}break;
+    case 'quit':if(sess&&sess.kind==='marathon'){if(player)player.pause();if(!sess.done){if(sess.timer)clearInterval(sess.timer);sess=null;go({name:'marathon'})}else finish();break}if(confirm('Выйти? Результаты этой тренировки не сохранятся.')){sess=null;if(player)player.pause();go({name:'home'})}break;
     case 'pick':if(!e.answered){e.picked=+b.dataset.i;mark(e,e.opts[e.picked]===e.correct);if(hasAudio(e.p))play(e.p.id);render()}break;
     case 'tok':{const ti=+b.dataset.ti;if(!e.chosen.includes(ti)){e.chosen.push(ti);render()}break}
     case 'untok':e.chosen.splice(+b.dataset.k,1);render();break;
@@ -1525,15 +1338,6 @@ document.getElementById('audio-file').addEventListener('change',async ev=>{
   pendingAudioId=null;render();
 });
 document.getElementById('backup-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)importData(f)});
-document.getElementById('voice-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)processVoice(f)});
-document.addEventListener('change',ev=>{
-  const t=ev.target;
-  if(t.id==='vsize'){const V=vLoad();if(vMode()==='words')V.wsize=t.value;else V.size=t.value;delete V.batch;vSave(V);view.err='';render();return}
-  if(t.dataset&&t.dataset.vchk!==undefined&&view.rows){view.rows[+t.dataset.vchk].checked=t.checked;
-    const c=view.rows.filter(r=>r.checked&&r.ok).length,bp=document.getElementById('vpack'),bs=document.getElementById('vsave');
-    if(bp){bp.textContent=`Скачать пакет озвучки (${c})`;bp.disabled=!c}if(bs)bs.disabled=!c}
-});
-document.getElementById('pack-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)importPack(f)});
 render();
 hideSplash();
 recInit();
