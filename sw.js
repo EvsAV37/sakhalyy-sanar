@@ -1,5 +1,5 @@
 /* Сахалыы саҥар — офлайн-работа и обновления */
-const VERSION='d1ebfd0f4a';
+const VERSION='f5748a72a0';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'].concat(["./fonts/onest-cyrillic-ext.woff2", "./fonts/onest-cyrillic.woff2", "./fonts/onest-latin.woff2", "./fonts/pt-serif-cyrillic-400-normal.woff2", "./fonts/pt-serif-cyrillic-ext-400-normal.woff2", "./fonts/pt-serif-latin-400-normal.woff2"]);
 const AUDIO=["audio-00491a144b.json", "audio-7944366193.json", "audio-aa9c60e7de.json", "audio-c260ae22d3.json"];
 const CORE_CACHE='core-'+VERSION, AUDIO_CACHE='audio', FONT_CACHE='fonts';
