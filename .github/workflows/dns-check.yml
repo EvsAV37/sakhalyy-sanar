@@ -2,13 +2,21 @@ name: dns-check
 on:
   push:
     branches: [dns-check]
+    paths: ['.github/**']
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dns-check
+          sparse-checkout: .github
       - name: DNS
         run: |
+          exec > >(tee -a result.txt) 2>&1
           D=sakhalyy-sanar.ru
           T=_github-pages-challenge-evsav37.$D
           echo "== Delegation from .ru TLD =="; dig +norec NS $D @a.dns.ripn.net | sed -n '/AUTHORITY/,/^$/p'
@@ -24,5 +32,11 @@ jobs:
           done
       - name: GitHub Pages health check
         run: |
+          exec > >(tee -a result.txt) 2>&1
           sudo gem install github-pages-health-check --no-document >/dev/null 2>&1
           ruby -e 'require "github-pages-health-check"; c=GitHubPages::HealthCheck::Domain.new("sakhalyy-sanar.ru"); puts "valid: #{c.valid?}"; puts "reason: #{c.reason.inspect}" unless c.valid?; puts "ns: #{c.dns.to_a.first(3).map(&:to_s)}" rescue puts $!'
+      - name: Save
+        if: always()
+        run: |
+          git config user.name github-actions; git config user.email actions@github.com
+          git add -f result.txt; git commit -m "Результат проверки DNS"; git push
