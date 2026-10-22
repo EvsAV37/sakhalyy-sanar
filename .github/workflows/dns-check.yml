@@ -1,0 +1,28 @@
+name: dns-check
+on:
+  push:
+    branches: [dns-check]
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DNS
+        run: |
+          D=sakhalyy-sanar.ru
+          T=_github-pages-challenge-evsav37.$D
+          echo "== Delegation from .ru TLD =="; dig +norec NS $D @a.dns.ripn.net | sed -n '/AUTHORITY/,/^$/p'
+          for R in 8.8.8.8 1.1.1.1 9.9.9.9 208.67.222.222; do
+            echo "== Resolver $R =="
+            echo "NS:";  dig +short NS $D @$R
+            echo "A:";   dig +short A $D @$R
+            echo "www:"; dig +short www.$D @$R
+            echo "TXT:"; dig +short TXT $T @$R
+          done
+          for N in buck.ns.cloudflare.com walk.ns.cloudflare.com; do
+            echo "== Authoritative $N =="; dig +short A $D @$N; dig +short TXT $T @$N
+          done
+      - name: GitHub Pages health check
+        run: |
+          sudo gem install github-pages-health-check --no-document >/dev/null 2>&1
+          ruby -e 'require "github-pages-health-check"; c=GitHubPages::HealthCheck::Domain.new("sakhalyy-sanar.ru"); puts "valid: #{c.valid?}"; puts "reason: #{c.reason.inspect}" unless c.valid?; puts "ns: #{c.dns.to_a.first(3).map(&:to_s)}" rescue puts $!'
