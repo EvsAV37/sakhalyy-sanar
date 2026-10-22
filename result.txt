@@ -1,0 +1,89 @@
+== Delegation from .ru TLD ==
+;; flags: qr; QUERY: 1, ANSWER: 0, AUTHORITY: 2, ADDITIONAL: 1
+
+;; AUTHORITY SECTION:
+SAKHALYY-SANAR.ru.	345600	IN	NS	walk.ns.cloudflare.com.
+SAKHALYY-SANAR.ru.	345600	IN	NS	buck.ns.cloudflare.com.
+
+== Resolver 8.8.8.8 ==
+NS:
+walk.ns.cloudflare.com.
+buck.ns.cloudflare.com.
+A:
+185.199.110.153
+185.199.109.153
+185.199.111.153
+185.199.108.153
+www:
+evsav37.github.io.
+185.199.108.153
+185.199.110.153
+185.199.109.153
+185.199.111.153
+TXT:
+"0674f0f0c2765fea14f0ecd3bf90b1"
+== Resolver 1.1.1.1 ==
+NS:
+buck.ns.cloudflare.com.
+walk.ns.cloudflare.com.
+A:
+185.199.109.153
+185.199.111.153
+185.199.110.153
+185.199.108.153
+www:
+evsav37.github.io.
+185.199.109.153
+185.199.111.153
+185.199.108.153
+185.199.110.153
+TXT:
+"0674f0f0c2765fea14f0ecd3bf90b1"
+== Resolver 9.9.9.9 ==
+NS:
+walk.ns.cloudflare.com.
+buck.ns.cloudflare.com.
+A:
+185.199.110.153
+185.199.108.153
+185.199.109.153
+185.199.111.153
+www:
+evsav37.github.io.
+185.199.109.153
+185.199.111.153
+185.199.108.153
+185.199.110.153
+TXT:
+"0674f0f0c2765fea14f0ecd3bf90b1"
+== Resolver 208.67.222.222 ==
+NS:
+buck.ns.cloudflare.com.
+walk.ns.cloudflare.com.
+A:
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+www:
+evsav37.github.io.
+185.199.110.153
+185.199.111.153
+185.199.108.153
+185.199.109.153
+TXT:
+"0674f0f0c2765fea14f0ecd3bf90b1"
+== Authoritative buck.ns.cloudflare.com ==
+185.199.110.153
+185.199.111.153
+185.199.108.153
+185.199.109.153
+"0674f0f0c2765fea14f0ecd3bf90b1"
+== Authoritative walk.ns.cloudflare.com ==
+185.199.110.153
+185.199.108.153
+185.199.111.153
+185.199.109.153
+"0674f0f0c2765fea14f0ecd3bf90b1"
+valid: true
+ns: ["sakhalyy-sanar.ru.\t300\tIN\tA\t185.199.108.153", "sakhalyy-sanar.ru.\t300\tIN\tA\t185.199.110.153", "sakhalyy-sanar.ru.\t300\tIN\tA\t185.199.111.153"]
