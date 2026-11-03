@@ -1,0 +1,51 @@
+# Сахалыы саҥар — выкладка сайта на свой сервер (FirstVDS, Россия) после каждого изменения в main.
+# Сайт: https://sakhalyy-sanar.ru. На сервер уходят только файлы сайта (без src/ и служебных).
+# Ключ — секрет SAKHA_SSH; на сервере он привязан к одной команде (sakha-deploy, см. репозиторий uustarybul,
+# server/sakha) и ничего, кроме выкладки самоучителя, сделать не может.
+name: server
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: server
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HOST: 45.150.10.178
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: deploy
+        env:
+          SAKHA_SSH: ${{ secrets.SAKHA_SSH }}
+        run: |
+          if [ -z "$SAKHA_SSH" ]; then
+            echo "::warning title=server::Секрет SAKHA_SSH не задан — выкладка на сервер пропущена"
+            exit 0
+          fi
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          echo "$SAKHA_SSH" | base64 -d | jq -r .k > ~/.ssh/sakha && chmod 600 ~/.ssh/sakha
+          echo "$HOST $(echo "$SAKHA_SSH" | base64 -d | jq -r .h)" > ~/.ssh/known_hosts
+          git archive --format=tar.gz HEAD -- . ':!src' ':!.github' ':!CNAME' ':!README.md' ':!.gitignore' ':!.nojekyll' \
+            | ssh -i ~/.ssh/sakha -o IdentitiesOnly=yes -o ConnectTimeout=30 -o ServerAliveInterval=30 \
+                  -o StrictHostKeyChecking=yes sakha@"$HOST" "deploy $GITHUB_SHA" | tee out.txt
+          grep -q '^выложена версия' out.txt || { echo "::error title=server::выкладка не прошла"; exit 1; }
+          echo "::notice title=server OK::$(head -1 out.txt)"
+
+      - name: check
+        run: |
+          for p in / /sw.js /manifest.webmanifest; do
+            c=$(curl -s -o /dev/null -m 20 -w '%{http_code}' "https://sakhalyy-sanar.ru$p" || true)
+            echo "https://sakhalyy-sanar.ru$p — $c"
+            [ "$c" = 200 ] || echo "::warning title=check::https://sakhalyy-sanar.ru$p — $c"
+          done
