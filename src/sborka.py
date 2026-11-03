@@ -40,10 +40,13 @@ DOMAIN = 'sakhalyy-sanar.ru'
 MANIFEST = {
     "name": "Сахалыы саҥар — разговорный якутский",
     "short_name": "Сахалыы саҥар",
+    "description": "Самоучитель разговорного якутского: уроки и диалоги с озвучкой, словарь, работает без интернета.",
     "lang": "ru",
+    "id": "./",
     "start_url": "./",
     "scope": "./",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#050B1C",
     "theme_color": "#081128",
     "icons": [

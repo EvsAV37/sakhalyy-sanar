@@ -168,6 +168,7 @@ body.in-session .nav{display:none}
 .sheet.show{display:block}
 .sheet>div{max-width:560px;margin:0 auto}
 .sheet .x{float:right;margin:-6px -8px 0 0}
+.sheet h2{margin:0 0 8px}.sheet ol.steps{margin:8px 0 14px;padding-left:22px;line-height:1.5}.sheet ol.steps li{margin:6px 0}
 .sw{font-family:"PT Serif",Georgia,serif;font-size:1.8rem;line-height:1.2;margin:0 0 6px}
 .dpos{font-size:.82rem;color:var(--sun-ink);font-weight:700;margin-left:6px;white-space:nowrap}
 .en{font-size:.88rem;color:var(--muted);margin-top:6px}
@@ -225,17 +226,26 @@ a.btn,a.mini{text-decoration:none;display:inline-block}
 select.inp{appearance:auto}
 #splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:radial-gradient(120% 75% at 50% 42%,#10244E 0%,#081430 45%,#050B1C 100%);transition:opacity .5s ease}
-#splash img{width:min(56vw,280px);height:auto;margin-top:-5vh}
+/* картинка запуска iPhone — ровный фон без знака (иначе при передаче странице знак двоится); знак проявляется здесь */
+#splash img{width:min(56vw,280px);height:auto;margin-top:-5vh;animation:spIn .45s .05s ease-out both}
 #splash .sp-name{margin-top:18px;font-size:clamp(34px,10.5vw,52px);line-height:1.05;font-weight:600;text-align:center;letter-spacing:-.01em;
   background:linear-gradient(180deg,#FBEBC4 0%,#F0CC84 55%,#D9A85A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 #splash .sp-sub{margin-top:16px;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#A9BCDD;font-weight:500;text-align:center}
+#splash .sp-name{animation:spUp .45s .22s ease-out both}#splash .sp-sub{animation:spUp .45s .36s ease-out both}
+@keyframes spIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes spUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){#splash *{animation:none!important}}
+.spq #splash *{animation:none!important}
 #splash.out{opacity:0;pointer-events:none}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div id="splash" aria-hidden="true"><img src="emblem-dark.webp" alt=""><div class="sp-name">Сахалыы<br>саҥар</div><div class="sp-sub">самоучитель якутского языка</div></div>
-<script>window.SPLASH_AT=Date.now();setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},4000);</script>
+<script>window.SPLASH_AT=Date.now();
+/* перезапуск ради обновления (после паузы): заставка уже на экране — продолжаем её без повторного проявления */
+try{var su=+sessionStorage.getItem('sakha-upd');sessionStorage.removeItem('sakha-upd');if(su&&Date.now()-su<10000){window.SPLASH_AT=su;document.documentElement.classList.add('spq')}}catch(e){}
+setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},4000);</script>
 <main id="app"></main>
 <nav class="nav" aria-label="Разделы"><div>
   <button data-act="home" data-tab="home">Уроки</button>
@@ -565,6 +575,8 @@ function rebuildDict(){DICT.length=DICT_BASE;for(const [k,i] of DMAP)if(i>=DICT_
 const BUILTIN_AUDIO={};
 /* Загрузка озвучки для работы без сети (только сайт): {done,total,ok,err} */
 let AUDIO_DL=null;
+/* Карточка «Установить на телефон» и установка — только у сайта (задаёт PWA-блок); в офлайн-файле пусто */
+let pwaCard=()=>'',pwaInstall=null;
 /* Мини-грамматика к урокам. {слово} — якутский пример. */
 const GRAMMAR={
  l1:['{Дорообо} — одному человеку, {Дорооболоруҥ} — многим или на «вы». Окончание -ҥ часто означает обращение к нескольким людям или вежливое «вы».',
@@ -819,7 +831,9 @@ function reviewPanel(){
   </section>`;
 }
 
-const LOGO_DARK=document.querySelector('#splash img').src;
+const LOGO_DARK=document.querySelector('#splash img').src, SPLASH_TPL=document.getElementById('splash').cloneNode(true);
+/* показать заставку снова (обновление после паузы) */
+function showSplash(){if(document.getElementById('splash'))return;document.documentElement.classList.remove('spq');window.SPLASH_AT=Date.now();document.body.appendChild(SPLASH_TPL.cloneNode(true))}
 function hideSplash(){const e=document.getElementById('splash');if(!e)return;
   setTimeout(()=>{e.classList.add('out');setTimeout(()=>e.remove(),550)},Math.max(0,1500-(Date.now()-(window.SPLASH_AT||0))))}
 function audioDlText(){const a=AUDIO_DL;if(!a||a.ok||!a.total)return '';const pc=Math.floor(a.done/a.total*100);
@@ -830,6 +844,7 @@ function home(){
     <h1 lang="sah">Сахалыы<br>саҥар</h1></div>
     <p class="lead">Разговорный якутский: фразы для знакомства, магазина, дороги и визита в гости.</p><div class="band" aria-hidden="true"></div></header>
     ${at?`<p class="audio-wait" id="audio-dl" role="status">${at}</p>`:''}
+    ${pwaCard()}
     ${reviewPanel()}
     <div class="seg" role="tablist"><button class="${dl?'':'on'}" role="tab" aria-selected="${!dl}" data-act="segph">Фразы</button><button class="${dl?'on':''}" role="tab" aria-selected="${dl}" data-act="dialogs">Диалоги</button></div>
     ${dl?dialogsList():`    <ol class="lessons">${LESSONS.map((l,i)=>{const n=known(l),t=l.phrases.length;return `<li><button class="lesson ${l.custom?'mine':''}" data-act="lesson" data-id="${l.id}">
@@ -842,6 +857,12 @@ function home(){
 }
 
 const APP_AUTHOR='Евсеев А.В.';
+const SITE_URL='https://sakhalyy-sanar.ru/';
+async function shareApp(){
+  const text='Сахалыы саҥар — самоучитель разговорного якутского: уроки и диалоги с озвучкой, словарь, работает без интернета.';
+  if(navigator.share){try{await navigator.share({title:'Сахалыы саҥар',text,url:SITE_URL});return}catch(e){if(e&&e.name==='AbortError')return}}
+  try{await navigator.clipboard.writeText(SITE_URL);toast('Ссылка скопирована: '+SITE_URL)}catch(e){toast(SITE_URL)}
+}
 function settingsView(){
   return `<h1>Настройки</h1>
     <section class="backup" style="border-top:0;padding-top:0;margin-top:10px"><h2 style="margin-top:0">Хранение</h2>
@@ -853,6 +874,9 @@ function settingsView(){
     <section class="backup"><h2 style="margin-top:0">Прогресс</h2>
       <p class="ps">Обнуляет «Знаю N из M», повторение и серию дней. Правки фраз, свои уроки и озвучка останутся.</p>
       <div class="row"><button class="btn ghost" data-act="reset" style="color:var(--bad);border-color:var(--bad)">Сбросить прогресс</button></div></section>
+    <section class="backup"><h2 style="margin-top:0">Поделиться</h2>
+      <p class="ps">Отправьте ссылку на самоучитель друзьям и родным — в мессенджер или по почте.</p>
+      <div class="row"><button class="btn ghost" data-act="shareapp">Поделиться приложением</button></div></section>
     <section class="backup"><h2 style="margin-top:0">О приложении</h2>
  <p class="ps">© 2026${APP_AUTHOR?' '+esc(APP_AUTHOR):''}${/\.$/.test(APP_AUTHOR)?'':'.'} «Сахалыы саҥар» — самоучитель разговорного якутского.</p>
  <p class="ps" style="margin-top:8px">Фразы, диалоги и мини-грамматику составил ИИ; слова и образцы фраз сверены по словарю sakhatyla.ru (CC BY-SA). Сомнительные формы стоит показать носителю языка. Исправить любую фразу можно кнопкой «Править» в уроке.</p>
@@ -1049,7 +1073,7 @@ function gramCard(id){const g=GRAMMAR[id];if(!g)return '';
     <p class="hint">Составлено ИИ, стоит показать носителю языка.</p></details>`}
 function wordsHtml(sa){return sa.split(/([\p{L}-]+)/u).map((part,i)=>i%2?`<span class="w" data-act="word" data-w="${esc(part)}">${hl(part)}</span>`:esc(part)).join('')}
 function openSheet(tok){
-  const r=dictLookup(tok),sh=document.getElementById('sheet');
+  const r=dictLookup(tok),sh=document.getElementById('sheet');sh.setAttribute('aria-label','Слово');
   sh.innerHTML=`<div><button class="x" data-act="sclose" aria-label="Закрыть">×</button>
     <p class="sw" lang="sah">${hl(tok)}</p>
     ${r&&r.known?`<p style="font-size:1.15rem">${esc(r.form)}</p>`:''}
@@ -1059,6 +1083,9 @@ function openSheet(tok){
     <div class="row">${wBtn(r&&r.d?r.d[0]:tok)}${r&&r.d?`<button class="mini" data-act="dsearch" data-q="${esc(r.d[0])}">Открыть в словаре</button>`:''}<a class="mini" href="${esc(styUrl(r&&r.d?r.d[0]:tok))}" target="_blank" rel="noopener">sakhatyla.ru</a></div></div>`;
   sh.classList.add('show');document.getElementById('sheet-bg').classList.add('show');
 }
+function showSheet(html,label){const sh=document.getElementById('sheet');sh.setAttribute('aria-label',label||'Окно');
+  sh.innerHTML=`<div><button class="x" data-act="sclose" aria-label="Закрыть">×</button>${html}</div>`;
+  sh.classList.add('show');document.getElementById('sheet-bg').classList.add('show')}
 function closeSheet(){document.getElementById('sheet').classList.remove('show');document.getElementById('sheet-bg').classList.remove('show')}
 
 /* ---------- Марафон ---------- */
@@ -1284,6 +1311,9 @@ document.addEventListener('click',ev=>{
       toast('Исходный перевод возвращён.');break}
     case 'word':openSheet(b.dataset.w);break;
     case 'sclose':closeSheet();break;
+    case 'shareapp':shareApp();break;
+    case 'install':if(pwaInstall)pwaInstall();break;
+    case 'insthide':try{localStorage.setItem('sakha-install-hide','1')}catch(e){}render();break;
     case 'dsearch':closeSheet();lastField='f-dict';go({name:'dict',q:b.dataset.q});break;
     case 'dialog':{const d={id:b.dataset.id,i:0,mistakes:0};dAdvance(d);go({name:'dialog',d});playSeq(dlgIds(d.id,0,d.i));break}
     case 'dpick':{const d=view.d,L=DIALOGUES.find(x=>x.id===d.id).lines,k=+b.dataset.i;
@@ -1394,6 +1424,32 @@ async function audioSync(){
   }catch(e){}finally{audioSyncing=false}
 }
 addEventListener('online',()=>{if(AUDIO_DL&&!AUDIO_DL.ok){AUDIO_DL.err=false;audioSync()}});
+/* ---------- Установка на телефон (как в «Уустары бул») ----------
+   Android: системное окно «Установить» одной кнопкой. iPhone: подсказка «Поделиться → На экран Домой».
+   Карточка на главной — только в браузере телефона, пока приложение не установлено; «Не сейчас» скрывает её. */
+let installEvt=null;
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const isIOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isAndroid=()=>/Android/.test(navigator.userAgent);
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;if(view.name==='home')render()});
+addEventListener('appinstalled',()=>{installEvt=null;toast('Приложение добавлено на экран.');if(view.name==='home')render()});
+pwaCard=()=>{
+  if(isStandalone()||!(isIOS()||isAndroid()))return '';
+  try{if(localStorage.getItem('sakha-install-hide'))return ''}catch(e){}
+  return `<section class="panel"><p class="pt">Установите на телефон</p>
+    <p class="ps">Значок на экране, запуск без браузера и работа без интернета.${isIOS()?' Лучше сразу: на iPhone прогресс из браузера в приложение сам не переходит.':''}</p>
+    <div class="row" style="margin-top:12px"><button class="btn" data-act="install">Установить</button><button class="btn ghost" data-act="insthide">Не сейчас</button></div></section>`};
+pwaInstall=async()=>{
+  if(installEvt){const ev=installEvt;installEvt=null;try{ev.prompt();await ev.userChoice}catch(e){}render();return}
+  if(isIOS()){showSheet(`<h2>Установить на iPhone</h2><ol class="steps">
+      <li>Нажмите <b>«Поделиться»</b> — квадрат со стрелкой вверх (в Safari — внизу экрана).</li>
+      <li>Выберите <b>«На экран „Домой“»</b>.</li><li>Нажмите <b>«Добавить»</b>.</li></ol>
+      <p class="hint">Если такого пункта нет, откройте sakhalyy-sanar.ru в Safari.</p>
+      <button class="btn ghost wide" data-act="sclose">Понятно</button>`,'Установка');return}
+  showSheet(`<h2>Установить на телефон</h2><ol class="steps"><li>Откройте меню браузера (⋮ вверху справа).</li>
+    <li>Выберите <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b>.</li></ol>
+    <button class="btn ghost wide" data-act="sclose">Понятно</button>`,'Установка');
+};
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});
@@ -1403,7 +1459,23 @@ if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostnam
     if(reg.waiting&&navigator.serviceWorker.controller)show();
     reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;
       w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)show()})});
-    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update().catch(()=>{})});
+    /* Обновление после паузы. iPhone не перезапускает свёрнутое приложение, а «размораживает» старую страницу.
+       Свёрнуто 30 минут и дольше, открыта главная, ничего не вводится — показываем заставку, проверяем новую версию
+       (не дольше 3,5 с). Есть — перезапуск под той же заставкой; нет — заставка уходит. Плашка «Обновить» остаётся. */
+    let hiddenAt=0;
+    /* пока качается озвучка, новая версия включится только после загрузки — ждать её под заставкой не будем */
+    const idle=()=>view.name==='home'&&!recState&&!document.getElementById('sheet').classList.contains('show')&&!(AUDIO_DL&&!AUDIO_DL.ok&&!AUDIO_DL.err);
+    const waitNew=ms=>new Promise(res=>{const t0=Date.now();(function poll(){
+      if(reg.waiting)return res(reg.waiting);if(Date.now()-t0>ms||!reg.installing&&Date.now()-t0>800)return res(null);setTimeout(poll,150)})()});
+    document.addEventListener('visibilitychange',async()=>{
+      if(document.visibilityState==='hidden'){hiddenAt=Date.now();return}
+      const away=hiddenAt?Date.now()-hiddenAt:0;hiddenAt=0;
+      if(away<(window.SAKHA_UPD_AFTER!=null?window.SAKHA_UPD_AFTER:30*60*1000)||!navigator.serviceWorker.controller||!idle()){reg.update().catch(()=>{});return}
+      showSplash();
+      let w=null;try{await Promise.race([reg.update(),new Promise(r=>setTimeout(r,2500))]);w=await waitNew(3500-500)}catch(e){}
+      if(w&&idle()){try{sessionStorage.setItem('sakha-upd',String(window.SPLASH_AT))}catch(e){}w.postMessage('skip');setTimeout(hideSplash,4000);return}
+      hideSplash();
+    });
   }).catch(()=>{});
   if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
 }
