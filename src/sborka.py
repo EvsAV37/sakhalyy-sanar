@@ -15,7 +15,7 @@
 и создаётся при сборке (телефон не даёт прикреплять такое расширение).
 
 Запуск:
-  python3 sborka.py site      → папка build/site/  (версия для сайта, PWA)
+  python3 sborka.py site      → папка build/site/  (версия для сайта, PWA; озвучка — MP3 в a/ + индекс)
   python3 sborka.py offline   → build/sakhalyy-sanar-offline.html (один файл)
   python3 sborka.py both      → и то и другое (по умолчанию)
 """
@@ -92,16 +92,46 @@ def with_dict(html):
     return html.replace('/*DICT*/[]', json.dumps(data, ensure_ascii=False, separators=(',', ':')), 1)
 
 
+def site_audio(out):
+    """Озвучка для сайта: каждая запись — обычный MP3 в папке a/ (имя — отпечаток содержимого, одинаковые
+    записи хранятся один раз) и индекс audio-<отпечаток>.json: {id: {sa, f}}. Возвращает [имя индекса] —
+    его подставляют в метку /*AUDIO_FILES*/[] в app.html и sw.js. Без озвучки — пустой список."""
+    audio = {}
+    for name in audio_files():
+        with open(os.path.join(BASE, 'ozvuchka', name), encoding='utf-8') as f:
+            audio.update(json.load(f))
+    if not audio:
+        return []
+    os.makedirs(os.path.join(out, 'a'))
+    index, made = {}, set()
+    for key, v in audio.items():
+        src = audio.get(v['r']) if 'r' in v else v   # ссылка на ту же запись под другим ключом
+        if not src or 'd' not in src:
+            continue
+        assert src.get('t', 'audio/mpeg') == 'audio/mpeg', f'{key}: не MP3'
+        data = base64.b64decode(src['d'])
+        fname = 'a/' + hashlib.sha1(data).hexdigest()[:12] + '.mp3'
+        if fname not in made:
+            with open(os.path.join(out, fname), 'wb') as f:
+                f.write(data)
+            made.add(fname)
+        index[key] = {'sa': v['sa'], 'f': fname}
+    body = json.dumps(index, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
+    name = 'audio-' + hashlib.md5(body.encode()).hexdigest()[:10] + '.json'
+    with open(os.path.join(out, name), 'w', encoding='utf-8') as f:
+        f.write(body)
+    print(f'озвучка: {len(index)} записей, файлов MP3 {len(made)}')
+    return [name]
+
+
 def build_site():
     out = os.path.join(BUILD, 'site')
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(out)
-    files = audio_files()
+    files = site_audio(out)
     html = with_emblems(with_dict(read('app.html'))).replace('/*AUDIO_FILES*/[]', json.dumps(files), 1)
     with open(os.path.join(out, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
-    for name in files:
-        shutil.copy(os.path.join(BASE, 'ozvuchka', name), os.path.join(out, name))
     for name in ASSETS:
         shutil.copy(os.path.join(BASE, name), os.path.join(out, name))
     shutil.copytree(os.path.join(BASE, FONTS_DIR), os.path.join(out, FONTS_DIR))

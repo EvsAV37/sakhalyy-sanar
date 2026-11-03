@@ -561,8 +561,10 @@ function rebuildDict(){DICT.length=DICT_BASE;for(const [k,i] of DMAP)if(i>=DICT_
   d.fk=k;d.oi=i;d.fx=!!f;d.ex=f&&f.ex||'';d[1]=f&&f.pos||o[0];d[2]=f?f.ru:o[1]}
  DITEMS=null;
  (E.words||[]).forEach(w=>{const r=[w.sa,w.pos||'',w.ru,w.ex||''];r.u=w.id;const k=w.sa.toLowerCase();if(!DMAP.has(k))DMAP.set(k,DICT.length);DICT.push(r)})}
-/* Встроенная озвучка: {id:{sa,t,d(base64)}} */
+/* Встроенная озвучка: в офлайн-файле {id:{sa,t,d(base64)}}, на сайте {id:{sa,f:'a/….mp3'}} */
 const BUILTIN_AUDIO={};
+/* Загрузка озвучки для работы без сети (только сайт): {done,total,ok,err} */
+let AUDIO_DL=null;
 /* Мини-грамматика к урокам. {слово} — якутский пример. */
 const GRAMMAR={
  l1:['{Дорообо} — одному человеку, {Дорооболоруҥ} — многим или на «вы». Окончание -ҥ часто означает обращение к нескольким людям или вежливое «вы».',
@@ -643,7 +645,7 @@ let S=load();
 const META='sakha-meta-v1';
 function metaGet(){try{return JSON.parse(localStorage.getItem(META))||{}}catch(e){return {}}}
 function metaSet(n,at){const m=metaGet();m[n]=at;try{localStorage.setItem(META,JSON.stringify(m))}catch(e){}}
-function touch(n){metaSet(n,Date.now());cloudQueue(n)}
+function touch(n){metaSet(n,Date.now())}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}touch('progress')}
 
 /* ---------- Правки пользователя ---------- */
@@ -700,15 +702,18 @@ function blobToDataURL(b){return new Promise((res,rej)=>{const r=new FileReader(
 function b64ToBlob(b64,type){const bin=atob(b64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:type||'audio/webm'})}
 let seqToken=0;
 async function playSeq(ids){const my=++seqToken;for(const id of ids){if(my!==seqToken)return;await play(id,true)}}
-async function play(id,wait){
-  if(String(id).startsWith('dw:')){const w=WMAP.get(id.slice(3).toLowerCase());if(w)return play(w.id,wait)}
+/* rate — скорость: 0.75 для «Медленно». Тогда играет <audio> с сохранением высоты голоса; обычная скорость — через Web Audio. */
+async function play(id,wait,rate){
+  if(String(id).startsWith('dw:')){const w=WMAP.get(id.slice(3).toLowerCase());if(w)return play(w.id,wait,rate)}
   try{const c=getCtx();if(c.resume)c.resume()}catch(e){}
   let blob;try{blob=await recGet(id)}catch(e){}
   if(!blob){const p=ALL.find(x=>x.id===id)||WORDS.find(x=>x.id===id)||DLINES.find(x=>x.id===id)||(String(id).startsWith('dw:')?{id,sa:id.slice(3)}:null),bi=biGet(id);
-    if(p&&bi&&bi.sa===p.sa)blob=b64ToBlob(bi.d,bi.t);
-    else if(p&&(id[0]==='w'||p.dl)){const al=wordAlias(p);if(al&&al!==id)return play(al,wait)}}
-  if(!blob){if(!wait)toast('Запись не найдена.');return}
+    if(p&&bi&&bi.sa===p.sa)blob=bi.f?await fetch(bi.f).then(r=>r.ok?r.blob():null).catch(()=>null):b64ToBlob(bi.d,bi.t);
+    else if(p&&(id[0]==='w'||p.dl)){const al=wordAlias(p);if(al&&al!==id)return play(al,wait,rate)}}
+  if(!blob){if(!wait)toast(AUDIO_DL&&!AUDIO_DL.ok?'Озвучка ещё загружается — нужен интернет.':'Запись не найдена.');return}
   if(player){try{player.pause()}catch(e){}}
+  if(curSrc){try{curSrc.stop()}catch(e){}}
+  if(rate&&rate!==1)try{await playEl(blob,rate,wait);return}catch(e){}
   try{const c=getCtx();const ab=await decodeAudio(await new Response(blob).arrayBuffer());
     if(curSrc){try{curSrc.stop()}catch(e){}}
     curSrc=c.createBufferSource();curSrc.buffer=ab;curSrc.connect(c.destination);
@@ -716,6 +721,9 @@ async function play(id,wait){
   try{const url=URL.createObjectURL(blob);player=new Audio(url);player.onended=()=>URL.revokeObjectURL(url);await player.play()}
   catch(e){try{player=new Audio(await blobToDataURL(blob));await player.play()}catch(e2){toast('Не получилось воспроизвести запись в этом окне. Попробуйте открыть ссылку в браузере телефона.')}}
 }
+function playEl(blob,rate,wait){const url=URL.createObjectURL(blob),a=new Audio(url);player=a;a.playbackRate=rate;
+  a.preservesPitch=a.mozPreservesPitch=a.webkitPreservesPitch=true;
+  return a.play().then(()=>new Promise(r=>{a.onended=a.onpause=()=>{URL.revokeObjectURL(url);r()};if(!wait)r()}))}
 async function startRec(id){
   if(recState){stopRec();return}
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){toast('Микрофон здесь недоступен. Загрузите запись файлом.');return}
@@ -736,11 +744,8 @@ let toastTimer=null;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),4500)}
 
 /* ---------- Резервная копия ---------- */
-async function getCap(name){try{return window.claude&&window.claude.use?await window.claude.use(name):null}catch(e){return null}}
-/* В Claude — окно сохранения Claude; в скачанной копии — обычное скачивание браузера. */
+/* Установленное приложение — окно «Поделиться» (сохранить в Файлы); иначе — обычное скачивание браузера. */
 async function getSaver(){
-  const cap=await getCap('downloads');if(cap)return cap;
-  if(window.claude)return null;
   const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
   if(standalone&&navigator.canShare){return {save:async({filename,data})=>{const f=new File([data],filename,{type:data.type||'application/json'});
     if(navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:filename});return {status:'saved'}}catch(e){if(e&&e.name==='AbortError')throw {code:'declined'};throw e}}
@@ -754,7 +759,6 @@ async function exportData(){
   const d=new Date(),ymd=d.toISOString().slice(0,10);
   const payload=JSON.stringify({app:'sakha-phrases',version:1,date:d.toISOString(),progress:S,edits:E,recordings});
   const dl=await getSaver();
-  if(!dl){toast('Сохранение файла недоступно в этом окне. Откройте приложение по ссылке в Claude.');return}
   try{await dl.save({filename:`sahalyy-sanar-${ymd}.json`,data:new Blob([payload],{type:'application/json'})});
     S.lastBackup=today();save();render();toast('Резервная копия сохранена.')}
   catch(e){if(e&&e.code==='declined')return;toast(e&&e.code==='rate_limited'?'Окно сохранения уже открыто.':'Не удалось сохранить файл.')}
@@ -776,37 +780,6 @@ let actx=null, curSrc=null;
 function vLoad(){try{return JSON.parse(localStorage.getItem(VKEY))||{}}catch(e){return {}}}
 function vSave(v){try{localStorage.setItem(VKEY,JSON.stringify(v))}catch(e){}touch('voice')}
 
-/* ---------- Облако: личное хранилище в Claude (если доступно) ---------- */
-var CLOUD=null,cloudPending=new Set(),cloudTimer=null,cloudState='';
-function cloudVal(n){return n==='progress'?S:n==='edits'?E:vLoad()}
-function cloudQueue(n){if(!CLOUD)return;cloudPending.add(n);clearTimeout(cloudTimer);cloudTimer=setTimeout(cloudFlush,1200)}
-async function cloudFlush(){
-  if(!CLOUD)return;const names=[...cloudPending];cloudPending.clear();
-  for(const n of names){const body={v:JSON.parse(JSON.stringify(cloudVal(n))),at:metaGet()[n]||Date.now()};
-    try{await CLOUD.ref(n).set(body);cloudState='ok'}catch(e){try{await new Promise(r=>setTimeout(r,800+Math.random()*800));await CLOUD.ref(n).set(body);cloudState='ok'}catch(e2){cloudState='Ошибка записи: '+((e2&&(e2.code||e2.message))||'неизвестно')}}}
-}
-async function cloudInit(){
-  if(!window.claude)return;
-  const db=await getCap('db'),user=await getCap('user');
-  if(!db||!user){cloudState='Хранилище Claude недоступно в этом окне ('+(!db?'db':'user')+')';render();return}
-  let uid=null;try{uid=await user.id()}catch(e){cloudState='Не удалось узнать пользователя: '+((e&&(e.code||e.message))||'');render();return}
-  if(!uid){cloudState='Не удалось узнать пользователя';render();return}
-  const ref=n=>db.doc('data/users/'+uid+'/'+n);
-  let snaps;try{snaps=await Promise.all(['progress','edits','voice'].map(n=>ref(n).get()))}catch(e){cloudState='Ошибка чтения: '+((e&&(e.code||e.message))||'неизвестно');render();return}
-  cloudState='ok';
-  CLOUD={ref};const meta=metaGet();let changed=false;
-  ['progress','edits','voice'].forEach((n,i)=>{
-    const sn=snaps[i],d=sn.exists?sn.data():null,cAt=d&&d.at||0,lAt=meta[n]||0;
-    if(d&&d.v&&cAt>=lAt){const v=JSON.parse(JSON.stringify(d.v));
-      if(n==='progress'){S=Object.assign(fresh(),v);try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-      else if(n==='edits'){E=Object.assign(freshE(),v);try{localStorage.setItem(EKEY,JSON.stringify(E))}catch(e){}}
-      else{try{localStorage.setItem(VKEY,JSON.stringify(v))}catch(e){}}
-      metaSet(n,cAt);changed=true}
-    else if(lAt>cAt||!d)cloudQueue(n);
-  });
-  if(changed)rebuild();
-  if(view.name!=='ex')render();
-}
 function biGet(id){let b=BUILTIN_AUDIO[id];if(b&&b.r){const t=BUILTIN_AUDIO[b.r];b=t?{sa:b.sa,t:t.t,d:t.d}:null}return b}
 function hasOwnAudio(p){const b=biGet(p.id);return REC.has.has(p.id)||!!(b&&b.sa===p.sa)}
 function normW(t){return t.toLowerCase().replace(/[^\p{L} ]/gu,'').trim()}
@@ -849,11 +822,14 @@ function reviewPanel(){
 const LOGO_DARK=document.querySelector('#splash img').src;
 function hideSplash(){const e=document.getElementById('splash');if(!e)return;
   setTimeout(()=>{e.classList.add('out');setTimeout(()=>e.remove(),550)},Math.max(0,1500-(Date.now()-(window.SPLASH_AT||0))))}
+function audioDlText(){const a=AUDIO_DL;if(!a||a.ok||!a.total)return '';const pc=Math.floor(a.done/a.total*100);
+  return `Озвучка для работы без сети: ${pc}%${a.err?' — продолжится, когда появится интернет':''}`}
 function home(){
-  const dl=view.seg==='dialogs';
+  const dl=view.seg==='dialogs',at=audioDlText();
   return `<header class="hero"><div class="brand"><img class="logo logo-d" src="${LOGO_DARK}" alt=""><img class="logo logo-l" src="emblem-light.webp" alt="">
     <h1 lang="sah">Сахалыы<br>саҥар</h1></div>
     <p class="lead">Разговорный якутский: фразы для знакомства, магазина, дороги и визита в гости.</p><div class="band" aria-hidden="true"></div></header>
+    ${at?`<p class="audio-wait" id="audio-dl" role="status">${at}</p>`:''}
     ${reviewPanel()}
     <div class="seg" role="tablist"><button class="${dl?'':'on'}" role="tab" aria-selected="${!dl}" data-act="segph">Фразы</button><button class="${dl?'on':''}" role="tab" aria-selected="${dl}" data-act="dialogs">Диалоги</button></div>
     ${dl?dialogsList():`    <ol class="lessons">${LESSONS.map((l,i)=>{const n=known(l),t=l.phrases.length;return `<li><button class="lesson ${l.custom?'mine':''}" data-act="lesson" data-id="${l.id}">
@@ -867,11 +843,9 @@ function home(){
 
 const APP_AUTHOR='Евсеев А.В.';
 function settingsView(){
-  const st=CLOUD&&cloudState==='ok';
   return `<h1>Настройки</h1>
     <section class="backup" style="border-top:0;padding-top:0;margin-top:10px"><h2 style="margin-top:0">Хранение</h2>
-      <p class="ps">${st?'Прогресс, правки и свои уроки сохраняются в вашем личном хранилище Claude и не пропадают при перезапуске.':'Прогресс, ваши слова и записи хранятся на этом устройстве. Время от времени сохраняйте резервную копию в файл, чтобы не потерять их.'}</p>
-      ${cloudState&&cloudState!=='ok'?`<p class="legend">Состояние: ${esc(cloudState)}</p>`:''}</section>
+      <p class="ps">Прогресс, ваши слова и записи хранятся на этом устройстве. Время от времени сохраняйте резервную копию в файл, чтобы не потерять их.</p></section>
     <section class="backup"><h2 style="margin-top:0">Резервная копия</h2>
       <p class="ps">Файл с прогрессом, правками, вашими словами и записями. Через него данные переносятся на другое устройство или в установленное приложение.${S.lastBackup!==null?` Последняя копия: ${fmtDay(S.lastBackup)}.`:' Копий ещё не было.'}</p>
       <div class="row"><button class="btn" data-act="export">Сохранить в файл</button><button class="btn ghost" data-act="import">Загрузить из файла</button></div></section>
@@ -891,7 +865,7 @@ function lessonView(){
   const list=l.phrases.length?`<ul class="phrases">${l.phrases.map(p=>`<li>
       <p class="psa sa" lang="sah">${ed?hl(p.sa):wordsHtml(p.sa)}</p><p class="pru">${esc(p.ru)}</p>${p.note?`<p class="pnote">${esc(p.note)}</p>`:''}
       ${p.edited?'<p class="tag">Изменено вами</p>':''}${p.mine&&!l.custom?'<p class="tag">Ваша фраза</p>':''}
-      ${ed?'':`<div class="row">${hasAudio(p)?`<button class="mini" data-act="play" data-id="${p.id}" aria-label="Слушать запись">▶ Слушать</button>`:''}</div>`}
+      ${ed?'':`<div class="row">${hasAudio(p)?`<button class="mini" data-act="play" data-id="${p.id}" aria-label="Слушать запись">▶ Слушать</button>${slowBtn(p.id)}`:''}</div>`}
       ${ed?`<div class="row"><button class="mini" data-act="editp" data-id="${p.id}">Изменить</button>${p.edited?`<button class="mini" data-act="revertp" data-id="${p.id}">Вернуть исходную</button>`:''}<button class="mini danger" data-act="delp" data-id="${p.id}">Удалить</button></div>
       ${REC.ok?`<div class="row">${recState&&recState.id===p.id?`<button class="mini rec" data-act="rec" data-id="${p.id}">■ Остановить запись</button>`
         :`<button class="mini" data-act="rec" data-id="${p.id}" ${recState?'disabled':''}>● ${REC.has.has(p.id)?'Перезаписать':'Записать'}</button><button class="mini" data-act="upaudio" data-id="${p.id}">Загрузить аудио</button>${REC.has.has(p.id)?`<button class="mini" data-act="play" data-id="${p.id}">▶</button><button class="mini danger" data-act="delrec" data-id="${p.id}">Удалить запись</button>`:''}`}</div>`:''}`:''}
@@ -1007,7 +981,7 @@ function dOpts(d){
 function dialogView(){
   const d=view.d, D=DIALOGUES.find(x=>x.id===d.id), L=D.lines, done=d.i>=L.length;
   if(!done&&!d.opts)d.opts=dOpts(d);
-  const shown=L.slice(0,d.i).map((l,k)=>{const it=DLINES.find(x=>x.id===d.id+'l'+k);return `<li class="line ${l[0]}"><span class="who">${l[0]==='b'?'Вы':'Собеседник'}</span><span class="sa" lang="sah">${hl(l[1])}</span><span class="ru">${esc(l[2])}</span>${it&&hasAudio(it)?`<button class="mini" style="margin-top:6px" data-act="play" data-id="${it.id}" aria-label="Слушать реплику">▶</button>`:''}</li>`}).join('');
+  const shown=L.slice(0,d.i).map((l,k)=>{const it=DLINES.find(x=>x.id===d.id+'l'+k);return `<li class="line ${l[0]}"><span class="who">${l[0]==='b'?'Вы':'Собеседник'}</span><span class="sa" lang="sah">${hl(l[1])}</span><span class="ru">${esc(l[2])}</span>${it&&hasAudio(it)?`<button class="mini" style="margin-top:6px" data-act="play" data-id="${it.id}" aria-label="Слушать реплику">▶</button> <button class="mini" style="margin-top:6px" data-act="slow" data-id="${it.id}" aria-label="Слушать медленно" title="Медленно">🐢</button>`:''}</li>`}).join('');
   const turn=done?`<div class="turn"><p class="pt">Диалог пройден${d.mistakes?`, ошибок: ${d.mistakes}`:' без ошибок'}.</p>
       <div class="row"><button class="btn ghost" data-act="dialog" data-id="${d.id}">Пройти ещё раз</button>${(()=>{const n=DIALOGUES[DIALOGUES.findIndex(x=>x.id===d.id)+1];return n?`<button class="btn" data-act="dialog" data-id="${n.id}">Следующий</button>`:''})()}<button class="btn ghost" data-act="dialogs">Все диалоги</button></div></div>`
     :`<div class="turn"><p class="ask" style="margin-top:0">Ваша реплика. По смыслу: «${esc(L[d.i][2])}»</p>
@@ -1039,7 +1013,8 @@ function dictSearch(q){
 }
 function dkey(sa){const x=WMAP.get(String(sa).toLowerCase());return x?x.id:'dw:'+sa}
 function dSound(k){if(REC.has.has(k))return true;if(k.startsWith('dw:'))return !!BUILTIN_AUDIO[k];const x=WORDS.find(w=>w.id===k);return !!x&&hasAudio(x)}
-function playBtn(k){return `<button class="mini" data-act="play" data-id="${esc(k)}">▶ Слушать</button>`}
+function playBtn(k){return `<button class="mini" data-act="play" data-id="${esc(k)}">▶ Слушать</button>${slowBtn(k)}`}
+function slowBtn(k,c){return ` <button class="mini${c?' '+c:''}" data-act="slow" data-id="${esc(k)}" aria-label="Слушать медленно">🐢 Медленно</button>`}
 function wBtn(w){const k=dkey(w);return dSound(k)?playBtn(k):''}
 function recRow(k){if(!REC.ok)return '';
  if(recState&&recState.id===k)return `<div class="row"><button class="mini rec" data-act="rec" data-id="${esc(k)}">■ Остановить запись</button></div>`;
@@ -1225,7 +1200,7 @@ function exView(){
   }
   const fb=e.answered?`<div class="fb ${e.ok?'ok':'bad'}" role="status"><div>
       <p class="fbt">${e.near?'Почти верно — засчитано':e.ok?'Верно':'Правильный ответ'}</p>
-      <p class="fbp"><span class="sa" lang="sah">${hl(p.sa)}</span> — ${esc(p.ru)}</p>${hasAudio(p)?`<button class="mini play" data-act="play" data-id="${p.id}">▶ Слушать</button>`:''}
+      <p class="fbp"><span class="sa" lang="sah">${hl(p.sa)}</span> — ${esc(p.ru)}</p>${hasAudio(p)?`<button class="mini play" data-act="play" data-id="${p.id}">▶ Слушать</button>${slowBtn(p.id,'play')}`:''}
       <button class="btn wide" data-act="next">Дальше</button></div></div>`:'';
   const M=sess.kind==='marathon';
   const mpct=M&&sess.mode==='all'?Math.round(Object.keys(sess.res).length/sess.total0*100):pct;
@@ -1316,6 +1291,7 @@ document.addEventListener('click',ev=>{
       else{d.wrong.push(k);d.mistakes++;render()}
       break}
     case 'play':play(b.dataset.id);break;
+    case 'slow':play(b.dataset.id,false,0.75);break;
     case 'rec':startRec(b.dataset.id);break;
     case 'upaudio':pendingAudioId=b.dataset.id;document.getElementById('audio-file').click();break;
     case 'delrec':if(confirm('Удалить эту запись?')){recDel(b.dataset.id).then(render)}break;
@@ -1378,7 +1354,6 @@ document.getElementById('backup-file').addEventListener('change',ev=>{const f=ev
 render();
 hideSplash();
 recInit();
-cloudInit();
 </script>
 
 <!--PWA-->
@@ -1389,10 +1364,36 @@ cloudInit();
 <script>
 /* ---------- PWA: озвучка отдельными файлами, офлайн и обновления ---------- */
 const AUDIO_FILES=/*AUDIO_FILES*/[];
+const AUDIO_CACHE='audio-mp3';
 Promise.all(AUDIO_FILES.map(f=>fetch(f).then(r=>{if(!r.ok)throw 0;return r.json()}))).then(parts=>{
   parts.forEach(p=>Object.assign(BUILTIN_AUDIO,p));
   if(view.name!=='ex'&&view.name!=='form'&&view.name!=='wform'&&view.name!=='lform')render();
+  audioSync();
 }).catch(()=>toast('Не удалось загрузить озвучку. Откройте приложение с интернетом один раз, чтобы она сохранилась.'));
+/* Озвучка — отдельные MP3 (имя = отпечаток содержимого). Качаются в фоне, по 6 сразу, в кеш для работы без сети. */
+let audioSyncing=false;
+function audioShow(){const e=document.getElementById('audio-dl'),t=audioDlText();
+  if(e){if(t)e.textContent=t;else e.remove()}else if(t&&view.name==='home')render()}
+async function audioSync(){
+  if(audioSyncing||!('caches' in window))return;audioSyncing=true;
+  try{
+    const files=[...new Set(Object.values(BUILTIN_AUDIO).map(v=>v.f).filter(Boolean))],want=new Set(files);
+    const c=await caches.open(AUDIO_CACHE),have=new Set();
+    for(const r of await c.keys()){const f=new URL(r.url).pathname.replace(/^.*\/(a\/[^/]+)$/,'$1');if(want.has(f))have.add(f);else await c.delete(r)}
+    const todo=files.filter(f=>!have.has(f));
+    AUDIO_DL={done:files.length-todo.length,total:files.length,ok:!todo.length,err:false};
+    if(!todo.length)return;
+    audioShow();let shown=0;
+    const tick=()=>{const t=Date.now();if(t-shown>250){shown=t;audioShow()}};
+    const worker=async()=>{while(todo.length&&!AUDIO_DL.err){const f=todo.shift();
+      try{const r=await fetch(f,{cache:'no-store'});if(!r.ok)throw 0;await c.put(f,r);AUDIO_DL.done++;tick()}
+      catch(e){todo.unshift(f);AUDIO_DL.err=true}}};
+    await Promise.all(Array.from({length:6},worker));
+    if(!todo.length){AUDIO_DL.ok=true;audioShow();toast('Озвучка сохранена: приложение работает без интернета.')}
+    else audioShow();
+  }catch(e){}finally{audioSyncing=false}
+}
+addEventListener('online',()=>{if(AUDIO_DL&&!AUDIO_DL.ok){AUDIO_DL.err=false;audioSync()}});
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});
