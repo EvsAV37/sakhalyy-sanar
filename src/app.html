@@ -105,6 +105,26 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mini.danger{color:var(--bad)}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .row .btn{margin-top:0}
+/* ряд кнопок одной ширины: что не влезло в строку — растягивается на всю ширину, без «лесенки» */
+.row.fill>.btn{flex:1 1 auto;text-align:center}
+/* настройки */
+.backup h2{margin-top:0}.set-first{border-top:0!important;padding-top:0!important;margin-top:10px!important}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:4px 0 12px;font-size:.95rem}.kv dt{color:var(--muted)}.kv dd{margin:0}
+.kv .hl{color:var(--sun-ink);font-weight:700}.kv .mu,.ps.mu{color:var(--muted)}
+.danger-zone{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.lic{margin-top:10px}.lic summary{cursor:pointer;color:var(--link);font-weight:700;padding:6px 0}
+.lic[open] summary{margin-bottom:4px}
+/* точка «есть обновление» на вкладке «Настройки» */
+.nav button.dot{position:relative}.nav button.dot::after{content:'';position:absolute;top:7px;left:calc(50% + 9px);width:8px;height:8px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 2px var(--nav-bg)}
+/* © под вкладками — только где есть нижняя полоса iPhone (на остальных высота 0) */
+.nav .nav-copy{display:block;max-width:none;height:env(safe-area-inset-bottom,0px);overflow:hidden;text-align:center;font-size:10.5px;line-height:13px;color:var(--muted);opacity:.75;letter-spacing:.02em}
+/* полоса под строкой состояния: при прокрутке текст не уходит под часы */
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);opacity:0;transition:opacity .2s;pointer-events:none}
+html.scrolled body::before{opacity:.97}
+.inp::placeholder{font-family:"Onest",system-ui,sans-serif;font-size:.95rem}
+/* загрузка озвучки на главной */
+.adl-bar{display:block;height:4px;margin-top:6px;border-radius:2px;background:var(--line);overflow:hidden}.adl-bar span{display:block;height:100%;background:var(--sun);border-radius:2px;transition:width .3s}
 .head{display:flex;justify-content:space-between;align-items:center;gap:12px}
 
 .lessons{list-style:none;margin:0;padding:0}
@@ -127,7 +147,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .psa{font-size:1.45rem;line-height:1.3}
 .pru{margin-top:2px}
 .pnote{font-size:.92rem;color:var(--muted);margin-top:4px}
-.stick{position:sticky;bottom:calc(53px + env(safe-area-inset-bottom,0px));margin:0 -18px;padding:26px 18px 14px;
+.stick{position:sticky;bottom:calc(58px + env(safe-area-inset-bottom,0px));margin:0 -18px;padding:26px 18px 14px;
   background:linear-gradient(to bottom,transparent,var(--bg) 24px)}
 
 label{display:block;font-weight:700;margin-top:18px}
@@ -135,12 +155,12 @@ label small{font-weight:400;color:var(--muted);font-size:.9rem}
 .inp{width:100%;margin-top:6px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit}
 .inp.sa{font-family:"PT Serif",Georgia,serif;font-size:1.25rem}
 .inp:focus{border-color:var(--accent);outline:none}
-.keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.key{min-width:44px;height:44px;font-family:"PT Serif",Georgia,serif;font-size:1.3rem;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+.keys{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px;max-width:340px}
+.key{min-width:0;height:44px;font-family:"PT Serif",Georgia,serif;font-size:1.3rem;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
 .hint{font-size:.88rem;color:var(--muted);margin-top:6px}
 .err{color:var(--bad);margin-top:14px;font-weight:700}
 
-.nav{position:fixed;left:0;right:0;bottom:0;background:var(--nav-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--nav-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:5}
 .nav div{max-width:560px;margin:0 auto;display:flex}
 .nav button{flex:1;background:none;border:0;padding:16px 4px;color:var(--muted);font-weight:700}
 .nav button[aria-current="page"]{color:var(--sun-ink);box-shadow:inset 0 3px 0 var(--sun)}
@@ -153,7 +173,7 @@ body.in-session .nav{display:none}
 .ask{color:var(--muted);margin-top:28px;font-weight:700}
 .prompt{font-size:1.9rem;line-height:1.25;margin:6px 0 22px}
 .prompt.ru{font-family:inherit;font-size:1.5rem}
-.opt{display:block;width:100%;text-align:left;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.opt{display:flex;align-items:center;min-height:56px;width:100%;text-align:left;padding:12px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
 .opt.sa{font-size:1.2rem}
 .opt.right{border-color:var(--ok);background:var(--ok-soft)}
 .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
@@ -194,18 +214,20 @@ mark.miss{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:
 
 .sounds{list-style:none;padding:0;margin:18px 0 0}
 .sounds li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
-.glyph{flex:none;min-width:64px;white-space:nowrap;font-family:"PT Serif",Georgia,serif;font-size:2.2rem;line-height:1;color:var(--accent)}
+.glyph{flex:none;width:76px;white-space:nowrap;font-family:"PT Serif",Georgia,serif;font-size:2.2rem;line-height:1;color:var(--accent)}
+.glyph.long{font-size:1.6rem;line-height:1.25}
 .sname{font-weight:700}
 .sex{margin-top:4px;color:var(--muted)}
 .sex .sa{color:var(--ink);font-size:1.1rem}
 .big{font-family:"PT Serif",Georgia,serif;font-size:2.4rem;margin:30px 0 6px}
-.nav button{font-size:.84rem;padding:16px 1px}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.74rem;line-height:1.1;padding:8px 1px 9px}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .seg{display:flex;gap:4px;margin:24px 0 12px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
 .seg button{flex:1;border:0;background:transparent;color:var(--muted);border-radius:10px;padding:9px;font-weight:700}
 .seg button.on{background:var(--seg-on-bg);color:var(--seg-on-ink)}
 .play{display:inline-flex;align-items:center;gap:6px;margin-top:8px}
 .mini.rec{color:var(--bad);border-color:var(--bad)}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:12px;z-index:9;display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(89px + env(safe-area-inset-bottom,0px));max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:12px;z-index:9;display:none}
 .toast.show{display:block}
 .backup{margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
 .chat{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
@@ -248,12 +270,12 @@ try{var su=+sessionStorage.getItem('sakha-upd');sessionStorage.removeItem('sakha
 setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},4000);</script>
 <main id="app"></main>
 <nav class="nav" aria-label="Разделы"><div>
-  <button data-act="home" data-tab="home">Уроки</button>
-  <button data-act="marathon" data-tab="marathon">Марафон</button>
-  <button data-act="dict" data-tab="dict">Словарь</button>
-  <button data-act="sounds" data-tab="sounds">Звуки</button>
-  <button data-act="settings" data-tab="settings">Настройки</button>
-</div></nav>
+  <button data-act="home" data-tab="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H10c1.1 0 2 .9 2 2v14c0-1.1-.9-2-2-2H5.5C4.7 18 4 17.3 4 16.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H14c-1.1 0-2 .9-2 2v14c0-1.1.9-2 2-2h4.5c.8 0 1.5-.7 1.5-1.5z"/></svg>Уроки</button>
+  <button data-act="marathon" data-tab="marathon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg>Марафон</button>
+  <button data-act="dict" data-tab="dict"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19.5V5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h12"/><path d="M9.5 13l2.5-6 2.5 6M10.3 11h3.4"/></svg>Словарь</button>
+  <button data-act="sounds" data-tab="sounds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>Звуки</button>
+  <button data-act="settings" data-tab="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.35 4.79 L10.90 2.46 L13.10 2.46 L13.65 4.79 L15.93 5.73 L17.96 4.48 L19.52 6.04 L18.27 8.07 L19.21 10.35 L21.54 10.90 L21.54 13.10 L19.21 13.65 L18.27 15.93 L19.52 17.96 L17.96 19.52 L15.93 18.27 L13.65 19.21 L13.10 21.54 L10.90 21.54 L10.35 19.21 L8.07 18.27 L6.04 19.52 L4.48 17.96 L5.73 15.93 L4.79 13.65 L2.46 13.10 L2.46 10.90 L4.79 10.35 L5.73 8.07 L4.48 6.04 L6.04 4.48 L8.07 5.73Z"/><circle cx="12" cy="12" r="3"/></svg>Настройки</button>
+</div><div class="nav-copy">© 2026 Евсеев А.В.</div></nav>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="sheet-bg" class="sheet-bg" data-act="sclose"></div><div id="sheet" class="sheet" role="dialog" aria-label="Слово"></div>
 <input type="file" id="audio-file" accept="audio/*" hidden>
@@ -577,6 +599,11 @@ const BUILTIN_AUDIO={};
 let AUDIO_DL=null;
 /* Карточка «Установить на телефон» и установка — только у сайта (задаёт PWA-блок); в офлайн-файле пусто */
 let pwaCard=()=>'',pwaInstall=null;
+/* Версия сборки: дату и отпечаток подставляет sborka.py вместо метки */
+const APP_BUILD=/*BUILD*/{d:'',v:''};
+/* Обновления (только сайт; задаёт PWA-блок): {state:'idle'|'checking'|'ready'|'latest'|'offline', check(), apply()} */
+let UPD=null;
+function updDot(){const b=document.querySelector('.nav button[data-tab=settings]');if(b)b.classList.toggle('dot',!!UPD&&UPD.state==='ready')}
 /* Мини-грамматика к урокам. {слово} — якутский пример. */
 const GRAMMAR={
  l1:['{Дорообо} — одному человеку, {Дорооболоруҥ} — многим или на «вы». Окончание -ҥ часто означает обращение к нескольким людям или вежливое «вы».',
@@ -817,7 +844,7 @@ function go(v){view=v;render();window.scrollTo(0,0)}
 function render(){
   document.body.classList.toggle('in-session',view.name==='ex');
   const tab={marathon:'marathon',sounds:'sounds',dict:'dict',wform:'dict',dfix:'dict',settings:'settings'}[view.name]||'home';
-  document.querySelectorAll('.nav button').forEach(b=>b.dataset.tab===tab?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  document.querySelectorAll('.nav button').forEach(b=>b.dataset.tab===tab?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));updDot();
   $app.innerHTML=({home,lesson:lessonView,review:reviewView,sounds:soundsView,ex:exView,result:resultView,form:formView,lform:lformView,dialogs:dialogsView,dialog:dialogView,dict:dictView,wform:wformView,dfix:dfixView,marathon:marathonView,settings:settingsView})[view.name]();
   if(view.name==='ex'){const f=document.getElementById('f-type');if(f&&!f.disabled){lastField='f-type';try{f.focus()}catch(x){}}}
 }
@@ -827,23 +854,24 @@ function reviewPanel(){
   return `<section class="panel">
     <p class="pt">${due?`Сегодня на повторение: ${due} ${plural(due,'фраза','фразы','фраз')}`:'Сегодня повторять нечего'}</p>
     <p class="ps">${S.streak.last===null?'Пройдите первый урок — его фразы начнут возвращаться на повторение.':st?`Занимаетесь ${st} ${plural(st,'день','дня','дней')} подряд`:'Серия прервалась — начните новую сегодня.'}</p>
-    <div class="row" style="margin-top:12px">${due?'<button class="btn" data-act="review">Повторить</button>':''}<button class="btn ghost" data-act="quick">5 фраз за минуту</button><button class="btn ghost" data-act="marathon">Марафон</button></div>
+    <div class="row fill" style="margin-top:12px">${due?'<button class="btn" data-act="review">Повторить</button>':''}<button class="btn ghost" data-act="quick">5 фраз за минуту</button><button class="btn ghost" data-act="marathon">Марафон</button></div>
   </section>`;
 }
 
 const LOGO_DARK=document.querySelector('#splash img').src, SPLASH_TPL=document.getElementById('splash').cloneNode(true);
 /* показать заставку снова (обновление после паузы) */
 function showSplash(){if(document.getElementById('splash'))return;document.documentElement.classList.remove('spq');window.SPLASH_AT=Date.now();document.body.appendChild(SPLASH_TPL.cloneNode(true))}
+/* заставка держится не меньше 1,5 с; при запуске сайта ещё ждёт проверку обновления (window.UPD_WAIT, не дольше 3 с) */
 function hideSplash(){const e=document.getElementById('splash');if(!e)return;
-  setTimeout(()=>{e.classList.add('out');setTimeout(()=>e.remove(),550)},Math.max(0,1500-(Date.now()-(window.SPLASH_AT||0))))}
-function audioDlText(){const a=AUDIO_DL;if(!a||a.ok||!a.total)return '';const pc=Math.floor(a.done/a.total*100);
-  return `Озвучка для работы без сети: ${pc}%${a.err?' — продолжится, когда появится интернет':''}`}
+  setTimeout(()=>Promise.resolve(window.UPD_WAIT).then(()=>{const e2=document.getElementById('splash');if(!e2||window.UPD_GO)return;e2.classList.add('out');setTimeout(()=>e2.remove(),550)}),Math.max(0,1500-(Date.now()-(window.SPLASH_AT||0))))}
+function audioDlPct(){const a=AUDIO_DL;return a&&a.total?Math.floor(a.done/a.total*100):0}
+function audioDlText(){const a=AUDIO_DL;if(!a||!a.total)return '';if(a.ok)return 'сохранена, приложение работает без интернета';
+  return `загружается: ${audioDlPct()}%${a.err?' — продолжится, когда появится интернет':a.paused?' — пауза':''}`}
 function home(){
-  const dl=view.seg==='dialogs',at=audioDlText();
+  const dl=view.seg==='dialogs';
   return `<header class="hero"><div class="brand"><img class="logo logo-d" src="${LOGO_DARK}" alt=""><img class="logo logo-l" src="emblem-light.webp" alt="">
     <h1 lang="sah">Сахалыы<br>саҥар</h1></div>
     <p class="lead">Разговорный якутский: фразы для знакомства, магазина, дороги и визита в гости.</p><div class="band" aria-hidden="true"></div></header>
-    ${at?`<p class="audio-wait" id="audio-dl" role="status">${at}</p>`:''}
     ${pwaCard()}
     ${reviewPanel()}
     <div class="seg" role="tablist"><button class="${dl?'':'on'}" role="tab" aria-selected="${!dl}" data-act="segph">Фразы</button><button class="${dl?'on':''}" role="tab" aria-selected="${dl}" data-act="dialogs">Диалоги</button></div>
@@ -863,25 +891,35 @@ async function shareApp(){
   if(navigator.share){try{await navigator.share({title:'Сахалыы саҥар',text,url:SITE_URL});return}catch(e){if(e&&e.name==='AbortError')return}}
   try{await navigator.clipboard.writeText(SITE_URL);toast('Ссылка скопирована: '+SITE_URL)}catch(e){toast(SITE_URL)}
 }
+function fmtBuild(d){if(!d)return '';const t=new Date(d+'T00:00:00Z');return t.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).replace(' г.','')}
+function appSection(){
+  if(!UPD)return '';
+  const st={checking:'Проверяем…',ready:'Доступна новая версия.',latest:'Установлена последняя версия.',offline:'Нет интернета — проверить не получилось.'}[UPD.state]||'';
+  const at=audioDlText(),inst=!!(window.pwaCanInstall&&pwaCanInstall());
+  return `<section class="backup set-first"><h2>Приложение</h2>
+      <dl class="kv"><dt>Версия</dt><dd>${APP_BUILD.d?'от '+fmtBuild(APP_BUILD.d):'—'}${st?`<br><span class="${UPD.state==='ready'?'hl':'mu'}">${st}</span>`:''}</dd>
+      ${at?`<dt>Озвучка без сети</dt><dd id="audio-dl"><span>${at}</span>${AUDIO_DL&&!AUDIO_DL.ok?`<span class="adl-bar"><span style="width:${audioDlPct()}%"></span></span>`:''}</dd>`:''}</dl>
+      <div class="row fill">${UPD.state==='ready'?'<button class="btn" data-act="updapply">Обновить</button>':`<button class="btn ghost" data-act="updcheck" ${UPD.state==='checking'?'disabled':''}>Проверить обновления</button>`}${inst?'<button class="btn ghost" data-act="install">Установить на телефон</button>':''}</div></section>`;
+}
 function settingsView(){
+  const app=appSection();
   return `<h1>Настройки</h1>
-    <section class="backup" style="border-top:0;padding-top:0;margin-top:10px"><h2 style="margin-top:0">Хранение</h2>
-      <p class="ps">Прогресс, ваши слова и записи хранятся на этом устройстве. Время от времени сохраняйте резервную копию в файл, чтобы не потерять их.</p></section>
-    <section class="backup"><h2 style="margin-top:0">Резервная копия</h2>
-      <p class="ps">Файл с прогрессом, правками, вашими словами и записями. Через него данные переносятся на другое устройство или в установленное приложение.${S.lastBackup!==null?` Последняя копия: ${fmtDay(S.lastBackup)}.`:' Копий ещё не было.'}</p>
-      <div class="row"><button class="btn" data-act="export">Сохранить в файл</button><button class="btn ghost" data-act="import">Загрузить из файла</button></div></section>
-    
-    <section class="backup"><h2 style="margin-top:0">Прогресс</h2>
-      <p class="ps">Обнуляет «Знаю N из M», повторение и серию дней. Правки фраз, свои уроки и озвучка останутся.</p>
-      <div class="row"><button class="btn ghost" data-act="reset" style="color:var(--bad);border-color:var(--bad)">Сбросить прогресс</button></div></section>
-    <section class="backup"><h2 style="margin-top:0">Поделиться</h2>
+    ${app}
+    <section class="backup${app?'':' set-first'}"><h2>Мои данные</h2>
+      <p class="ps">Прогресс, ваши слова и записи хранятся на этом телефоне. Чтобы не потерять их или перенести на другое устройство, сохраняйте резервную копию в файл.</p>
+      <p class="ps mu">${S.lastBackup!==null?`Последняя копия: ${fmtDay(S.lastBackup)}.`:'Копий ещё не было.'}</p>
+      <div class="row fill"><button class="btn" data-act="export">Сохранить в файл</button><button class="btn ghost" data-act="import">Загрузить из файла</button></div>
+      <div class="danger-zone"><p class="ps">Сброс обнуляет «Знаю N из M», повторение и серию дней. Правки фраз, свои уроки и озвучка останутся.</p>
+      <button class="btn ghost danger" data-act="reset">Сбросить прогресс</button></div></section>
+    <section class="backup"><h2>Поделиться</h2>
       <p class="ps">Отправьте ссылку на самоучитель друзьям и родным — в мессенджер или по почте.</p>
-      <div class="row"><button class="btn ghost" data-act="shareapp">Поделиться приложением</button></div></section>
-    <section class="backup"><h2 style="margin-top:0">О приложении</h2>
+      <div class="row fill"><button class="btn ghost" data-act="shareapp">Поделиться приложением</button></div></section>
+    <section class="backup"><h2>О приложении</h2>
  <p class="ps">© 2026${APP_AUTHOR?' '+esc(APP_AUTHOR):''}${/\.$/.test(APP_AUTHOR)?'':'.'} «Сахалыы саҥар» — самоучитель разговорного якутского.</p>
+ <details class="lic"><summary>Источники и лицензии</summary>
  <p class="ps" style="margin-top:8px">Фразы, диалоги и мини-грамматику составил ИИ; слова и образцы фраз сверены по словарю sakhatyla.ru (CC BY-SA). Сомнительные формы стоит показать носителю языка. Исправить любую фразу можно кнопкой «Править» в уроке.</p>
  <p class="ps" style="margin-top:8px">Словарь — Викисловарь (en.wiktionary.org) через kaikki.org, лицензия CC BY-SA; переводы значений на русский сделал ИИ. Словарная часть распространяется на тех же условиях CC BY-SA.</p>
- <p class="ps" style="margin-top:8px">Озвучка — синтезированный голос модели Silero (silero.ai), лицензия CC BY-NC 4.0: только для некоммерческого использования.</p></section>`;
+ <p class="ps" style="margin-top:8px">Озвучка — синтезированный голос модели Silero (silero.ai), лицензия CC BY-NC 4.0: только для некоммерческого использования.</p></details></section>`;
 }
 function lessonView(){
   const l=LESSONS.find(x=>x.id===view.id);if(!l){view={name:'home'};return home()}
@@ -979,7 +1017,7 @@ function reviewView(){
 
 function soundsView(){
   return `<h1>Звуки</h1><p class="lead">В якутском есть звуки, которых нет в русском. Прочитайте пример вслух, следуя подсказке.</p>
-    <ul class="sounds">${SOUNDS.map(s=>`<li><span class="glyph" aria-hidden="true">${esc(s.g)}</span><div>
+    <ul class="sounds">${SOUNDS.map(s=>`<li><span class="glyph${s.g.length>3?' long':''}" aria-hidden="true">${esc(s.g)}</span><div>
       <p class="sname">${esc(s.n)}</p><p>${esc(s.d)}</p><p class="sex">Пример: <span class="sa" lang="sah">${hl(s.ex)}</span></p></div></li>`).join('')}</ul>`;
 }
 
@@ -1005,7 +1043,7 @@ function dOpts(d){
 function dialogView(){
   const d=view.d, D=DIALOGUES.find(x=>x.id===d.id), L=D.lines, done=d.i>=L.length;
   if(!done&&!d.opts)d.opts=dOpts(d);
-  const shown=L.slice(0,d.i).map((l,k)=>{const it=DLINES.find(x=>x.id===d.id+'l'+k);return `<li class="line ${l[0]}"><span class="who">${l[0]==='b'?'Вы':'Собеседник'}</span><span class="sa" lang="sah">${hl(l[1])}</span><span class="ru">${esc(l[2])}</span>${it&&hasAudio(it)?`<button class="mini" style="margin-top:6px" data-act="play" data-id="${it.id}" aria-label="Слушать реплику">▶</button> <button class="mini" style="margin-top:6px" data-act="slow" data-id="${it.id}" aria-label="Слушать медленно" title="Медленно">🐢</button>`:''}</li>`}).join('');
+  const shown=L.slice(0,d.i).map((l,k)=>{const it=DLINES.find(x=>x.id===d.id+'l'+k);return `<li class="line ${l[0]}"><span class="who">${l[0]==='b'?'Вы':'Собеседник'}</span><span class="sa" lang="sah">${hl(l[1])}</span><span class="ru">${esc(l[2])}</span>${it&&hasAudio(it)?`<span class="row" style="margin-top:8px"><button class="mini" data-act="play" data-id="${it.id}" aria-label="Слушать реплику">▶ Слушать</button>${slowBtn(it.id)}</span>`:''}</li>`}).join('');
   const turn=done?`<div class="turn"><p class="pt">Диалог пройден${d.mistakes?`, ошибок: ${d.mistakes}`:' без ошибок'}.</p>
       <div class="row"><button class="btn ghost" data-act="dialog" data-id="${d.id}">Пройти ещё раз</button>${(()=>{const n=DIALOGUES[DIALOGUES.findIndex(x=>x.id===d.id)+1];return n?`<button class="btn" data-act="dialog" data-id="${n.id}">Следующий</button>`:''})()}<button class="btn ghost" data-act="dialogs">Все диалоги</button></div></div>`
     :`<div class="turn"><p class="ask" style="margin-top:0">Ваша реплика. По смыслу: «${esc(L[d.i][2])}»</p>
@@ -1114,7 +1152,7 @@ function clockText(){const left=Math.max(0,Math.ceil((sess.end-Date.now())/1000)
 function marathonView(){
   const wa=getDItems().filter(w=>hasAudio(w)).length;
   const block=(src,title,sub)=>`<section class="panel"><p class="pt">${title}</p><p class="ps">${sub}</p>
-    <div class="row"><button class="btn" data-act="mstart" data-src="${src}" data-mode="endless">Без конца</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="all">Все по разу</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="timed">5 минут</button></div></section>`;
+    <div class="row fill"><button class="btn" data-act="mstart" data-src="${src}" data-mode="endless">Без конца</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="all">Все по разу</button><button class="btn ghost" data-act="mstart" data-src="${src}" data-mode="timed">5 минут</button></div></section>`;
   return `<h1>Марафон</h1>
     <p class="lead">Задания идут подряд, без деления на уроки. Ошибки возвращаются через несколько заданий, пока не ответите верно. Выйти можно в любой момент — результат сохранится.</p>
     ${block('phrases','Фразы',`${ALL.length} ${plural(ALL.length,'фраза','фразы','фраз')} из всех уроков`)}
@@ -1312,6 +1350,8 @@ document.addEventListener('click',ev=>{
     case 'word':openSheet(b.dataset.w);break;
     case 'sclose':closeSheet();break;
     case 'shareapp':shareApp();break;
+    case 'updcheck':if(UPD)UPD.check();break;
+    case 'updapply':if(UPD)UPD.apply();break;
     case 'install':if(pwaInstall)pwaInstall();break;
     case 'insthide':try{localStorage.setItem('sakha-install-hide','1')}catch(e){}render();break;
     case 'dsearch':closeSheet();lastField='f-dict';go({name:'dict',q:b.dataset.q});break;
@@ -1381,16 +1421,14 @@ document.getElementById('audio-file').addEventListener('change',async ev=>{
   pendingAudioId=null;render();
 });
 document.getElementById('backup-file').addEventListener('change',ev=>{const f=ev.target.files[0];ev.target.value='';if(f)importData(f)});
+addEventListener('scroll',()=>document.documentElement.classList.toggle('scrolled',scrollY>4),{passive:true});
 render();
 hideSplash();
 recInit();
 </script>
 
 <!--PWA-->
-<div id="upd" class="upd" hidden><span>Доступна новая версия</span><button class="btn" id="upd-btn">Обновить</button></div>
-<style>.upd{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;
- padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--accent);box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:536px;margin:0 auto}
-.upd[hidden]{display:none}.upd span{font-weight:700}.audio-wait{font-size:.88rem;color:var(--muted)}</style>
+<style>.audio-wait{font-size:.88rem;color:var(--muted)}</style>
 <script>
 /* ---------- PWA: озвучка отдельными файлами, офлайн и обновления ---------- */
 const AUDIO_FILES=/*AUDIO_FILES*/[];
@@ -1401,10 +1439,15 @@ Promise.all(AUDIO_FILES.map(f=>fetch(f).then(r=>{if(!r.ok)throw 0;return r.json(
   audioSync();
 }).catch(()=>toast('Не удалось загрузить озвучку. Откройте приложение с интернетом один раз, чтобы она сохранилась.'));
 /* Озвучка — отдельные MP3 (имя = отпечаток содержимого). Качаются в фоне, по 6 сразу, в кеш для работы без сети. */
-let audioSyncing=false;
-function audioShow(){const e=document.getElementById('audio-dl'),t=audioDlText();
-  if(e){if(t)e.textContent=t;else e.remove()}else if(t&&view.name==='home')render()}
-async function audioSync(){
+let audioSyncing=false,audioRunning=null;
+/* пауза загрузки перед сменой версии: иначе телефон не переключит версию, пока идут запросы */
+function audioPause(){if(AUDIO_DL&&!AUDIO_DL.ok)AUDIO_DL.paused=true;return audioRunning||Promise.resolve()}
+function audioShow(){const e=document.getElementById('audio-dl');
+  if(view.name!=='settings')return;if(!e||!AUDIO_DL||AUDIO_DL.ok){render();return}
+  e.querySelector('span').textContent=audioDlText();const b=e.querySelector('.adl-bar span');if(b)b.style.width=audioDlPct()+'%'}
+function audioSync(){if(audioSyncing)return audioRunning;audioRunning=audioSyncRun();return audioRunning}
+async function audioSyncRun(){
+  await Promise.resolve(window.UPD_WAIT);if(window.UPD_GO)return;
   if(audioSyncing||!('caches' in window))return;audioSyncing=true;
   try{
     const files=[...new Set(Object.values(BUILTIN_AUDIO).map(v=>v.f).filter(Boolean))],want=new Set(files);
@@ -1415,15 +1458,16 @@ async function audioSync(){
     if(!todo.length)return;
     audioShow();let shown=0;
     const tick=()=>{const t=Date.now();if(t-shown>250){shown=t;audioShow()}};
-    const worker=async()=>{while(todo.length&&!AUDIO_DL.err){const f=todo.shift();
+    const worker=async()=>{while(todo.length&&!AUDIO_DL.err&&!AUDIO_DL.paused){const f=todo.shift();
       try{const r=await fetch(f,{cache:'no-store'});if(!r.ok)throw 0;await c.put(f,r);AUDIO_DL.done++;tick()}
       catch(e){todo.unshift(f);AUDIO_DL.err=true}}};
     await Promise.all(Array.from({length:6},worker));
     if(!todo.length){AUDIO_DL.ok=true;audioShow();toast('Озвучка сохранена: приложение работает без интернета.')}
+    else if(AUDIO_DL.paused)audioRunning=null;
     else audioShow();
   }catch(e){}finally{audioSyncing=false}
 }
-addEventListener('online',()=>{if(AUDIO_DL&&!AUDIO_DL.ok){AUDIO_DL.err=false;audioSync()}});
+addEventListener('online',()=>{if(AUDIO_DL&&!AUDIO_DL.ok&&!AUDIO_DL.paused){AUDIO_DL.err=false;audioSync()}});
 /* ---------- Установка на телефон (как в «Уустары бул») ----------
    Android: системное окно «Установить» одной кнопкой. iPhone: подсказка «Поделиться → На экран Домой».
    Карточка на главной — только в браузере телефона, пока приложение не установлено; «Не сейчас» скрывает её. */
@@ -1433,12 +1477,13 @@ const isIOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platfor
 const isAndroid=()=>/Android/.test(navigator.userAgent);
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;if(view.name==='home')render()});
 addEventListener('appinstalled',()=>{installEvt=null;toast('Приложение добавлено на экран.');if(view.name==='home')render()});
+window.pwaCanInstall=()=>!isStandalone()&&(!!installEvt||isIOS()||isAndroid());
 pwaCard=()=>{
   if(isStandalone()||!(isIOS()||isAndroid()))return '';
   try{if(localStorage.getItem('sakha-install-hide'))return ''}catch(e){}
   return `<section class="panel"><p class="pt">Установите на телефон</p>
     <p class="ps">Значок на экране, запуск без браузера и работа без интернета.${isIOS()?' Лучше сразу: на iPhone прогресс из браузера в приложение сам не переходит.':''}</p>
-    <div class="row" style="margin-top:12px"><button class="btn" data-act="install">Установить</button><button class="btn ghost" data-act="insthide">Не сейчас</button></div></section>`};
+    <div class="row fill" style="margin-top:12px"><button class="btn" data-act="install">Установить</button><button class="btn ghost" data-act="insthide">Не сейчас</button></div></section>`};
 pwaInstall=async()=>{
   if(installEvt){const ev=installEvt;installEvt=null;try{ev.prompt();await ev.userChoice}catch(e){}render();return}
   if(isIOS()){showSheet(`<h2>Установить на iPhone</h2><ol class="steps">
@@ -1453,30 +1498,42 @@ pwaInstall=async()=>{
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});
+  const hadSW=!!navigator.serviceWorker.controller;
+  let doneWait;window.UPD_WAIT=hadSW?new Promise(r=>{doneWait=r;setTimeout(r,3000)}):null;
+  UPD={state:'idle',standalone:isStandalone(),check:()=>{},apply:()=>{}};
   navigator.serviceWorker.register('sw.js').then(reg=>{
-    const show=()=>{const u=document.getElementById('upd');u.hidden=false;
-      document.getElementById('upd-btn').onclick=()=>{if(reg.waiting)reg.waiting.postMessage('skip');u.hidden=true}};
-    if(reg.waiting&&navigator.serviceWorker.controller)show();
-    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;
-      w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)show()})});
-    /* Обновление после паузы. iPhone не перезапускает свёрнутое приложение, а «размораживает» старую страницу.
-       Свёрнуто 30 минут и дольше, открыта главная, ничего не вводится — показываем заставку, проверяем новую версию
-       (не дольше 3,5 с). Есть — перезапуск под той же заставкой; нет — заставка уходит. Плашка «Обновить» остаётся. */
-    let hiddenAt=0;
-    /* пока качается озвучка, новая версия включится только после загрузки — ждать её под заставкой не будем */
-    const idle=()=>view.name==='home'&&!recState&&!document.getElementById('sheet').classList.contains('show')&&!(AUDIO_DL&&!AUDIO_DL.ok&&!AUDIO_DL.err);
+    const set=st=>{UPD.state=st;updDot();if(view.name==='settings')render()};
+    /* новая версия ждёт: ставим загрузку озвучки на паузу и переключаемся (перезапуск — по controllerchange) */
+    const go=async(withSplash)=>{const w=reg.waiting;if(!w)return false;window.UPD_GO=true;
+      if(withSplash){showSplash();try{sessionStorage.setItem('sakha-upd',String(window.SPLASH_AT))}catch(e){}}
+      await Promise.race([audioPause(),new Promise(r=>setTimeout(r,4000))]);w.postMessage('skip');
+      /* если телефон не переключил версию — не держим заставку */
+      setTimeout(()=>{window.UPD_GO=false;hideSplash()},6000);return true};
     const waitNew=ms=>new Promise(res=>{const t0=Date.now();(function poll(){
       if(reg.waiting)return res(reg.waiting);if(Date.now()-t0>ms||!reg.installing&&Date.now()-t0>800)return res(null);setTimeout(poll,150)})()});
+    const check=async(ms)=>{set('checking');
+      try{await Promise.race([reg.update(),new Promise((_,j)=>setTimeout(()=>j(0),ms))]);const w=await waitNew(ms);set(w?'ready':'latest');return w}
+      catch(e){set(reg.waiting?'ready':navigator.onLine?'latest':'offline');return reg.waiting}};
+    UPD.check=()=>check(6000);UPD.apply=()=>go(true);
+    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;
+      w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)set('ready')})});
+    /* При запуске (приложение уже стояло): пока видна заставка, проверяем новую версию — есть, перезапуск под заставкой */
+    if(hadSW){(async()=>{let w=reg.waiting;if(!w)w=await check(2500);
+      if(w&&view.name==='home'){try{sessionStorage.setItem('sakha-upd',String(window.SPLASH_AT))}catch(e){}window.UPD_GO=true;w.postMessage('skip')}
+      doneWait()})()}
+    /* Обновление после паузы: свёрнуто 30 минут и дольше, открыта главная — заставка, проверка, перезапуск */
+    let hiddenAt=0;
+    const idle=()=>view.name==='home'&&!recState&&!document.getElementById('sheet').classList.contains('show');
     document.addEventListener('visibilitychange',async()=>{
       if(document.visibilityState==='hidden'){hiddenAt=Date.now();return}
       const away=hiddenAt?Date.now()-hiddenAt:0;hiddenAt=0;
-      if(away<(window.SAKHA_UPD_AFTER!=null?window.SAKHA_UPD_AFTER:30*60*1000)||!navigator.serviceWorker.controller||!idle()){reg.update().catch(()=>{});return}
-      showSplash();
-      let w=null;try{await Promise.race([reg.update(),new Promise(r=>setTimeout(r,2500))]);w=await waitNew(3500-500)}catch(e){}
-      if(w&&idle()){try{sessionStorage.setItem('sakha-upd',String(window.SPLASH_AT))}catch(e){}w.postMessage('skip');setTimeout(hideSplash,4000);return}
+      if(away<(window.SAKHA_UPD_AFTER!=null?window.SAKHA_UPD_AFTER:30*60*1000)||!navigator.serviceWorker.controller||!idle()){
+        if(UPD.state!=='checking')reg.update().catch(()=>{});return}
+      showSplash();const w=reg.waiting||await check(3000);
+      if(w&&idle()&&await go(true))return;
       hideSplash();
     });
-  }).catch(()=>{});
+  }).catch(()=>{if(doneWait)doneWait()});
   if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
 }
 </script>

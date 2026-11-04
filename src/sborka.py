@@ -2,7 +2,7 @@
 """Сборка приложения «Сахалыы саҥар» из исходников.
 
 Исходники (в одной папке со скриптом):
-  app.html                — код приложения с метками /*DICT*/, /*AUDIO_FILES*/, <!--PWA--> и <!--PWA-HEAD-->
+  app.html                — код приложения с метками /*DICT*/, /*AUDIO_FILES*/, /*BUILD*/, <!--PWA--> и <!--PWA-HEAD-->
   dict.json               — словарь (массив ["слово","часть речи","перевод","англ. значение"])
   sw.js                   — заготовка service worker (метки /*VERSION*/, /*AUDIO_FILES*/)
   icon-192.png, icon-512.png, icon-maskable-512.png, apple-touch-icon.png — иконки
@@ -127,12 +127,22 @@ def site_audio(out):
     return [name]
 
 
+def with_build(html):
+    """Дата и отпечаток сборки вместо метки /*BUILD*/{d:'',v:''} (показываются в «Настройки → Приложение»)."""
+    import datetime
+    m = "/*BUILD*/{d:'',v:''}"
+    assert html.count(m) == 1, 'в app.html нет метки /*BUILD*/'
+    v = hashlib.md5((read('app.html') + read('dict.json')).encode()).hexdigest()[:7]
+    d = datetime.date.today().isoformat()
+    return html.replace(m, json.dumps({'d': d, 'v': v}), 1)
+
+
 def build_site():
     out = os.path.join(BUILD, 'site')
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(out)
     files = site_audio(out)
-    html = with_emblems(with_dict(read('app.html'))).replace('/*AUDIO_FILES*/[]', json.dumps(files), 1)
+    html = with_build(with_emblems(with_dict(read('app.html')))).replace('/*AUDIO_FILES*/[]', json.dumps(files), 1)
     with open(os.path.join(out, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
     for name in ASSETS:
@@ -161,7 +171,7 @@ def build_site():
 
 def build_offline():
     os.makedirs(BUILD, exist_ok=True)
-    html = with_emblems(with_dict(read('app.html')))
+    html = with_build(with_emblems(with_dict(read('app.html'))))
     # шрифты внутрь файла — без сети они берутся отсюда
     for name in font_files():
         ref = f'url({FONTS_DIR}/{name})'
